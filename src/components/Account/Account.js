@@ -22,14 +22,14 @@ const useStyles = makeStyles(styles);
 const Account = () => {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
-  console.log('state.account:', account);
+  const { buying_power } = account;
   return (
     <div id="account">
       <Typography variant="h4" component="h4" gutterBottom>
         Your Account
       </Typography>
       <Typography variant="body1" gutterBottom>
-        Your Account
+        ${buying_power}
       </Typography>
       <br />
       <RegularButton>Save</RegularButton>
