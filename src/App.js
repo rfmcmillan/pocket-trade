@@ -7,6 +7,7 @@ import EditAccount from './components/EditAccount/EditAccount';
 import store from './store';
 import { HashRouter, Route } from 'react-router-dom';
 import { loadAccount } from './store/account';
+import { loadPositions } from './store/positions';
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     bootstrap: async () => {
       dispatch(loadAccount());
+      dispatch(loadPositions());
     },
   };
 };
