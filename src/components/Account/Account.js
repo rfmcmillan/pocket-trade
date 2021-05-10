@@ -34,10 +34,6 @@ const Account = () => {
   const [secondary, setSecondary] = React.useState(false);
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
-  console.log(dummyPositions);
-  const marketValues = dummyPositions.map((position) => {
-    return position.market_value;
-  });
 
   const { portfolio_value } = account;
   var formatter = new Intl.NumberFormat('en-US', {
@@ -45,6 +41,14 @@ const Account = () => {
     currency: 'USD',
   });
   const portfolio_value_usd = formatter.format(portfolio_value);
+
+  const marketValues = dummyPositions.map((position) => {
+    return position.market_value;
+  });
+  const currAllocations = dummyPositions.map((position) => {
+    return (position.market_value * 1) / (portfolio_value * 1);
+  });
+
   const theme = useTheme();
 
   const data = {
@@ -107,9 +111,11 @@ const Account = () => {
         </Typography>
         <div>
           <List>
-            {dummyPositions.map((position) => {
+            {dummyPositions.map((position, idx) => {
+              const currAllocation =
+                (position.market_value * 1) / (portfolio_value * 1);
               return (
-                <ListItem>
+                <ListItem key={idx}>
                   <ListItemAvatar>
                     <Avatar></Avatar>
                   </ListItemAvatar>
@@ -117,6 +123,7 @@ const Account = () => {
                     primary={position.symbol}
                     secondary={findEtfName(position.symbol)}
                   />
+                  <ListItemText secondary={currAllocation} />
                 </ListItem>
               );
             })}
