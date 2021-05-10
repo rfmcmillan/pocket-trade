@@ -13,8 +13,9 @@ const loadAccountActionCreator = (account) => {
 
 const loadAccount = () => {
   return async (dispatch) => {
-    const account = await axios.get('/account');
-    console.log(account);
+    const response = await axios.get('/api/account');
+    const account = response.data;
+
     dispatch(loadAccountActionCreator(account));
   };
 };
@@ -71,6 +72,7 @@ const accountReducer = (state = [], action) => {
 
 export {
   loadAccount,
+  loadAccountActionCreator,
   // updateUserActionCreator,
   // updateUser,
   accountReducer,
