@@ -1,0 +1,30 @@
+body {
+  font-family: Georgia;
+}
+#nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.delete {
+  margin-left: 0.5rem;
+}
+.unregister {
+  margin-left: 0.5rem;
+}
+.error {
+  color: red;
+}
+#add-student {
+  margin-bottom: 0px;
+}
+#add-campus {
+  margin-bottom: 0px;
+}
+#campus-img {
+  margin-top: 0.2rem;
+}
