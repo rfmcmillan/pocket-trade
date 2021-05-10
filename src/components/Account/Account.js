@@ -40,6 +40,11 @@ const Account = () => {
   });
 
   const { portfolio_value } = account;
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+  const portfolio_value_usd = formatter.format(portfolio_value);
   const theme = useTheme();
 
   const data = {
@@ -80,13 +85,17 @@ const Account = () => {
       titleFontColor: theme.palette.text.primary,
     },
   };
-  const findEtfName = (symbol) =>{
-  if (symbol === 'VT'){
-    return 'Total World Stock ETF'
- } else if (symbol === 'BNDW') {
-
- }
-}
+  const findEtfName = (symbol) => {
+    if (symbol === 'VT') {
+      return 'Vanguard Total World Stock ETF';
+    } else if (symbol === 'BNDW') {
+      return 'Vanguard Total World Bond ETF';
+    } else if (symbol === 'VNQ') {
+      return 'Vanguard Real Estate ETF';
+    } else if (symbol === 'GLD') {
+      return 'SPDR Gold Trust ETF';
+    }
+  };
   return (
     <div id="account">
       <div>
@@ -94,13 +103,7 @@ const Account = () => {
           Your Account
         </Typography>
         <Typography variant="h5" gutterBottom>
-          ${portfolio_value}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Positions:
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Positions:
+          {portfolio_value_usd}
         </Typography>
         <div>
           <List>
@@ -112,11 +115,7 @@ const Account = () => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={position.symbol}
-                    secondary={
-                      if (position.symbol === 'VT'){
-                         return 'Total World Stock ETF'
-                      }
-                    }
+                    secondary={findEtfName(position.symbol)}
                   />
                 </ListItem>
               );
