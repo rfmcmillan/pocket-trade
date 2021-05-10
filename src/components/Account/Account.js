@@ -22,14 +22,20 @@ const useStyles = makeStyles(styles);
 const Account = () => {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
-  const { buying_power } = account;
+  const { portfolio_value } = account;
   return (
     <div id="account">
       <Typography variant="h4" component="h4" gutterBottom>
         Your Account
       </Typography>
-      <Typography variant="body1" gutterBottom>
-        ${buying_power}
+      <Typography variant="h5" gutterBottom>
+        ${portfolio_value}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Holdings:
+      </Typography>
+      <Typography variant="h7" gutterBottom>
+        Holdings:
       </Typography>
       <br />
       <RegularButton>Save</RegularButton>
