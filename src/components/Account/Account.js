@@ -12,11 +12,12 @@ import {
   useTheme,
   colors,
   Box,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from '@material-ui/core';
 import { Folder } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,11 +26,16 @@ import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
 import { Doughnut } from 'react-chartjs-2';
 import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';
+import PositionTable from '../PositionTable/PositionTable';
 
 const useStyles = makeStyles(styles);
 
 const Account = () => {
-  const classes = useStyles();
+  const classes = useStyles({
+    table: {
+      minWidth: 650,
+    },
+  });
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
   const account = useSelector((state) => state.account);
@@ -44,9 +50,6 @@ const Account = () => {
 
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
-  });
-  const currAllocations = dummyPositions.map((position) => {
-    return (position.market_value * 1) / (portfolio_value * 1);
   });
 
   const theme = useTheme();
@@ -89,17 +92,7 @@ const Account = () => {
       titleFontColor: theme.palette.text.primary,
     },
   };
-  const findEtfName = (symbol) => {
-    if (symbol === 'VT') {
-      return 'Vanguard Total World Stock ETF';
-    } else if (symbol === 'BNDW') {
-      return 'Vanguard Total World Bond ETF';
-    } else if (symbol === 'VNQ') {
-      return 'Vanguard Real Estate ETF';
-    } else if (symbol === 'GLD') {
-      return 'SPDR Gold Trust ETF';
-    }
-  };
+
   return (
     <div id="account">
       <div>
@@ -109,26 +102,7 @@ const Account = () => {
         <Typography variant="h5" gutterBottom>
           {portfolio_value_usd}
         </Typography>
-        <div>
-          <List>
-            {dummyPositions.map((position, idx) => {
-              const currAllocation =
-                (position.market_value * 1) / (portfolio_value * 1);
-              return (
-                <ListItem key={idx}>
-                  <ListItemAvatar>
-                    <Avatar></Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={position.symbol}
-                    secondary={findEtfName(position.symbol)}
-                  />
-                  <ListItemText secondary={currAllocation} />
-                </ListItem>
-              );
-            })}
-          </List>
-        </div>
+        <PositionTable />
       </div>
       <Box
       // sx={{
@@ -138,7 +112,6 @@ const Account = () => {
       >
         <Doughnut data={data} options={options} />
       </Box>
-      <RegularButton>Save</RegularButton>
     </div>
   );
 };
