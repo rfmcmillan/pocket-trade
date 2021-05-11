@@ -21,25 +21,24 @@ const Position = db.define('position', {
   alpacaData: {
     type: DataTypes.JSON,
   },
-  targAllocation: {
+  tgtPct: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  currAllocation: {
+  currPct: {
     type: DataTypes.FLOAT,
   },
 });
 
-Position.prototype.calcCurrAllocation = async function () {
+Position.prototype.calcCurrPct = async function () {
   const account = await alpaca.getAccount();
   const { long_market_value, cash } = account;
-  this.currAllocation =
-    (this.alpacaData.market_value * 1) / (long_market_value * 1);
+  this.currPct = (this.alpacaData.market_value * 1) / (long_market_value * 1);
   this.save();
 };
 
 Position.addHook('afterCreate', (position) => {
-  position.calcCurrAllocation();
+  position.calcCurrPct();
 });
 
 const syncAndSeed = async () => {
@@ -70,22 +69,22 @@ const syncAndSeed = async () => {
   const vt = await Position.create({
     name: 'Vanguard Total World Stock ETF',
     alpacaData: vtAlpaca,
-    targAllocation: 0.6,
+    tgtPct: 0.6,
   });
   const bndw = await Position.create({
     name: 'Vanguard Total World Bond ETF',
     alpacaData: bndwAlpaca,
-    targAllocation: 0.2,
+    tgtPct: 0.2,
   });
   const vnq = await Position.create({
     name: 'Vanguard Real Estate ETF',
     alpacaData: vnqAlpaca,
-    targAllocation: 0.1,
+    tgtPct: 0.1,
   });
   const gld = await Position.create({
     name: 'SPDR Gold Trust ETF',
     alpacaData: gldAlpaca,
-    targAllocation: 0.1,
+    tgtPct: 0.1,
   });
 
   return { positions: { vt, bndw, vnq, gld } };

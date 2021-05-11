@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { api_key, api_secret } from '../../env.js';
 
 const LOAD_POSITIONS = 'LOAD_POSITIONS';
 const REBALANCE_POSITIONS = 'REBALANCE_POSITIONS';
@@ -21,27 +20,45 @@ const loadPositions = () => {
   };
 };
 
-const rebalancePositionsActionCreator = (positions) => {
+const rebalancePositionsActionCreator = (orders) => {
   return {
     type: REBALANCE_POSITIONS,
-    positions,
+    orders,
   };
 };
 
 const rebalancePositions = () => {
   return async (dispatch) => {
-    const response = await axios.get('/api/positions');
-    const positions = response.data;
+    const acctResponse = await axios.get('api/account');
+    const account = acctResponse.data;
+    const { portfolio_value } = account;
+    const posResponse = await axios.get('/api/positions');
+    const positions = posResponse.data;
     positions.forEach((position) => {
-      const { targAllocation, currAllocation } = position;
+      const {
+        tgtPct,
+        currPct,
+        alpacaData: { symbol },
+      } = position;
+      const tgtAmt = tgtPct * portfolio_value;
+      const currAmt = currPct * portfolio_value;
+      const amtToTrade = tgtAmt - currAmt;
+      if (amtToTrade > 0) {
+        console.log(`Buy $${amtToTrade} of ${symbol}`);
+      } else if (amtToTrade < 0) {
+        console.log(`Sell $${amtToTrade} of ${symbol}`);
+      }
     });
-    dispatch(loadPositionsActionCreator(positions));
+    dispatch(rebalancePositionsActionCreator(positions));
   };
 };
 
 //Reducer
 const positionsReducer = (state = [], action) => {
   if (action.type === LOAD_POSITIONS) {
+    state = action.positions;
+  }
+  if (action.type === REBALANCE_POSITIONS) {
     state = action.positions;
   }
   return state;

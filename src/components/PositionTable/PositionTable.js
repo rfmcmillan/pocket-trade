@@ -38,13 +38,13 @@ const PositionTable = () => {
   const { long_market_value } = account;
 
   function createData(position, long_market_value) {
-    const { name, id, alpacaData, targAllocation, currAllocation } = position;
+    const { name, id, alpacaData, tgtPct, currPct } = position;
     const { symbol } = alpacaData;
     const row = {
       name,
       symbol,
-      targAllocation,
-      currAllocation,
+      tgtPct,
+      currPct,
     };
     return row;
   }
@@ -66,17 +66,14 @@ const PositionTable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => {
-            console.log('currAllocation:', row.currAllocation);
             return (
               <TableRow key={idx}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
                 <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell align="right">{`${
-                  row.targAllocation * 100
-                }%`}</TableCell>
-                <TableCell align="right">{`${(row.currAllocation * 100).toFixed(
+                <TableCell align="right">{`${row.tgtPct * 100}%`}</TableCell>
+                <TableCell align="right">{`${(row.currPct * 100).toFixed(
                   2
                 )}%`}</TableCell>
               </TableRow>
