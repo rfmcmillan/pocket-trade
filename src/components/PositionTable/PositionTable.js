@@ -33,7 +33,6 @@ const useStyles = makeStyles({
 const PositionTable = () => {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
-  console.log(account);
   const positions = useSelector((state) => state.positions);
   const { long_market_value } = account;
 
@@ -52,7 +51,6 @@ const PositionTable = () => {
   const rows = positions.map((position) => {
     return createData(position, long_market_value);
   });
-  console.log('rows:', rows);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">

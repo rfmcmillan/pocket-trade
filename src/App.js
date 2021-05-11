@@ -8,6 +8,7 @@ import store from './store';
 import { HashRouter, Route } from 'react-router-dom';
 import { loadAccount } from './store/account';
 import { loadPositions } from './store/positions';
+import { loadOrders } from './store/orders';
 
 class App extends React.Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ const mapDispatchToProps = (dispatch) => {
     bootstrap: async () => {
       dispatch(loadAccount());
       dispatch(loadPositions());
+      dispatch(loadOrders());
     },
   };
 };
