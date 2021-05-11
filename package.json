@@ -23,10 +23,10 @@
 		"express": "^4.17.1",
 		"faker": "^5.4.0",
 		"morgan": "^1.10.0",
-		"pg": "^8.5.1",
+		"pg": "^8.6.0",
 		"prop-types": "^15.7.2",
 		"react-chartjs-2": "^3.0.3",
-		"sequelize": "^6.5.1"
+		"sequelize": "^6.6.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.10",
