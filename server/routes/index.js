@@ -56,23 +56,6 @@ router.post('/orders', async (req, res, next) => {
       type,
       time_in_force,
     });
-    // const response = await axios.post(
-    //   'https://paper-api.alpaca.markets/v2/orders',
-    //   {
-    //     symbol,
-    //     notional,
-    //     side,
-    //     type,
-    //     time_in_force,
-    //     headers: {
-    //       'APCA-API-KEY-ID': api_key,
-    //       'APCA-API-SECRET-KEY': api_secret,
-    //     },
-    //   }
-    // );
-    // const order = response.data;
-    // console.log(response);
-    // res.sendStatus(201);
   } catch (error) {
     next(error);
   }

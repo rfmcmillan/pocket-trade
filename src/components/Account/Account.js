@@ -19,6 +19,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Snackbar,
 } from '@material-ui/core';
 import { Folder } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,8 +40,7 @@ const Account = () => {
       minWidth: 650,
     },
   });
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
   const dispatch = useDispatch();
@@ -123,6 +123,7 @@ const Account = () => {
         );
       }
     });
+    setOpen(true);
   };
 
   return (
@@ -147,6 +148,13 @@ const Account = () => {
       <Button variant="outlined" onClick={() => rebalance()}>
         Rebalance
       </Button>
+      <Snackbar
+        open={open}
+        message="Success! Trades submitted!"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={2500}
+        onClose={() => setOpen(false)}
+      />
     </div>
   );
 };

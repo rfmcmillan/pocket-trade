@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Nav from './components/Nav';
+import Nav from './components/Nav/Nav';
 import Account from './components/Account/Account';
 import EditAccount from './components/EditAccount/EditAccount';
 import store from './store';
@@ -19,7 +19,7 @@ class App extends React.Component {
     return (
       <HashRouter>
         <div>
-          {/* <Route component={Nav} /> */}
+          <Route component={Nav} />
           <Route component={Account} path="/account" exact />
           <Route component={EditAccount} path="/edit-account" exact />
         </div>
