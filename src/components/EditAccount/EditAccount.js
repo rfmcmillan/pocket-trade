@@ -26,9 +26,9 @@ const EditAccount = (props) => {
   const [stocks, bonds, frequency] = React.useState('');
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
   return (
     <div id="account">
       <Typography variant="h4" component="h4" gutterBottom>

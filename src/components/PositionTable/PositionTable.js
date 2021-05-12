@@ -23,7 +23,6 @@ import {
 } from '@material-ui/core';
 import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
 import '@fontsource/roboto';
-import dummyPositions from '../../assets/dummyPositions';
 
 const useStyles = makeStyles({
   table: {
@@ -34,53 +33,24 @@ const useStyles = makeStyles({
 const PositionTable = () => {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
-  const { portfolio_value } = account;
-  const findEtfName = (symbol) => {
-    if (symbol === 'VT') {
-      return 'Vanguard Total World Stock ETF';
-    } else if (symbol === 'BNDW') {
-      return 'Vanguard Total World Bond ETF';
-    } else if (symbol === 'VNQ') {
-      return 'Vanguard Real Estate ETF';
-    } else if (symbol === 'GLD') {
-      return 'SPDR Gold Trust ETF';
-    }
-  };
+  const positions = useSelector((state) => state.positions);
+  const { long_market_value } = account;
 
-  function createData(position, portfolio_value) {
-    const {
-      symbol,
-      asset_class,
-      qty,
-      market_value,
-      cost_basis,
-      unrealized_pl,
-      unrealized_plpc,
-      current_price,
-      lastday_price,
-      change_today,
-    } = position;
+  function createData(position, long_market_value) {
+    const { name, id, alpacaData, tgtPct, currPct } = position;
+    const { symbol } = alpacaData;
     const row = {
+      name,
       symbol,
-      asset_class,
-      qty,
-      market_value,
-      cost_basis,
-      unrealized_pl,
-      unrealized_plpc,
-      current_price,
-      lastday_price,
-      change_today,
+      tgtPct,
+      currPct,
     };
-    row.currAllocation = (position.market_value * 1) / (portfolio_value * 1);
-    row.name = findEtfName(position.symbol);
     return row;
   }
 
-  const rows = dummyPositions.map((position) => {
-    return createData(position, portfolio_value);
+  const rows = positions.map((position) => {
+    return createData(position, long_market_value);
   });
-  console.log('rows:', rows);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -88,23 +58,22 @@ const PositionTable = () => {
           <TableRow>
             <TableCell>Position </TableCell>
             <TableCell align="right">Symbol</TableCell>
-            <TableCell align="right">Actual (%)</TableCell>
-            <TableCell align="right">Target (%)</TableCell>
+            <TableCell align="right">Target</TableCell>
+            <TableCell align="right">Actual</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => {
-            console.log('currAllocation:', row.currAllocation);
             return (
               <TableRow key={idx}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
                 <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell align="right">{`${
-                  row.currAllocation * 100
-                }%`}</TableCell>
-                <TableCell align="right">#</TableCell>
+                <TableCell align="right">{`${row.tgtPct * 100}%`}</TableCell>
+                <TableCell align="right">{`${(row.currPct * 100).toFixed(
+                  2
+                )}%`}</TableCell>
               </TableRow>
             );
           })}
