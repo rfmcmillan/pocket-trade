@@ -13,6 +13,7 @@ import {
   Button,
   Box,
   Typography,
+  Link,
 } from '@material-ui/core';
 import { updatePosition } from '../../store/positions';
 import '@fontsource/roboto';
@@ -47,6 +48,7 @@ const PositionTable = () => {
     const { name, id, alpacaData, tgtPct, currPct } = position;
     const { symbol } = alpacaData;
     const row = {
+      id,
       name,
       symbol,
       tgtPct,
@@ -69,14 +71,14 @@ const PositionTable = () => {
     setEdit(false);
   };
 
-  const onSave = () => {
-    positions.forEach((position) => {
-      const { id, name, tgtPct, currPct } = position;
-      console.log('update', position);
-      //  dispatch(updatePosition({});
-    });
-    setEdit(false);
-  };
+  // const onSave = () => {
+  //   positions.forEach((position) => {
+  //     const { id, name, tgtPct, currPct } = position;
+  //     console.log('update', position);
+  //     //  dispatch(updatePosition({});
+  //   });
+  //   setEdit(false);
+  // };
 
   return (
     <TableContainer component={Paper}>
@@ -100,10 +102,10 @@ const PositionTable = () => {
                 <TableCell align="right">
                   {!edit ? (
                     <Box>
-                      <Typography>{row.tgtPct * 100}</Typography>
-                      <Button color="primary" onClick={handleEditButtonClick}>
+                      <Typography>{`${row.tgtPct * 100}%`}</Typography>
+                      <Link href={`/#/edit-position/${row.id}`} color="primary">
                         Edit
-                      </Button>
+                      </Link>
                     </Box>
                   ) : (
                     <updatePositionTableTgtPct />
