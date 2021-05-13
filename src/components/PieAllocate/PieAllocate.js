@@ -7,7 +7,7 @@ import dummyPositions from '../../assets/dummyPositions';
 
 const PieAllocate = () => {
   const positions = useSelector((state) => state.positions);
-  console.log('positions:', positions);
+
   const tgtPcts = positions.map((position) => {
     return {
       name: position.alpacaData.symbol,
@@ -18,7 +18,7 @@ const PieAllocate = () => {
   const currPcts = positions.map((position) => {
     return position.currPct;
   });
-  console.log(tgtPcts);
+
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
   });

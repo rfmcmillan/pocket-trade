@@ -1,37 +1,25 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
-  TextField,
   Typography,
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
   useTheme,
   colors,
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Snackbar,
 } from '@material-ui/core';
-import { Folder } from '@material-ui/icons';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { rebalanceOrders } from '../../store/orders';
-import RegularButton from '../CustomButtons/Button';
 import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
 import { Doughnut } from 'react-chartjs-2';
 import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';
 import PositionTable from '../PositionTable/PositionTable';
+import OrderHistory from '../OrderHistory/OrderHistory';
 import { createOrder } from '../../store/orders';
 import PieAllocate from '../PieAllocate/PieAllocate';
+import DialogRebalance from '../DialogRebalance/DialogRebalance';
 
 const useStyles = makeStyles(styles);
 
@@ -98,34 +86,43 @@ const Account = () => {
     },
   };
 
-  const rebalance = async () => {
-    const acctResponse = await axios.get('api/account');
-    const account = acctResponse.data;
-    const { portfolio_value } = account;
-    const posResponse = await axios.get('/api/positions');
-    const positions = posResponse.data;
-    positions.forEach((position) => {
-      const {
-        tgtPct,
-        currPct,
-        alpacaData: { symbol },
-      } = position;
-      const tgtAmt = tgtPct * portfolio_value;
-      const currAmt = currPct * portfolio_value;
-      const amtToTrade = parseInt(tgtAmt - currAmt);
-      if (amtToTrade > 0) {
-        // console.log(`Buy $${amtToTrade} of ${symbol}`);
-        dispatch(createOrder(symbol, amtToTrade, 'buy', 'market', 'day'));
-      } else if (amtToTrade < 0) {
-        // console.log(`Sell $${-amtToTrade} of ${symbol}`);
-        const positiveAmtToTrade = -amtToTrade;
-        dispatch(
-          createOrder(symbol, positiveAmtToTrade, 'sell', 'market', 'day')
-        );
-      }
-    });
-    setOpen(true);
-  };
+  // const rebalance = async () => {
+  //   const acctResponse = await axios.get('api/account');
+  //   const account = acctResponse.data;
+  //   const { portfolio_value } = account;
+  //   const posResponse = await axios.get('/api/positions');
+  //   const positions = posResponse.data;
+  //   const proposedOrders = [];
+  //   positions.forEach((position) => {
+  //     const {
+  //       tgtPct,
+  //       currPct,
+  //       alpacaData: { symbol },
+  //     } = position;
+  //     const tgtAmt = tgtPct * portfolio_value;
+  //     const currAmt = currPct * portfolio_value;
+  //     const amount = parseInt(tgtAmt - currAmt);
+  //     const type = 'market';
+  //     const time_in_force = 'day';
+  //     if (amount > 0) {
+  //       const tradeAmt = amount;
+  //       const side = 'buy';
+  //       const order = { symbol, tradeAmt, side, type, time_in_force };
+  //       proposedOrders.push(order);
+  //       // dispatch(createOrder(symbol, amtToTrade, 'buy', 'market', 'day'));
+  //     } else if (amount < 0) {
+  //       const tradeAmt = -amount;
+  //       const side = 'sell';
+  //       const order = { symbol, tradeAmt, side, type, time_in_force };
+  //       proposedOrders.push(order);
+  //       // dispatch(
+  //       //   createOrder(symbol, positiveAmtToTrade, 'sell', 'market', 'day')
+  //       // );
+  //     }
+  //   });
+  //   setOpen(true);
+  //   return proposedOrders;
+  // };
 
   return (
     <div id="account">
@@ -147,16 +144,11 @@ const Account = () => {
       >
         <Doughnut data={data} options={options} />
       </Box>
-      <Button variant="outlined" onClick={() => rebalance()}>
+      {/* <Button variant="outlined" onClick={() => rebalance()}>
         Rebalance
-      </Button>
-      <Snackbar
-        open={open}
-        message="Success! Trades submitted!"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        autoHideDuration={2500}
-        onClose={() => setOpen(false)}
-      />
+      </Button> */}
+      <DialogRebalance />
+      <OrderHistory />
     </div>
   );
 };

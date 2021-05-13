@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import Nav from './components/Nav/Nav';
 import Account from './components/Account/Account';
 import EditAccount from './components/EditAccount/EditAccount';
-import store from './store';
 import { HashRouter, Route } from 'react-router-dom';
 import { loadAccount } from './store/account';
 import { loadPositions } from './store/positions';

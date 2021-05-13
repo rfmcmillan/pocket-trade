@@ -39,9 +39,21 @@ router.get('/orders', async (req, res, next) => {
       }
     );
     const orders = response.data;
+
     res.send(orders);
   } catch (error) {
     if (error) console.log('error with orders get route');
+    next(error);
+  }
+});
+router.get('/orders/all', async (req, res, next) => {
+  try {
+    const response = await alpaca.getOrders({ status: 'closed' });
+    console.log(response);
+
+    res.send(response);
+  } catch (error) {
+    if (error) console.log('error with get all orders get route');
     next(error);
   }
 });
