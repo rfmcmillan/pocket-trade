@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const LOAD_POSITIONS = 'LOAD_POSITIONS';
-const UPDATE_POSITION = 'UPDATE_POSITIONS';
+const UPDATE_POSITION = 'UPDATE_POSITION';
 
 //Create Action Creators & Thunks
 
@@ -27,14 +27,13 @@ const updatePositionActionCreator = (position) => {
   };
 };
 
-const updatePosition = (id, name, tgtPct, currPct) => {
+const updatePosition = (id, tgtPct) => {
   return async (dispatch) => {
     const response = await axios.put(`api/positions/${id}`, {
-      name,
       tgtPct,
-      currPct,
     });
     const position = response.data;
+    console.log(position);
     dispatch(updatePositionActionCreator(position));
   };
 };

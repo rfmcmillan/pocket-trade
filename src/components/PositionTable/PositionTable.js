@@ -148,6 +148,7 @@ const PositionTable = () => {
 
   const onSave = () => {
     positions.forEach((position) => {
+      const { id } = position;
       console.log(position);
       let tgtPct;
       if (position.alpacaData.symbol === 'GLD') {
@@ -159,9 +160,9 @@ const PositionTable = () => {
       } else if (position.alpacaData.symbol === 'VT') {
         tgtPct = vt;
       }
-      console.log(tgtPct);
+      tgtPct = tgtPct / 100;
       // console.log('update', position);
-      //  dispatch(updatePosition({});
+      dispatch(updatePosition(id, tgtPct));
     });
     setEdit(false);
   };
