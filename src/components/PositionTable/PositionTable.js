@@ -148,8 +148,19 @@ const PositionTable = () => {
 
   const onSave = () => {
     positions.forEach((position) => {
-      const { id, name, tgtPct, currPct } = position;
-      console.log('update', position);
+      console.log(position);
+      let tgtPct;
+      if (position.alpacaData.symbol === 'GLD') {
+        tgtPct = gld;
+      } else if (position.alpacaData.symbol === 'VNQ') {
+        tgtPct = vnq;
+      } else if (position.alpacaData.symbol === 'BNDW') {
+        tgtPct = bndw;
+      } else if (position.alpacaData.symbol === 'VT') {
+        tgtPct = vt;
+      }
+      console.log(tgtPct);
+      // console.log('update', position);
       //  dispatch(updatePosition({});
     });
     setEdit(false);
