@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   textField: {
-    maxWidth: 100,
+    maxWidth: 75,
   },
 });
 
@@ -43,6 +43,10 @@ const PositionTable = () => {
   const dispatch = useDispatch();
   const { long_market_value } = account;
   const [edit, setEdit] = React.useState(false);
+  const [gld, setGld] = React.useState(0);
+  const [vnq, setVnq] = React.useState(0);
+  const [vt, setVt] = React.useState(0);
+  const [bndw, setBndw] = React.useState(0);
 
   function createData(position, long_market_value) {
     const { name, id, alpacaData, tgtPct, currPct } = position;
@@ -67,19 +71,90 @@ const PositionTable = () => {
     console.log('edit:', edit);
   };
 
+  const determineSymbol = (row) => {
+    if (row.symbol === 'GLD') {
+      return (
+        <TextField
+          className={classes.textField}
+          label={`${row.tgtPct * 100}%`}
+          color="primary"
+          onChange={onChange}
+          name="gld"
+          value={gld}
+        >
+          Edit
+        </TextField>
+      );
+    } else if (row.symbol === 'VNQ') {
+      return (
+        <TextField
+          className={classes.textField}
+          label={`${row.tgtPct * 100}%`}
+          color="primary"
+          onChange={onChange}
+          name="vnq"
+          value={vnq}
+        >
+          Edit
+        </TextField>
+      );
+    } else if (row.symbol === 'BNDW') {
+      return (
+        <TextField
+          className={classes.textField}
+          label={`${row.tgtPct * 100}%`}
+          color="primary"
+          onChange={onChange}
+          name="bndw"
+          value={bndw}
+        >
+          Edit
+        </TextField>
+      );
+    } else if (row.symbol === 'VT') {
+      return (
+        <TextField
+          className={classes.textField}
+          label={`${row.tgtPct * 100}%`}
+          color="primary"
+          onChange={onChange}
+          name="vt"
+          value={vt}
+        >
+          Edit
+        </TextField>
+      );
+    }
+  };
+
   const onCancel = () => {
     setEdit(false);
   };
 
-  // const onSave = () => {
-  //   positions.forEach((position) => {
-  //     const { id, name, tgtPct, currPct } = position;
-  //     console.log('update', position);
-  //     //  dispatch(updatePosition({});
-  //   });
-  //   setEdit(false);
-  // };
+  const onChange = (ev) => {
+    console.log(ev.target);
+    // change[ev.target.name] = ev.target.value;
+    // change.categories = categories;
+    if (ev.target.name === 'gld') {
+      setGld(ev.target.value);
+    } else if (ev.target.name === 'vnq') {
+      setVnq(ev.target.value);
+    } else if (ev.target.name === 'bndw') {
+      setBndw(ev.target.value);
+    } else if (ev.target.name === 'vt') {
+      setVt(ev.target.value);
+    }
+  };
 
+  const onSave = () => {
+    positions.forEach((position) => {
+      const { id, name, tgtPct, currPct } = position;
+      console.log('update', position);
+      //  dispatch(updatePosition({});
+    });
+    setEdit(false);
+  };
+  console.log(vt, gld, vnq, bndw);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -103,9 +178,7 @@ const PositionTable = () => {
                   {!edit ? (
                     <Box>
                       <Typography>{`${row.tgtPct * 100}%`}</Typography>
-                      <Link href={`/#/edit-position/${row.id}`} color="primary">
-                        Edit
-                      </Link>
+                      {determineSymbol(row)}
                     </Box>
                   ) : (
                     <updatePositionTableTgtPct />
