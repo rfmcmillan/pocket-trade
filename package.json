@@ -26,6 +26,7 @@
 		"pg": "^8.6.0",
 		"prop-types": "^15.7.2",
 		"react-chartjs-2": "^3.0.3",
+		"recharts": "^2.0.9",
 		"sequelize": "^6.6.2"
 	},
 	"devDependencies": {
@@ -33,6 +34,7 @@
 		"@babel/preset-react": "^7.12.13",
 		"axios": "^0.21.1",
 		"babel-loader": "^8.2.2",
+		"babel-plugin-recharts": "^2.0.0",
 		"chai": "^4.3.4",
 		"css-loader": "^5.2.4",
 		"file-loader": "^6.2.0",

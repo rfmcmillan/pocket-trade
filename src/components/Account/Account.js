@@ -31,6 +31,7 @@ import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';
 import PositionTable from '../PositionTable/PositionTable';
 import { createOrder } from '../../store/orders';
+import PieAllocate from '../PieAllocate/PieAllocate';
 
 const useStyles = makeStyles(styles);
 
@@ -137,6 +138,7 @@ const Account = () => {
         </Typography>
         <PositionTable />
       </div>
+      <PieAllocate />
       <Box
       // sx={{
       //   height: 300,
