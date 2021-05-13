@@ -15,10 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const navStyle = {
+  background: 'linear-gradient(45deg, darkBlue 30%, darkSlateBlue 90%)',
+};
+
 const Nav = () => {
   const classes = useStyles();
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" style={navStyle}>
       <Toolbar>
         <IconButton
           edge="start"

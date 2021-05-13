@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const LOAD_POSITIONS = 'LOAD_POSITIONS';
+const UPDATE_POSITION = 'UPDATE_POSITIONS';
 
 //Create Action Creators & Thunks
 
@@ -19,12 +20,40 @@ const loadPositions = () => {
   };
 };
 
+const updatePositionActionCreator = (position) => {
+  return {
+    type: UPDATE_POSITION,
+    position,
+  };
+};
+
+const updatePosition = (id, name, tgtPct, currPct) => {
+  return async (dispatch) => {
+    const response = await axios.put(`api/positions/${id}`, {
+      name,
+      tgtPct,
+      currPct,
+    });
+    const position = response.data;
+    dispatch(updatePositionActionCreator(position));
+  };
+};
+
 //Reducer
 const positionsReducer = (state = [], action) => {
   if (action.type === LOAD_POSITIONS) {
     state = action.positions;
   }
+  if (action.type === UPDATE_POSITION) {
+    const positions = state.map((position) => {
+      if (position.id === action.position.id) {
+        return action.position;
+      }
+      return position;
+    });
+    state = positions;
+  }
   return state;
 };
 
-export { loadPositions, positionsReducer };
+export { loadPositions, updatePosition, positionsReducer };
