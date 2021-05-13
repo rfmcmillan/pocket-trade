@@ -178,10 +178,9 @@ const PositionTable = () => {
                   {!edit ? (
                     <Box>
                       <Typography>{`${row.tgtPct * 100}%`}</Typography>
-                      {determineSymbol(row)}
                     </Box>
                   ) : (
-                    <updatePositionTableTgtPct />
+                    determineSymbol(row)
                   )}
                 </TableCell>
                 <TableCell align="right">
