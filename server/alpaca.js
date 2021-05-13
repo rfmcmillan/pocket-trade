@@ -8,10 +8,4 @@ const alpaca = new Alpaca({
   usePolygon: false,
 });
 
-const getAlpacaAccount = async () => {
-  // console.log(alpaca);
-};
-
-getAlpacaAccount();
-
 module.exports = { alpaca };

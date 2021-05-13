@@ -1,18 +1,7 @@
-import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  TextField,
-  Typography,
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
-  useTheme,
-  colors,
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -21,7 +10,6 @@ import {
   TableRow,
   Paper,
 } from '@material-ui/core';
-import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
 import '@fontsource/roboto';
 
 const useStyles = makeStyles({

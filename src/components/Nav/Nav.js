@@ -1,14 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button,
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-} from '@material-ui/core';
+import { Typography, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
