@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder, loadOrders } from '../../store/orders';
+import { createFutureOrder } from '../../store/futureOrders';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -17,7 +18,7 @@ import {
   ListItemText,
   Snackbar,
 } from '@material-ui/core';
-import { createFutureOrder } from '../../store/futureOrders';
+
 const useStyles = makeStyles((theme) => ({
   dialogList: {
     width: '100%',
@@ -29,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SnackbarRebalance = (props) => {
+const SnackbarLowFrequency = (props) => {
   const [open, setOpen] = React.useState(false);
-  const {} = props;
+  const { monthFrequency } = props;
+  console.log(monthFrequency);
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,9 @@ const SnackbarRebalance = (props) => {
     setOpen(false);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    dispatch(createFutureOrder(monthFrequency));
+    console.log(monthFrequency);
     setOpen(true);
   };
 
@@ -65,4 +69,4 @@ const SnackbarRebalance = (props) => {
   );
 };
 
-export default SnackbarRebalance;
+export default SnackbarLowFrequency;

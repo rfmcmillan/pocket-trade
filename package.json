@@ -29,7 +29,8 @@
 		"react-chartjs-2": "^3.0.3",
 		"recharts": "^2.0.9",
 		"scheduler": "^0.20.2",
-		"sequelize": "^6.6.2"
+		"sequelize": "^6.6.2",
+		"toad-scheduler": "^1.0.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.10",

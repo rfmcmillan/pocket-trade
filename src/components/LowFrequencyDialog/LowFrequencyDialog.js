@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder, loadOrders } from '../../store/orders';
 import { makeStyles } from '@material-ui/core/styles';
+import SnackbarLowFrequency from '../SnackbarLowFrequency/SnackbarLowFrequency';
 import {
   Button,
   Typography,
@@ -32,9 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LowFrequencyDialog = (props) => {
   const [open, setOpen] = React.useState(false);
-  const { trades } = props;
-  console.log(trades);
-
+  const [monthFrequency, setMonthFrequency] = React.useState(3);
   const dispatch = useDispatch();
 
   const handleClickOpen = async () => {
@@ -47,6 +46,11 @@ const LowFrequencyDialog = (props) => {
 
   const handleSubmit = async () => {
     setOpen(true);
+  };
+
+  const onChange = (ev) => {
+    setMonthFrequency(ev.target.ariaValueNow * 1);
+    console.log(ev.target.ariaValueNow);
   };
 
   // const handleSubmit = async () => {
@@ -109,10 +113,10 @@ const LowFrequencyDialog = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`How infrequently would you like your rebalancing to occur? `}
+          {`How often (in months) would you like your rebalancing to occur? `}
         </DialogTitle>
         <DialogContent>
-          <Typography id="discrete-slider">Infrequency</Typography>
+          <Typography id="discrete-slider">Frequency</Typography>
           <Slider
             defaultValue={3}
             getAriaValueText={valuetext}
@@ -122,6 +126,7 @@ const LowFrequencyDialog = (props) => {
             step={1}
             min={1}
             max={12}
+            onChange={onChange}
             // marks={marks}
           />
         </DialogContent>
@@ -129,7 +134,7 @@ const LowFrequencyDialog = (props) => {
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
-          {/* <SnackbarLowFrequency trades={proposedOrders} /> */}
+          <SnackbarLowFrequency monthFrequency={monthFrequency} />
         </DialogActions>
       </Dialog>
     </div>

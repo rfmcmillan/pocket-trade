@@ -24,11 +24,12 @@ const createOrderActionCreator = (order) => {
   };
 };
 
-const createFutureOrder = (symbol, notional, side, type, time_in_force) => {
+const createFutureOrder = (monthFrequency) => {
   return async (dispatch) => {
+    console.log('inside thunk:', monthFrequency);
     const futureOrder = (
       await axios.post('/api/futureOrders', {
-        date,
+        monthFrequency,
       })
     ).data;
     dispatch(createFutureOrderActionCreator(futureOrder));
