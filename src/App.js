@@ -7,6 +7,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import { loadAccount } from './store/account';
 import { loadPositions } from './store/positions';
 import { loadOrders } from './store/orders';
+import updatePositionTableTgtPct from './components/PositionTable/updatePositionTgtPct';
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,6 +21,10 @@ class App extends React.Component {
           <Route component={Nav} />
           <Route component={Account} path="/account" exact />
           <Route component={EditAccount} path="/edit-account" exact />
+          <Route
+            component={updatePositionTableTgtPct}
+            path="/edit-position/:id"
+          />
         </div>
       </HashRouter>
     );

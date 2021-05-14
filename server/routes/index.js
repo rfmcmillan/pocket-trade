@@ -27,6 +27,16 @@ router.get('/positions', async (req, res, next) => {
   }
 });
 
+router.put('/positions/:id', async (req, res, next) => {
+  try {
+    const position = await Position.findByPk(req.params.id);
+    const updated = await position.update(req.body);
+    res.status(200).send(updated);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/orders', async (req, res, next) => {
   try {
     const response = await axios.get(
@@ -49,7 +59,6 @@ router.get('/orders', async (req, res, next) => {
 router.get('/orders/all', async (req, res, next) => {
   try {
     const response = await alpaca.getOrders({ status: 'closed' });
-    console.log(response);
 
     res.send(response);
   } catch (error) {

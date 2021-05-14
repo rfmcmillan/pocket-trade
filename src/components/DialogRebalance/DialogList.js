@@ -23,6 +23,5 @@ function ListItemLink(props) {
 export default function DialogList() {
   const classes = useStyles();
   const { proposedOrders } = this.props;
-  console.log('inside List:', proposedOrders);
   return <div className={classes.root}></div>;
 }

@@ -32,7 +32,6 @@ const DialogRebalance = () => {
   const dispatch = useDispatch();
 
   const rebalance = async () => {
-    console.log('rebalancing...');
     const acctResponse = await axios.get('api/account');
     const account = acctResponse.data;
     const { portfolio_value } = account;
@@ -66,16 +65,12 @@ const DialogRebalance = () => {
         // );
       }
     });
-    console.log('proposed:', proposed);
-    console.log('proposedOrders before:', proposedOrders);
     setProposedOrders(proposed);
-    console.log('proposedOrders after:', proposedOrders);
   };
 
   const handleClickOpen = () => {
     rebalance();
     setOpen(true);
-    console.log('upon opening dialog: proposedOrders:', proposedOrders);
   };
 
   const handleCancel = () => {

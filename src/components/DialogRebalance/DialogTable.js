@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 
 const DialogTable = () => {
   const classes = useStyles();
-  console.log(props);
   const { proposedOrders } = props;
 
   function createData(order) {
