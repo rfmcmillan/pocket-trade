@@ -17,6 +17,8 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import DialogList from './DialogList';
+import SnackbarRebalance from '../SnackbarRebalance/SnackbarRebalance';
+
 const useStyles = makeStyles((theme) => ({
   dialogList: {
     width: '100%',
@@ -86,7 +88,6 @@ const DialogRebalance = () => {
       const { symbol, tradeAmt, side, type, time_in_force } = order;
       dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
     });
-    await dispatch(loadOrders());
     setOpen(false);
   };
 
@@ -112,31 +113,25 @@ const DialogRebalance = () => {
           {`Click 'Submit' to place the following trades:`}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <List
-              component="nav"
-              aria-label="main mailbox folders"
-              className={classes.dialogList}
-            >
-              {proposedOrders.map((order, idx) => {
-                const { side, tradeAmt, symbol } = order;
-                return (
-                  <ListItem key={idx}>
-                    {side} {tradeAmt} shares of {symbol}
-                    <Divider />
-                  </ListItem>
-                );
-              })}
-            </List>
-          </DialogContentText>
+          <List
+            aria-label="main mailbox folders"
+            className={classes.dialogList}
+          >
+            {proposedOrders.map((order, idx) => {
+              const { side, tradeAmt, symbol } = order;
+              return (
+                <ListItem key={idx}>
+                  {side} {tradeAmt} shares of {symbol}
+                </ListItem>
+              );
+            })}
+          </List>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary" autoFocus>
-            Submit
-          </Button>
+          <SnackbarRebalance trades={proposedOrders} />
         </DialogActions>
       </Dialog>
     </div>

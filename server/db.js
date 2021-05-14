@@ -41,6 +41,17 @@ Position.addHook('afterCreate', (position) => {
   position.calcCurrPct();
 });
 
+const FutureOrder = db.define('futureOrder', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  date: {
+    type: DataTypes.DATE,
+  },
+});
+
 const syncAndSeed = async () => {
   await db.sync({ force: true });
   const account = await alpaca.getAccount();
@@ -90,4 +101,4 @@ const syncAndSeed = async () => {
   return { positions: { vt, bndw, vnq, gld } };
 };
 
-module.exports = { db, syncAndSeed, models: { Position } };
+module.exports = { db, syncAndSeed, models: { Position, FutureOrder } };

@@ -2,7 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
-import { PieChart, Pie, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import dummyPositions from '../../assets/dummyPositions';
 
@@ -28,35 +37,31 @@ const PieAllocate = () => {
   });
 
   const currPcts = positions.map((position) => {
-    return { name: position.alpacaData.symbol, value: position.currPct };
+    return {
+      name: position.alpacaData.symbol,
+      value: position.currPct,
+    };
   });
 
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
   });
 
-  const data02 = [
-    {
-      name: 'GLD',
-      value: 10,
-    },
-    {
-      name: 'VNQ',
-      value: 10,
-    },
-    {
-      name: 'BNDW',
-      value: 20,
-    },
-    {
-      name: 'VT',
-      value: 60,
-    },
-  ];
-
   return (
     <Paper className={classes.pie}>
       <PieChart width={600} height={300}>
+        <Tooltip wrapperStyle={{ backgroundColor: 'primary' }} />
+        {/* <Legend
+          width={100}
+          wrapperStyle={{
+            top: 40,
+            right: 20,
+            backgroundColor: '#f5f5f5',
+            border: '1px solid #d5d5d5',
+            borderRadius: 3,
+            lineHeight: '40px',
+          }}
+        /> */}
         <Pie
           data={currPcts}
           dataKey="value"

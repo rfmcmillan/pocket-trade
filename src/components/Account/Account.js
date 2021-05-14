@@ -33,7 +33,7 @@ const Account = () => {
 
   return (
     <div id="account">
-      <Typography variant="overtext">PORTFOLIO VALUE</Typography>
+      <Typography variant="overline">PORTFOLIO VALUE</Typography>
       <div>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Typography p={1} variant="h4" component="h4" color="primary">
@@ -41,7 +41,7 @@ const Account = () => {
           </Typography>
           <DialogRebalance p={1} />
         </Box>
-        <Typography p={1} variant="subtitle">
+        <Typography p={1} variant="subtitle1">
           Here's where your allocations stand today.
         </Typography>
         {/* <Typography variant="h5" gutterBottom>

@@ -1,7 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import {
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import LowFrequencyDialog from '../LowFrequencyDialog/LowFrequencyDialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,8 +31,9 @@ const Nav = () => {
     <AppBar position="static" className={classes.navBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
-          Portfolio Rebalancer
+          Rebalance View
         </Typography>
+        <LowFrequencyDialog />
       </Toolbar>
     </AppBar>
   );

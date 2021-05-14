@@ -83,4 +83,22 @@ router.post('/orders', async (req, res, next) => {
   }
 });
 
+router.get('/futureOrders', async (req, res, next) => {
+  try {
+    const response = await futureOrders.findAll();
+    res.send(response.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/futureOrders', async (req, res, next) => {
+  try {
+    const response = await futureOrders.findAll();
+    res.send(response.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
