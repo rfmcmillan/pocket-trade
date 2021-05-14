@@ -9,6 +9,9 @@ import {
   Box,
   Snackbar,
 } from '@material-ui/core';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { green, purple } from '@material-ui/core/colors';
 
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
@@ -22,6 +25,18 @@ import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
 
 const useStyles = makeStyles(styles);
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
 
 const Account = () => {
   const classes = useStyles({
@@ -44,8 +59,6 @@ const Account = () => {
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
   });
-
-  const theme = useTheme();
 
   const data = {
     datasets: [
@@ -125,31 +138,33 @@ const Account = () => {
   // };
 
   return (
-    <div id="account">
-      <div>
-        <Typography variant="h4" component="h4" gutterBottom>
-          Your Account
-        </Typography>
-        <Typography variant="h5" gutterBottom>
-          {portfolio_value_usd}
-        </Typography>
-        <PositionTable />
-      </div>
-      <PieAllocate />
-      <Box
-      // sx={{
-      //   height: 300,
-      //   position: 'relative',
-      // }}
-      >
-        <Doughnut data={data} options={options} />
-      </Box>
-      {/* <Button variant="outlined" onClick={() => rebalance()}>
+    <MuiThemeProvider theme={theme}>
+      <div id="account">
+        <div>
+          <Typography variant="h4" component="h4" gutterBottom>
+            Your Account
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            {portfolio_value_usd}
+          </Typography>
+          <PositionTable />
+        </div>
+        <PieAllocate />
+        <Box
+        // sx={{
+        //   height: 300,
+        //   position: 'relative',
+        // }}
+        >
+          <Doughnut data={data} options={options} />
+        </Box>
+        {/* <Button variant="outlined" onClick={() => rebalance()}>
         Rebalance
       </Button> */}
-      <DialogRebalance />
-      <OrderHistory />
-    </div>
+        <DialogRebalance />
+        <OrderHistory />
+      </div>
+    </MuiThemeProvider>
   );
 };
 
