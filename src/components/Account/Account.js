@@ -9,9 +9,6 @@ import {
   Box,
   Snackbar,
 } from '@material-ui/core';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { green, purple } from '@material-ui/core/colors';
 
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
@@ -25,18 +22,6 @@ import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
 
 const useStyles = makeStyles(styles);
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: green[500],
-    },
-  },
-});
 
 const Account = () => {
   const classes = useStyles({
@@ -59,6 +44,8 @@ const Account = () => {
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
   });
+
+  const theme = useTheme();
 
   const data = {
     datasets: [
@@ -93,78 +80,27 @@ const Account = () => {
       borderWidth: 1,
       enabled: true,
       footerFontColor: theme.palette.text.secondary,
-      intersect: false,
+      // intersect: false,
       mode: 'index',
       titleFontColor: theme.palette.text.primary,
     },
   };
 
-  // const rebalance = async () => {
-  //   const acctResponse = await axios.get('api/account');
-  //   const account = acctResponse.data;
-  //   const { portfolio_value } = account;
-  //   const posResponse = await axios.get('/api/positions');
-  //   const positions = posResponse.data;
-  //   const proposedOrders = [];
-  //   positions.forEach((position) => {
-  //     const {
-  //       tgtPct,
-  //       currPct,
-  //       alpacaData: { symbol },
-  //     } = position;
-  //     const tgtAmt = tgtPct * portfolio_value;
-  //     const currAmt = currPct * portfolio_value;
-  //     const amount = parseInt(tgtAmt - currAmt);
-  //     const type = 'market';
-  //     const time_in_force = 'day';
-  //     if (amount > 0) {
-  //       const tradeAmt = amount;
-  //       const side = 'buy';
-  //       const order = { symbol, tradeAmt, side, type, time_in_force };
-  //       proposedOrders.push(order);
-  //       // dispatch(createOrder(symbol, amtToTrade, 'buy', 'market', 'day'));
-  //     } else if (amount < 0) {
-  //       const tradeAmt = -amount;
-  //       const side = 'sell';
-  //       const order = { symbol, tradeAmt, side, type, time_in_force };
-  //       proposedOrders.push(order);
-  //       // dispatch(
-  //       //   createOrder(symbol, positiveAmtToTrade, 'sell', 'market', 'day')
-  //       // );
-  //     }
-  //   });
-  //   setOpen(true);
-  //   return proposedOrders;
-  // };
-
   return (
-    <MuiThemeProvider theme={theme}>
-      <div id="account">
-        <div>
-          <Typography variant="h4" component="h4" gutterBottom>
-            Your Account
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            {portfolio_value_usd}
-          </Typography>
-          <PositionTable />
-        </div>
-        <PieAllocate />
-        <Box
-        // sx={{
-        //   height: 300,
-        //   position: 'relative',
-        // }}
-        >
-          <Doughnut data={data} options={options} />
-        </Box>
-        {/* <Button variant="outlined" onClick={() => rebalance()}>
-        Rebalance
-      </Button> */}
-        <DialogRebalance />
-        <OrderHistory />
+    <div id="account">
+      <div>
+        <Typography variant="h4" component="h4" gutterBottom>
+          Your Account
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+          {portfolio_value_usd}
+        </Typography>
+        <PositionTable />
       </div>
-    </MuiThemeProvider>
+      <PieAllocate />
+      <DialogRebalance />
+      <OrderHistory />
+    </div>
   );
 };
 

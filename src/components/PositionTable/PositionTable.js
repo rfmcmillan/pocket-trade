@@ -23,6 +23,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  tableContain: {
+    borderRadius: '16px',
+  },
   textField: {
     maxWidth: 75,
   },
