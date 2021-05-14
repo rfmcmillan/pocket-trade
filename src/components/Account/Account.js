@@ -1,14 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button,
-  Typography,
-  useTheme,
-  colors,
-  Box,
-  Snackbar,
-} from '@material-ui/core';
+import { Button, Typography, useTheme, colors, Box } from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
 import '@fontsource/roboto';
@@ -38,63 +31,27 @@ const Account = () => {
 
   const theme = useTheme();
 
-  const data = {
-    datasets: [
-      {
-        data: marketValues,
-        backgroundColor: [
-          colors.indigo[500],
-          colors.red[600],
-          colors.orange[600],
-        ],
-        borderWidth: 8,
-        borderColor: colors.common.white,
-        hoverBorderColor: colors.common.white,
-      },
-    ],
-    labels: ['Global Stocks', 'Global Bonds', 'Real Estate', 'Gold'],
-  };
-
-  const options = {
-    animation: false,
-    cutoutPercentage: 80,
-    layout: { padding: 0 },
-    legend: {
-      display: false,
-    },
-    maintainAspectRatio: false,
-    responsive: true,
-    tooltips: {
-      backgroundColor: theme.palette.background.paper,
-      bodyFontColor: theme.palette.text.secondary,
-      borderColor: theme.palette.divider,
-      borderWidth: 1,
-      enabled: true,
-      footerFontColor: theme.palette.text.secondary,
-      // intersect: false,
-      mode: 'index',
-      titleFontColor: theme.palette.text.primary,
-    },
-  };
-
   return (
     <div id="account">
+      <Typography variant="overtext">PORTFOLIO VALUE</Typography>
       <div>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Typography p={1} variant="h4" component="h4" gutterBottom>
-            Your Account
+          <Typography p={1} variant="h4" component="h4" color="primary">
+            {portfolio_value_usd}
           </Typography>
           <DialogRebalance p={1} />
         </Box>
-        <Typography variant="h5" gutterBottom>
-          {portfolio_value_usd}
+        <Typography p={1} variant="subtitle">
+          Here's where your allocations stand today.
         </Typography>
-        <Box display="flex" flexDirection="row">
+        {/* <Typography variant="h5" gutterBottom>
+          {portfolio_value_usd}
+        </Typography> */}
+        <Box display="flex" flexDirection="row" marginTop={1.5}>
           <PositionTable p={1} />
           <PieAllocate p={1} />
         </Box>
       </div>
-
       <OrderHistory />
     </div>
   );

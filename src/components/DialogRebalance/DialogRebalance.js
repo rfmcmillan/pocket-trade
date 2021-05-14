@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder } from '../../store/orders';
+import { createOrder, loadOrders } from '../../store/orders';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -71,8 +71,8 @@ const DialogRebalance = () => {
     setProposedOrders(proposed);
   };
 
-  const handleClickOpen = () => {
-    rebalance();
+  const handleClickOpen = async () => {
+    await rebalance();
     setOpen(true);
   };
 
@@ -80,12 +80,13 @@ const DialogRebalance = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('upon clicking submit: proposedOrders:', proposedOrders);
-    proposedOrders.forEach((order) => {
+    await proposedOrders.forEach((order) => {
       const { symbol, tradeAmt, side, type, time_in_force } = order;
       dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
     });
+    await dispatch(loadOrders());
     setOpen(false);
   };
 
@@ -100,6 +101,7 @@ const DialogRebalance = () => {
       >
         Quick Rebalance
       </Button>
+
       <Dialog
         open={open}
         onClose={handleCancel}

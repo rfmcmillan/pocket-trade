@@ -58,7 +58,8 @@ router.get('/orders', async (req, res, next) => {
 });
 router.get('/orders/all', async (req, res, next) => {
   try {
-    const response = await alpaca.getOrders({ status: 'closed' });
+    //
+    const response = await alpaca.getOrders({ status: 'all' });
 
     res.send(response);
   } catch (error) {

@@ -78,12 +78,14 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="gld"
           value={gld}
           variant="outlined"
+          size="small"
+          autoFocus
         >
           Edit
         </TextField>
@@ -92,12 +94,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="vnq"
           value={vnq}
           variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -106,12 +109,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="bndw"
           value={bndw}
           variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -120,12 +124,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="vt"
           value={vt}
           variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -195,7 +200,9 @@ const PositionTable = () => {
                 <TableCell align="right">
                   {!edit ? (
                     <Box>
-                      <Typography>{`${row.tgtPct * 100}%`}</Typography>
+                      <Typography>{`${(row.tgtPct * 100).toFixed(
+                        2
+                      )}%`}</Typography>
                     </Box>
                   ) : (
                     determineSymbol(row)
