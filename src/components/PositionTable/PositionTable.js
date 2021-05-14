@@ -83,6 +83,7 @@ const PositionTable = () => {
           onChange={onChange}
           name="gld"
           value={gld}
+          variant="outlined"
         >
           Edit
         </TextField>
@@ -96,6 +97,7 @@ const PositionTable = () => {
           onChange={onChange}
           name="vnq"
           value={vnq}
+          variant="outlined"
         >
           Edit
         </TextField>
@@ -109,6 +111,7 @@ const PositionTable = () => {
           onChange={onChange}
           name="bndw"
           value={bndw}
+          variant="outlined"
         >
           Edit
         </TextField>
@@ -122,6 +125,7 @@ const PositionTable = () => {
           onChange={onChange}
           name="vt"
           value={vt}
+          variant="outlined"
         >
           Edit
         </TextField>
