@@ -80,49 +80,11 @@ const Account = () => {
       borderWidth: 1,
       enabled: true,
       footerFontColor: theme.palette.text.secondary,
-      intersect: false,
+      // intersect: false,
       mode: 'index',
       titleFontColor: theme.palette.text.primary,
     },
   };
-
-  // const rebalance = async () => {
-  //   const acctResponse = await axios.get('api/account');
-  //   const account = acctResponse.data;
-  //   const { portfolio_value } = account;
-  //   const posResponse = await axios.get('/api/positions');
-  //   const positions = posResponse.data;
-  //   const proposedOrders = [];
-  //   positions.forEach((position) => {
-  //     const {
-  //       tgtPct,
-  //       currPct,
-  //       alpacaData: { symbol },
-  //     } = position;
-  //     const tgtAmt = tgtPct * portfolio_value;
-  //     const currAmt = currPct * portfolio_value;
-  //     const amount = parseInt(tgtAmt - currAmt);
-  //     const type = 'market';
-  //     const time_in_force = 'day';
-  //     if (amount > 0) {
-  //       const tradeAmt = amount;
-  //       const side = 'buy';
-  //       const order = { symbol, tradeAmt, side, type, time_in_force };
-  //       proposedOrders.push(order);
-  //       // dispatch(createOrder(symbol, amtToTrade, 'buy', 'market', 'day'));
-  //     } else if (amount < 0) {
-  //       const tradeAmt = -amount;
-  //       const side = 'sell';
-  //       const order = { symbol, tradeAmt, side, type, time_in_force };
-  //       proposedOrders.push(order);
-  //       // dispatch(
-  //       //   createOrder(symbol, positiveAmtToTrade, 'sell', 'market', 'day')
-  //       // );
-  //     }
-  //   });
-  //   setOpen(true);
-  //   return proposedOrders;
-  // };
 
   return (
     <div id="account">
@@ -136,17 +98,6 @@ const Account = () => {
         <PositionTable />
       </div>
       <PieAllocate />
-      <Box
-      // sx={{
-      //   height: 300,
-      //   position: 'relative',
-      // }}
-      >
-        <Doughnut data={data} options={options} />
-      </Box>
-      {/* <Button variant="outlined" onClick={() => rebalance()}>
-        Rebalance
-      </Button> */}
       <DialogRebalance />
       <OrderHistory />
     </div>

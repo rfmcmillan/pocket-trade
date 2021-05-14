@@ -13,16 +13,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  navBar: {
+    backgroundColor: '#222B36',
+  },
 }));
-
-const navStyle = {
-  background: 'linear-gradient(45deg, darkBlue 30%, darkSlateBlue 90%)',
-};
 
 const Nav = () => {
   const classes = useStyles();
   return (
-    <AppBar position="static" style={navStyle}>
+    <AppBar position="static" className={classes.navBar}>
       <Toolbar>
         <IconButton
           edge="start"
