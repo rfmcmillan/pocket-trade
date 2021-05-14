@@ -21,7 +21,8 @@ import updatePositionTableTgtPct from './updatePositionTgtPct';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 400,
+    marginBottom: 20,
   },
   tableContain: {
     borderRadius: '16px',
@@ -32,11 +33,9 @@ const useStyles = makeStyles({
 });
 
 const cancelButtonStyle = {
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   margin: '10px',
 };
 const submitButtonStyle = {
-  background: 'linear-gradient(45deg, darkBlue 30%, darkSlateBlue 90%)',
   margin: '10px',
 };
 const PositionTable = () => {
@@ -171,8 +170,8 @@ const PositionTable = () => {
   };
   console.log(vt, gld, vnq, bndw);
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer component={Paper} className={classes.table}>
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Position </TableCell>

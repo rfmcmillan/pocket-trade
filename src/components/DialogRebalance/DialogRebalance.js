@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  button: {
+    borderRadius: 20,
+  },
 }));
 
 const DialogRebalance = () => {
@@ -89,8 +92,13 @@ const DialogRebalance = () => {
   const classes = useStyles();
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Rebalance
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={handleClickOpen}
+      >
+        Quick Rebalance
       </Button>
       <Dialog
         open={open}
@@ -99,7 +107,7 @@ const DialogRebalance = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`Click 'Submit' to submit the following trades:`}
+          {`Click 'Submit' to place the following trades:`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

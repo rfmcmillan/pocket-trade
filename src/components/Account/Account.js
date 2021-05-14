@@ -11,8 +11,6 @@ import {
 } from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '../../assets/jss/material-kit-react/views/profilePage.js';
-import { Doughnut } from 'react-chartjs-2';
 import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';
 import PositionTable from '../PositionTable/PositionTable';
@@ -21,14 +19,7 @@ import { createOrder } from '../../store/orders';
 import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
 
-const useStyles = makeStyles(styles);
-
 const Account = () => {
-  const classes = useStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
   const [open, setOpen] = React.useState(false);
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
@@ -89,16 +80,21 @@ const Account = () => {
   return (
     <div id="account">
       <div>
-        <Typography variant="h4" component="h4" gutterBottom>
-          Your Account
-        </Typography>
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
+          <Typography p={1} variant="h4" component="h4" gutterBottom>
+            Your Account
+          </Typography>
+          <DialogRebalance p={1} />
+        </Box>
         <Typography variant="h5" gutterBottom>
           {portfolio_value_usd}
         </Typography>
-        <PositionTable />
+        <Box display="flex" flexDirection="row">
+          <PositionTable p={1} />
+          <PieAllocate p={1} />
+        </Box>
       </div>
-      <PieAllocate />
-      <DialogRebalance />
+
       <OrderHistory />
     </div>
   );

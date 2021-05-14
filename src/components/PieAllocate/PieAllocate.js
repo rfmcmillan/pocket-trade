@@ -50,19 +50,7 @@ const PieAllocate = () => {
   ];
 
   return (
-    <PieChart width={730} height={250}>
-      <Pie
-        data={tgtPcts}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        innerRadius={30}
-        outerRadius={50}
-        fill="#7783DB"
-        className={classes.pie}
-        paddingAngle={10}
-      />
+    <PieChart width={600} height={300}>
       <Pie
         data={data02}
         dataKey="value"
@@ -71,10 +59,22 @@ const PieAllocate = () => {
         cy="50%"
         // startAngle={520}
         // endAngle={160}
-        innerRadius={60}
-        outerRadius={80}
+        innerRadius={90}
+        outerRadius={130}
         fill="#27C6DB"
+        paddingAngle={10}
         label
+      />
+      <Pie
+        data={tgtPcts}
+        dataKey="value"
+        nameKey="name"
+        cx="50%"
+        cy="50%"
+        innerRadius={50}
+        outerRadius={80}
+        fill="#7783DB"
+        // className={classes.pie}
         paddingAngle={10}
       />
     </PieChart>

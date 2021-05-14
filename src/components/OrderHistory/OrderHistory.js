@@ -12,15 +12,15 @@ import {
   TableBody,
 } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles({
+  contain: {
+    padding: 10,
+  },
+});
 
 const OrderHistory = () => {
   const orders = useSelector((state) => state.orders);
-  const classes = useStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
+  const classes = useStyles();
   function createData(order) {
     const {
       symbol,
@@ -51,12 +51,12 @@ const OrderHistory = () => {
   });
 
   return (
-    <Paper elevation={3}>
+    <Paper className={classes.contain} elevation={3}>
       <Typography variant="h6" className={classes.title}>
         Order History
       </Typography>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Position </TableCell>
