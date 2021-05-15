@@ -12,6 +12,7 @@ import { createOrder } from '../../store/orders';
 import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
 import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
+import SimplePieChart from '../SimplePieChart/SimplePieChart';
 
 const Account = () => {
   const [open, setOpen] = React.useState(false);
@@ -48,14 +49,23 @@ const Account = () => {
         {/* <Typography variant="h5" gutterBottom>
           {portfolio_value_usd}
         </Typography> */}
+
         <Box display="flex" flexDirection="row" marginTop={1.5}>
           <PositionTable p={1} />
 
           <PieAllocate p={1} />
         </Box>
-        <SimpleLineChart p={1} />
+
+        <Box
+          display="flex"
+          flexDirection="row"
+          marginTop={1.5}
+          justifyContent="space-between"
+        >
+          <SimpleLineChart />
+          <OrderHistory p={1} />
+        </Box>
       </div>
-      <OrderHistory />
     </div>
   );
 };

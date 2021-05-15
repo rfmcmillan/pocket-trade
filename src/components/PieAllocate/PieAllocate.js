@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import {
   PieChart,
   Pie,
@@ -22,7 +22,9 @@ const useStyles = makeStyles({
     // marginLeft: '15px',
     marginBottom: 20,
     marginLeft: 20,
+    padding: 10,
   },
+  contain: {},
 });
 
 const PieAllocate = () => {
@@ -47,31 +49,18 @@ const PieAllocate = () => {
     return position.market_value;
   });
 
-  const renderLabel = (entry) => {
-    return entry.nameKey;
-  };
-
   return (
     <Paper className={classes.pie}>
+      <Typography variant="h6">Target/Current Comparison</Typography>
       <PieChart width={600} height={300}>
         <Tooltip wrapperStyle={{ backgroundColor: 'primary' }} />
-        {/* <Legend
-          width={100}
-          wrapperStyle={{
-            top: 40,
-            right: 20,
-            backgroundColor: '#f5f5f5',
-            border: '1px solid #d5d5d5',
-            borderRadius: 3,
-            lineHeight: '40px',
-          }}
-        /> */}
+
         <Pie
           data={currPcts}
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="50%"
+          cy="110%"
           // startAngle={520}
           // endAngle={160}
           innerRadius={100}
@@ -85,13 +74,25 @@ const PieAllocate = () => {
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="50%"
+          cy="110%"
           innerRadius={60}
           outerRadius={90}
           fill="#7783DB"
           // className={classes.pie}
           paddingAngle={10}
-          label
+        />
+        <Legend
+          width={100}
+          align="left"
+          iconType="line"
+          // wrapperStyle={{
+          //   top: 40,
+          //   left: 110,
+          //   backgroundColor: '#f5f5f5',
+          //   border: '1px solid #d5d5d5',
+          //   borderRadius: 3,
+          //   lineHeight: '40px',
+          // }}
         />
       </PieChart>
     </Paper>

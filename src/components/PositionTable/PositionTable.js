@@ -14,6 +14,7 @@ import {
   Box,
   Typography,
   Link,
+  Checkbox,
 } from '@material-ui/core';
 import { updatePosition } from '../../store/positions';
 import '@fontsource/roboto';

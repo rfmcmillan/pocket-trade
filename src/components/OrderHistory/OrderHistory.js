@@ -15,6 +15,7 @@ import {
 const useStyles = makeStyles({
   contain: {
     padding: 10,
+    minWidth: 850,
   },
 });
 
@@ -83,11 +84,11 @@ const OrderHistory = () => {
                     {row.symbol}
                   </TableCell>
                   <TableCell>{`${month}/${date}/${year} ${hour}:${minute}`}</TableCell>
-                  <TableCell>{row.side}</TableCell>
+                  <TableCell>{row.side.toUpperCase()}</TableCell>
                   <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
                   <TableCell>{row.filled_avg_price}</TableCell>
-                  <TableCell>{row.notional}</TableCell>
-                  <TableCell>{row.status}</TableCell>
+                  <TableCell>{`$${row.notional}.00`}</TableCell>
+                  <TableCell>{row.status.toUpperCase()}</TableCell>
                 </TableRow>
               );
             })}

@@ -30,8 +30,8 @@ const theme = createMuiTheme({
     },
     mode: 'dark',
     primary: {
-      contrastText: '#ffffff',
-      main: '#7783DB',
+      contrastText: '#023020',
+      main: '#AFE1AF',
     },
     success: {
       contrastText: '#ffffff',

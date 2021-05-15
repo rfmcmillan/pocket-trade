@@ -103,7 +103,7 @@ const LowFrequencyDialog = (props) => {
         // className={classes.button}
         onClick={handleSubmit}
       >
-        Low Frequency Mode
+        AutoPilot Mode
       </Button>
 
       <Dialog

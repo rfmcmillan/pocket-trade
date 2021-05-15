@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import DialogList from './DialogList';
 import SnackbarRebalance from '../SnackbarRebalance/SnackbarRebalance';
+import DialogTable from './DialogTable';
 
 const useStyles = makeStyles((theme) => ({
   dialogList: {
@@ -113,7 +114,7 @@ const DialogRebalance = () => {
           {`Click 'Submit' to place the following trades:`}
         </DialogTitle>
         <DialogContent>
-          <List
+          {/* <List
             aria-label="main mailbox folders"
             className={classes.dialogList}
           >
@@ -125,7 +126,8 @@ const DialogRebalance = () => {
                 </ListItem>
               );
             })}
-          </List>
+          </List> */}
+          <DialogTable proposedOrders={proposedOrders} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} color="secondary">

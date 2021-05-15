@@ -98,21 +98,7 @@ const syncAndSeed = async () => {
     tgtPct: 0.1,
   });
 
-  const getTimeSeries = async () => {
-    try {
-      const prices = await axios.get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=GLD&apikey=${alpha_vantage_key}`
-      );
-      console.log(prices);
-      return prices;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const prices = getTimeSeries();
-
-  return { positions: { vt, bndw, vnq, gld }, prices: prices };
+  return { positions: { vt, bndw, vnq, gld } };
 };
 
 module.exports = { db, syncAndSeed, models: { Position, FutureOrder } };

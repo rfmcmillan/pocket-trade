@@ -18,10 +18,10 @@ const useStyles = makeStyles({
   },
 });
 
-const DialogTable = () => {
+const DialogTable = (props) => {
   const classes = useStyles();
   const { proposedOrders } = props;
-
+  console.log(proposedOrders);
   function createData(order) {
     const { side, tradeAmt, symbol } = order;
     const row = {
@@ -40,24 +40,18 @@ const DialogTable = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Order </TableCell>
-            <TableCell align="right">Buy/Sell</TableCell>
-            <TableCell align="right">Target</TableCell>
-            <TableCell align="right">Actual</TableCell>
+            <TableCell>Symbol </TableCell>
+            <TableCell>Buy/Sell</TableCell>
+            <TableCell>Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => {
             return (
               <TableRow key={idx}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell align="right">{`${row.tgtPct * 100}%`}</TableCell>
-                <TableCell align="right">{`${(row.currPct * 100).toFixed(
-                  2
-                )}%`}</TableCell>
+                <TableCell>{row.symbol}</TableCell>
+                <TableCell>{row.side.toUpperCase()}</TableCell>
+                <TableCell>{`$${row.tradeAmt}.00`}</TableCell>
               </TableRow>
             );
           })}
@@ -67,4 +61,4 @@ const DialogTable = () => {
   );
 };
 
-export default PositionTable;
+export default DialogTable;
