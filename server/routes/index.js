@@ -2,11 +2,13 @@ const router = require('express').Router();
 
 const { default: axios } = require('axios');
 //routes go here - these will be for your api routes
+// const schedule = require('node-schedule');
 const { alpaca } = require('../alpaca');
 const {
-  models: { Position },
+  models: { Position, FutureOrder },
 } = require('../db');
 const { api_key, api_secret } = require('../../env.js');
+const { ToadScheduler, SimpleIntervalJob, Task } = require('toad-scheduler');
 
 //I don't manipulate the Account data at all so I just access it directly through a get route and present it
 router.get('/account', async (req, res, next) => {
@@ -58,7 +60,8 @@ router.get('/orders', async (req, res, next) => {
 });
 router.get('/orders/all', async (req, res, next) => {
   try {
-    const response = await alpaca.getOrders({ status: 'closed' });
+    //
+    const response = await alpaca.getOrders({ status: 'all' });
 
     res.send(response);
   } catch (error) {
@@ -78,6 +81,40 @@ router.post('/orders', async (req, res, next) => {
       time_in_force,
     });
   } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/futureOrders', async (req, res, next) => {
+  try {
+    const response = await futureOrders.findAll();
+    res.send(response.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/futureOrders', async (req, res, next) => {
+  try {
+    console.log('inside post route');
+    const { monthFrequency } = req.body;
+    console.log('req.body:', req.body);
+    let date = Date.now();
+    const futureOrders = [];
+    for (let i = 0; i <= 12; i += monthFrequency) {
+      date += 86400000 * 30 * monthFrequency;
+      const newDate = new Date(date);
+      const time = newDate.getTime();
+      const returnDate = new Date(time);
+      console.log(returnDate.toString());
+      const stringDate = returnDate.toString();
+      const futureOrder = await FutureOrder.create({ date: returnDate });
+      futureOrders.push(futureOrder);
+    }
+    console.log(futureOrders);
+    res.send(futureOrders);
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 });

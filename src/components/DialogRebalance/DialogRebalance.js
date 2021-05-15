@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder } from '../../store/orders';
+import { createOrder, loadOrders } from '../../store/orders';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -17,11 +17,17 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import DialogList from './DialogList';
+import SnackbarRebalance from '../SnackbarRebalance/SnackbarRebalance';
+import DialogTable from './DialogTable';
+
 const useStyles = makeStyles((theme) => ({
   dialogList: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+  },
+  button: {
+    borderRadius: 20,
   },
 }));
 
@@ -68,8 +74,8 @@ const DialogRebalance = () => {
     setProposedOrders(proposed);
   };
 
-  const handleClickOpen = () => {
-    rebalance();
+  const handleClickOpen = async () => {
+    await rebalance();
     setOpen(true);
   };
 
@@ -77,9 +83,9 @@ const DialogRebalance = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('upon clicking submit: proposedOrders:', proposedOrders);
-    proposedOrders.forEach((order) => {
+    await proposedOrders.forEach((order) => {
       const { symbol, tradeAmt, side, type, time_in_force } = order;
       dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
     });
@@ -89,9 +95,15 @@ const DialogRebalance = () => {
   const classes = useStyles();
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Rebalance
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={handleClickOpen}
+      >
+        Quick Rebalance
       </Button>
+
       <Dialog
         open={open}
         onClose={handleCancel}
@@ -99,34 +111,29 @@ const DialogRebalance = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {`Click 'Submit' to submit the following trades:`}
+          {`Click 'Submit' to place the following trades:`}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <List
-              component="nav"
-              aria-label="main mailbox folders"
-              className={classes.dialogList}
-            >
-              {proposedOrders.map((order, idx) => {
-                const { side, tradeAmt, symbol } = order;
-                return (
-                  <ListItem key={idx}>
-                    {side} {tradeAmt} shares of {symbol}
-                    <Divider />
-                  </ListItem>
-                );
-              })}
-            </List>
-          </DialogContentText>
+          {/* <List
+            aria-label="main mailbox folders"
+            className={classes.dialogList}
+          >
+            {proposedOrders.map((order, idx) => {
+              const { side, tradeAmt, symbol } = order;
+              return (
+                <ListItem key={idx}>
+                  {side} {tradeAmt} shares of {symbol}
+                </ListItem>
+              );
+            })}
+          </List> */}
+          <DialogTable proposedOrders={proposedOrders} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary" autoFocus>
-            Submit
-          </Button>
+          <SnackbarRebalance trades={proposedOrders} />
         </DialogActions>
       </Dialog>
     </div>

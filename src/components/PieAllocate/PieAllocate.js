@@ -1,15 +1,31 @@
 import React from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { PieChart, Pie, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Paper, Typography } from '@material-ui/core';
+import {
+  PieChart,
+  Pie,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import dummyPositions from '../../assets/dummyPositions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   pie: {
-    backgroundColor: '#27C6DB',
+    // marginTop: '5px',
+    // marginBottom: '15px',
+    // marginLeft: '15px',
+    marginBottom: 20,
+    marginLeft: 20,
+    padding: 10,
   },
-}));
+  contain: {},
+});
 
 const PieAllocate = () => {
   const positions = useSelector((state) => state.positions);
@@ -23,61 +39,63 @@ const PieAllocate = () => {
   });
 
   const currPcts = positions.map((position) => {
-    return position.currPct;
+    return {
+      name: position.alpacaData.symbol,
+      value: position.currPct,
+    };
   });
 
   const marketValues = dummyPositions.map((position) => {
     return position.market_value;
   });
 
-  const data02 = [
-    {
-      name: 'GLD',
-      value: 10,
-    },
-    {
-      name: 'VNQ',
-      value: 10,
-    },
-    {
-      name: 'BNDW',
-      value: 20,
-    },
-    {
-      name: 'VT',
-      value: 60,
-    },
-  ];
-
   return (
-    <PieChart width={730} height={250}>
-      <Pie
-        data={tgtPcts}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        innerRadius={30}
-        outerRadius={50}
-        fill="#7783DB"
-        className={classes.pie}
-        paddingAngle={10}
-      />
-      <Pie
-        data={data02}
-        dataKey="value"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        // startAngle={520}
-        // endAngle={160}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#27C6DB"
-        label
-        paddingAngle={10}
-      />
-    </PieChart>
+    <Paper className={classes.pie}>
+      <Typography variant="h6">Target/Current Comparison</Typography>
+      <PieChart width={600} height={300}>
+        <Tooltip wrapperStyle={{ backgroundColor: 'primary' }} />
+
+        <Pie
+          data={currPcts}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="110%"
+          // startAngle={520}
+          // endAngle={160}
+          innerRadius={100}
+          outerRadius={130}
+          fill="#9FE2BF"
+          paddingAngle={10}
+          label
+        />
+        <Pie
+          data={tgtPcts}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="110%"
+          innerRadius={60}
+          outerRadius={90}
+          fill="#088F8F"
+          // className={classes.pie}
+          paddingAngle={10}
+        />
+        <Legend
+          width={100}
+          align="left"
+          iconType="line"
+          // wrapperStyle={{
+          //   top: 40,
+          //   left: 110,
+          //   backgroundColor: '#f5f5f5',
+          //   border: '1px solid #d5d5d5',
+          //   borderRadius: 3,
+          //   lineHeight: '40px',
+          // }}
+        />
+      </PieChart>
+    </Paper>
   );
 };
 

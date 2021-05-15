@@ -14,6 +14,7 @@ import {
   Box,
   Typography,
   Link,
+  Checkbox,
 } from '@material-ui/core';
 import { updatePosition } from '../../store/positions';
 import '@fontsource/roboto';
@@ -21,7 +22,8 @@ import updatePositionTableTgtPct from './updatePositionTgtPct';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 400,
+    marginBottom: 20,
   },
   tableContain: {
     borderRadius: '16px',
@@ -32,11 +34,9 @@ const useStyles = makeStyles({
 });
 
 const cancelButtonStyle = {
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   margin: '10px',
 };
 const submitButtonStyle = {
-  background: 'linear-gradient(45deg, darkBlue 30%, darkSlateBlue 90%)',
   margin: '10px',
 };
 const PositionTable = () => {
@@ -79,11 +79,14 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="gld"
           value={gld}
+          variant="outlined"
+          size="small"
+          autoFocus
         >
           Edit
         </TextField>
@@ -92,11 +95,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="vnq"
           value={vnq}
+          variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -105,11 +110,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="bndw"
           value={bndw}
+          variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -118,11 +125,13 @@ const PositionTable = () => {
       return (
         <TextField
           className={classes.textField}
-          label={`${row.tgtPct * 100}%`}
+          label={`${(row.tgtPct * 100).toFixed(2)}%`}
           color="primary"
           onChange={onChange}
           name="vt"
           value={vt}
+          variant="outlined"
+          size="small"
         >
           Edit
         </TextField>
@@ -171,8 +180,8 @@ const PositionTable = () => {
   };
   console.log(vt, gld, vnq, bndw);
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer component={Paper} className={classes.table}>
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Position </TableCell>
@@ -192,7 +201,9 @@ const PositionTable = () => {
                 <TableCell align="right">
                   {!edit ? (
                     <Box>
-                      <Typography>{`${row.tgtPct * 100}%`}</Typography>
+                      <Typography>{`${(row.tgtPct * 100).toFixed(
+                        2
+                      )}%`}</Typography>
                     </Box>
                   ) : (
                     determineSymbol(row)
