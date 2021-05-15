@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Typography, Box } from '@material-ui/core';
 import {
   PieChart,
   Pie,
@@ -51,7 +51,14 @@ const PieAllocate = () => {
 
   return (
     <Paper className={classes.pie}>
-      <Typography variant="h6">Target/Current Comparison</Typography>
+      <Typography variant="h6">Target/Actual Comparison</Typography>
+      <Box display="flex" flexDirection="row">
+        <Typography color="secondary">Target</Typography>
+        <Typography color="secondary">|</Typography>
+        <Typography marginLeft={5} color="primary">
+          Actual
+        </Typography>
+      </Box>
       <PieChart width={600} height={300}>
         <Tooltip wrapperStyle={{ backgroundColor: 'primary' }} />
 
@@ -60,7 +67,7 @@ const PieAllocate = () => {
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="110%"
+          cy="50%"
           // startAngle={520}
           // endAngle={160}
           innerRadius={100}
@@ -74,14 +81,14 @@ const PieAllocate = () => {
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="110%"
+          cy="50%"
           innerRadius={60}
           outerRadius={90}
           fill="#088F8F"
           // className={classes.pie}
           paddingAngle={10}
         />
-        <Legend
+        {/* <Legend
           width={100}
           align="left"
           iconType="line"
@@ -93,7 +100,7 @@ const PieAllocate = () => {
           //   borderRadius: 3,
           //   lineHeight: '40px',
           // }}
-        />
+        /> */}
       </PieChart>
     </Paper>
   );
