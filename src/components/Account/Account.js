@@ -44,7 +44,7 @@ const Account = () => {
           <DialogRebalance p={1} />
         </Box>
         <Typography p={1} variant="subtitle1">
-          Here's where your allocations stand today.
+          Here's where your portfolio stands today.
         </Typography>
         {/* <Typography variant="h5" gutterBottom>
           {portfolio_value_usd}
