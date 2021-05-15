@@ -42,7 +42,7 @@ const SnackbarLowFrequency = (props) => {
   };
 
   const handleSubmit = async (event) => {
-    dispatch(createFutureOrder(monthFrequency));
+    // dispatch(createFutureOrder(monthFrequency));
     console.log(monthFrequency);
     setOpen(true);
   };

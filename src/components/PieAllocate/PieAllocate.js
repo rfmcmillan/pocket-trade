@@ -67,7 +67,7 @@ const PieAllocate = () => {
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="50%"
+          cy="45%"
           // startAngle={520}
           // endAngle={160}
           innerRadius={100}
@@ -81,7 +81,7 @@ const PieAllocate = () => {
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="50%"
+          cy="45%"
           innerRadius={60}
           outerRadius={90}
           fill="#088F8F"
