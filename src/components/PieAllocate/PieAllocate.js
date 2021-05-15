@@ -47,6 +47,10 @@ const PieAllocate = () => {
     return position.market_value;
   });
 
+  const renderLabel = (entry) => {
+    return entry.nameKey;
+  };
+
   return (
     <Paper className={classes.pie}>
       <PieChart width={600} height={300}>
@@ -87,6 +91,7 @@ const PieAllocate = () => {
           fill="#7783DB"
           // className={classes.pie}
           paddingAngle={10}
+          label
         />
       </PieChart>
     </Paper>

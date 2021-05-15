@@ -3,4 +3,5 @@ module.exports = {
   api_secret: 'PjkdVnYDVvKpjIKBvZ74TNsUa0vZ048P5tLR4qyk',
   base_url: 'https://api.alpaca.markets',
   paper_base_url: 'https://paper-api.alpaca.markets',
+  alpha_vantage_key: 'FX9TYVWCBE79345X',
 };

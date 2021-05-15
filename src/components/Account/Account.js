@@ -11,6 +11,7 @@ import OrderHistory from '../OrderHistory/OrderHistory';
 import { createOrder } from '../../store/orders';
 import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
+import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
 
 const Account = () => {
   const [open, setOpen] = React.useState(false);
@@ -49,8 +50,10 @@ const Account = () => {
         </Typography> */}
         <Box display="flex" flexDirection="row" marginTop={1.5}>
           <PositionTable p={1} />
+
           <PieAllocate p={1} />
         </Box>
+        <SimpleLineChart p={1} />
       </div>
       <OrderHistory />
     </div>
