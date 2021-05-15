@@ -62,6 +62,7 @@ const Account = () => {
           marginTop={1.5}
           justifyContent="space-between"
         >
+          {' '}
           <SimpleLineChart />
           <OrderHistory p={1} />
         </Box>
