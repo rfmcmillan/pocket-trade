@@ -65,7 +65,7 @@ const PieAllocate = () => {
           // endAngle={160}
           innerRadius={100}
           outerRadius={130}
-          fill="#27C6DB"
+          fill="#9FE2BF"
           paddingAngle={10}
           label
         />
@@ -77,7 +77,7 @@ const PieAllocate = () => {
           cy="110%"
           innerRadius={60}
           outerRadius={90}
-          fill="#7783DB"
+          fill="#088F8F"
           // className={classes.pie}
           paddingAngle={10}
         />

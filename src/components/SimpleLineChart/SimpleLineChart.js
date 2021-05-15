@@ -61,11 +61,11 @@ const SimpleLineChart = () => {
         <Line
           type="monotone"
           dataKey="gld"
-          stroke="#8884d8"
+          stroke="#088F8F"
           activeDot={{ r: 8 }}
         />
         <Line type="monotone" dataKey="vnq" stroke="#27C6DB" />
-        <Line type="monotone" dataKey="bndw" stroke="#7783DB" />
+        <Line type="monotone" dataKey="bndw" stroke="#9FE2BF" />
         <Line type="monotone" dataKey="vt" stroke="#82ca9d" />
       </LineChart>
     </Paper>
