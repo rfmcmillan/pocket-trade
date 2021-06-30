@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { alpaca } = require('./alpaca');
-const { api_key, api_secret, alpha_vantage_key } = require('../env');
+const { API_KEY, API_SECRET } = require('../env');
 const Sequelize = require('sequelize');
 const db = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/robo_advisor_db',
@@ -59,8 +59,8 @@ const syncAndSeed = async () => {
   const positions = (
     await axios.get('https://paper-api.alpaca.markets/v2/positions', {
       headers: {
-        'APCA-API-KEY-ID': api_key,
-        'APCA-API-SECRET-KEY': api_secret,
+        'APCA-API-KEY-ID': API_KEY,
+        'APCA-API-SECRET-KEY': API_SECRET,
       },
     })
   ).data;

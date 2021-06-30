@@ -7,7 +7,7 @@ const { alpaca } = require('../alpaca');
 const {
   models: { Position, FutureOrder },
 } = require('../db');
-const { api_key, api_secret } = require('../../env');
+const { API_KEY, API_SECRET } = require('../../env');
 const { ToadScheduler, SimpleIntervalJob, Task } = require('toad-scheduler');
 
 //I don't manipulate the Account data at all so I just access it directly through a get route and present it
@@ -45,8 +45,8 @@ router.get('/orders', async (req, res, next) => {
       'https://paper-api.alpaca.markets/v2/orders',
       {
         headers: {
-          'APCA-API-KEY-ID': api_key,
-          'APCA-API-SECRET-KEY': api_secret,
+          'APCA-API-KEY-ID': API_KEY,
+          'APCA-API-SECRET-KEY': API_SECRET,
         },
       }
     );
