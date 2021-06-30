@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 const OrderHistory = () => {
   const orders = useSelector((state) => state.orders);
+
   const classes = useStyles();
   function createData(order) {
     const {
@@ -50,7 +51,7 @@ const OrderHistory = () => {
   const rows = orders.map((order) => {
     return createData(order);
   });
-
+  console.log('rows:', rows);
   return (
     <Paper className={classes.contain} elevation={3}>
       <Typography variant="h6" className={classes.title}>
