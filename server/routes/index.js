@@ -7,7 +7,7 @@ const { alpaca } = require('../alpaca');
 const {
   models: { Position, FutureOrder },
 } = require('../db');
-const { api_key, api_secret } = require('../../env.js');
+const { api_key, api_secret } = require('../../env');
 const { ToadScheduler, SimpleIntervalJob, Task } = require('toad-scheduler');
 
 //I don't manipulate the Account data at all so I just access it directly through a get route and present it
