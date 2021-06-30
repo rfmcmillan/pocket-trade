@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
-const { alpha_vantage_key } = require('../../../env.js');
+const { alpha_vantage_key } = require('../../../env/index.js');
 import { makeStyles } from '@material-ui/core/styles';
 import {
   LineChart,

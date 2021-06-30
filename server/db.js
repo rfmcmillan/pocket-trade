@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { alpaca } = require('./alpaca');
-const { api_key, api_secret, alpha_vantage_key } = require('../env.js');
+const { api_key, api_secret, alpha_vantage_key } = require('../env');
 const Sequelize = require('sequelize');
 const db = new Sequelize(
   process.env.DATABASE_URL || 'postgres://localhost/robo_advisor_db',
