@@ -51,7 +51,6 @@ const OrderHistory = () => {
   const rows = orders.map((order) => {
     return createData(order);
   });
-  console.log('rows:', rows);
   return (
     <Paper className={classes.contain} elevation={3}>
       <Typography variant="h6" className={classes.title}>
@@ -74,7 +73,7 @@ const OrderHistory = () => {
             {rows.map((row, idx) => {
               const timeStamp = new Date(row.created_at);
               const date = timeStamp.getDate();
-              const month = timeStamp.getMonth();
+              const month = timeStamp.getMonth() + 1;
               const year = timeStamp.getFullYear();
               const hour = timeStamp.getHours();
               const minute = timeStamp.getMinutes();

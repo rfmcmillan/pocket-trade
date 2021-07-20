@@ -34,6 +34,7 @@ Position.prototype.calcCurrPct = async function () {
   const account = await alpaca.getAccount();
   const { long_market_value, cash } = account;
   this.currPct = (this.alpacaData.market_value * 1) / (long_market_value * 1);
+  console.log('this.currPct:', this.currPct);
   this.save();
 };
 

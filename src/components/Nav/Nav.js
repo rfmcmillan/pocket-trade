@@ -31,7 +31,7 @@ const Nav = () => {
     <AppBar position="static" className={classes.navBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
-          TradeAssist
+          PocketTrade
         </Typography>
         <LowFrequencyDialog />
       </Toolbar>

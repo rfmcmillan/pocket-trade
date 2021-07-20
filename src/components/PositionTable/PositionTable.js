@@ -67,6 +67,7 @@ const PositionTable = () => {
   const rows = positions.map((position) => {
     return createData(position, long_market_value);
   });
+  console.log('rows:', rows);
 
   const handleEditButtonClick = () => {
     console.log('edit before:', edit);
