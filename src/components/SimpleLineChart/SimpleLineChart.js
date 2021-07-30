@@ -14,7 +14,6 @@ import { Paper, Typography } from '@material-ui/core';
 import classNames from 'classnames';
 
 const data2 = [
-  { name: '2020-06-01', gld: 162.92, vnq: 77.36, bndw: 80.91, vt: 73.14 },
   { name: '2020-07-01', gld: 167.05, vnq: 78.8, bndw: 81.32, vt: 75.03 },
   { name: '2020-08-01', gld: 185.05, vnq: 81.42, bndw: 82.38, vt: 79.29 },
   { name: '2020-09-01', gld: 186.99, vnq: 81.47, bndw: 81.53, vt: 83.68 },
