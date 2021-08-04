@@ -19,7 +19,7 @@ class App extends React.Component {
       <HashRouter>
         <div>
           <Route component={Nav} />
-          <Route component={Account} path="/account" exact />
+          <Route component={Account} path="/" exact />
           <Route component={EditAccount} path="/edit-account" exact />
           <Route
             component={updatePositionTableTgtPct}
