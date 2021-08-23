@@ -30,41 +30,41 @@ const data2 = [
 const useStyles = makeStyles({
   contain: {
     padding: 10,
-    minWidth: 850,
+    marginRight: 25,
+    height: 639
   },
 });
 const SimpleLineChart = () => {
-  // static demoUrl = 'https://codesandbox.io/s/simple-line-chart-kec3v';
   const classes = useStyles();
   return (
     <Paper className={classes.contain}>
       <Typography variant="h6">Historical Performance</Typography>
-      <LineChart
-        width={970}
-        height={500}
-        data={data2}
-        margin={{
-          top: 30,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis domain={[165, 180]} />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="gld"
-          stroke="#088F8F"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="vnq" stroke="#27C6DB" />
-        <Line type="monotone" dataKey="bndw" stroke="#9FE2BF" />
-        <Line type="monotone" dataKey="vt" stroke="#82ca9d" />
-      </LineChart>
+      <ResponsiveContainer height="95%" width="100%">
+        <LineChart
+          data={data2}
+          margin={{
+            top: 30,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis domain={[165, 180]} />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="gld"
+            stroke="#088F8F"
+            activeDot={{ r: 8 }}
+          />
+          <Line type="monotone" dataKey="vnq" stroke="#27C6DB" />
+          <Line type="monotone" dataKey="bndw" stroke="#9FE2BF" />
+          <Line type="monotone" dataKey="vt" stroke="#82ca9d" />
+        </LineChart>
+      </ResponsiveContainer>
     </Paper>
   );
 };

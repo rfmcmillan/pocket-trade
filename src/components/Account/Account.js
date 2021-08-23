@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography, useTheme, colors, Box } from '@material-ui/core';
+import { Button, Typography, useTheme, colors, Box, Grid } from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
 import '@fontsource/roboto';
@@ -14,11 +14,18 @@ import DialogRebalance from '../DialogRebalance/DialogRebalance';
 import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
 import SimplePieChart from '../SimplePieChart/SimplePieChart';
 
+const useStyles = makeStyles({
+  bottomRow: {
+
+  },
+});
+
 const Account = () => {
   const [open, setOpen] = React.useState(false);
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const { portfolio_value } = account;
   var formatter = new Intl.NumberFormat('en-US', {
@@ -32,6 +39,7 @@ const Account = () => {
   });
 
   const theme = useTheme();
+
 
   return (
     <div id="account">
@@ -56,16 +64,19 @@ const Account = () => {
           <PieAllocate p={1} />
         </Box>
 
-        <Box
-          display="flex"
-          flexDirection="row"
-          marginTop={1.5}
-          justifyContent="space-between"
+        <Grid
+          container
+          className={classes.bottomRow}
+
         >
           {' '}
-          <SimpleLineChart />
-          <OrderHistory p={1} />
-        </Box>
+          <Grid item xs={6}>
+            <SimpleLineChart />
+          </Grid>
+          <Grid item xs={6}>
+            <OrderHistory p={1} />
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
