@@ -78,19 +78,21 @@ const OrderHistory = () => {
               const hour = timeStamp.getHours();
               const minute = timeStamp.getMinutes();
 
-              return (
-                <TableRow key={idx}>
-                  <TableCell component="th" scope="row">
-                    {row.symbol}
-                  </TableCell>
-                  <TableCell>{`${month}/${date}/${year} ${hour}:${minute}`}</TableCell>
-                  <TableCell>{row.side.toUpperCase()}</TableCell>
-                  <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
-                  <TableCell>{row.filled_avg_price}</TableCell>
-                  <TableCell>{`$${row.notional}.00`}</TableCell>
-                  <TableCell>{row.status.toUpperCase()}</TableCell>
-                </TableRow>
-              );
+              if (idx < 10) {
+                return (
+                  <TableRow key={idx}>
+                    <TableCell component="th" scope="row">
+                      {row.symbol}
+                    </TableCell>
+                    <TableCell>{`${month}/${date}/${year} ${hour}:${minute}`}</TableCell>
+                    <TableCell>{row.side.toUpperCase()}</TableCell>
+                    <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
+                    <TableCell>{row.filled_avg_price}</TableCell>
+                    <TableCell>{`$${row.notional}.00`}</TableCell>
+                    <TableCell>{row.status.toUpperCase()}</TableCell>
+                  </TableRow>
+                );
+              }
             })}
           </TableBody>
         </Table>
