@@ -78,7 +78,7 @@ const OrderHistory = () => {
               const hour = timeStamp.getHours();
               const minute = timeStamp.getMinutes();
 
-              if (idx < 10) {
+              if (idx < 7) {
                 return (
                   <TableRow key={idx}>
                     <TableCell component="th" scope="row">

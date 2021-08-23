@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   contain: {
     padding: 10,
     marginRight: 25,
-    height: 639
+    height: 480
   },
 });
 const SimpleLineChart = () => {
