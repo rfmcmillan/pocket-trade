@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontFamily: 'Recursive',
+    fontSize: 30,
   },
   navBar: {
     backgroundColor: '#222B36',

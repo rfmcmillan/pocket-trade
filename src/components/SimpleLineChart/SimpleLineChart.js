@@ -75,6 +75,7 @@ const data2 = {
 const useStyles = makeStyles({
   contain: {
     padding: 10,
+    // paddingBottom: 20,
     marginRight: 25,
     height: 480,
   },
@@ -85,35 +86,15 @@ const options = {
   chart: {
     id: 'basic-line',
   },
-
+  legend: {
+    labels: {
+      colors: ['white'],
+    },
+  },
   tooltip: {
     enabled: true,
     fillSeriesColor: false,
     theme: true,
-    // y: {
-    //   title: {
-    //     formatter: function (val, index) {
-    //       if (val) {
-    //         return `${val}:00`;
-    //       }
-    //     },
-    //   },
-    //   formatter: function (val, index) {
-    //     if (val) {
-    //       if (val === 0) {
-    //         return ' 0 sessions';
-    //       }
-    //       if (val === 1) {
-    //         return ' 1 session';
-    //       } else {
-    //         return ` ${val} sessions`;
-    //       }
-    //     }
-    //   },
-    // },
-    // z: {
-    //   formatter: undefined,
-    // },
   },
 
   stroke: {
