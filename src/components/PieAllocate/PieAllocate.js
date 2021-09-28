@@ -19,9 +19,11 @@ import TargetDonut from './TargetDonut';
 
 const useStyles = makeStyles({
   pie: {
+    // width: 370,
     marginBottom: 20,
     marginLeft: 20,
     padding: 10,
+    height: 350,
   },
 });
 
@@ -30,8 +32,8 @@ const PieAllocate = () => {
 
   return (
     <Paper className={classes.pie}>
-      <Grid container alignItems="center">
-        <Grid container alignItems="center">
+      <Grid container direction="column" alignItems="center">
+        <Grid container direction="column" alignItems="flex-start">
           <Grid item>
             <Typography variant="h6">Target/Actual Comparison</Typography>
           </Grid>
@@ -49,10 +51,10 @@ const PieAllocate = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          <ActualDonut />
+        <div>
           <TargetDonut />
-        </Grid>
+          <ActualDonut />
+        </div>
       </Grid>
     </Paper>
   );

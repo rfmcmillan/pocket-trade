@@ -58,14 +58,18 @@ const Account = () => {
         <Typography p={1} variant="subtitle1">
           Here's where your portfolio stands today.
         </Typography>
-        <Grid container flexDirection="row" marginTop={1.5}>
-          <Grid item xs={9}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="row"
+          marginTop={1.5}
+        >
+          <Grid item xs={10}>
             <PositionTable />
           </Grid>
-          <Grid item xs={3}>
-            <PieAllocate />
-          </Grid>
-        </Grid>
+
+          <PieAllocate />
+        </Box>
 
         <Grid container className={classes.bottomRow}>
           {' '}

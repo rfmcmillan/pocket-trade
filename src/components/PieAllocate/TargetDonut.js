@@ -15,36 +15,19 @@ const ActualDonut = (props) => {
   });
   const classes = useStyles();
   const tgtPcts = positions.map((position) => {
-    return {
-      name: position.alpacaData.symbol,
-      value: position.tgtPct,
-    };
-  });
-
-  const currPcts = positions.map((position) => {
-    return position.currPct;
-  });
-
-  const marketValues = dummyPositions.map((position) => {
-    return position.market_value;
+    return position.tgtPct;
   });
 
   const chart = {
     options: {
       chart: {
-        offsetY: -260,
+        offsetY: -14,
         toolbar: {
           show: false,
         },
       },
       colors: ['#088F8F'],
       dataLabels: { enabled: false },
-      stroke: {
-        colors: [theme.palette.background.paper],
-        show: true,
-        width: 8,
-      },
-      legend: { show: false, position: 'bottom' },
       plotOptions: {
         pie: {
           customScale: 0.63,
@@ -53,11 +36,18 @@ const ActualDonut = (props) => {
           },
         },
       },
+      stroke: {
+        colors: [theme.palette.background.paper],
+        show: true,
+        width: 8,
+      },
+      tooltip: { enabled: true },
+      legend: { show: false, position: 'bottom' },
     },
-    series: currPcts,
+    series: tgtPcts,
     labels: ['Vanguard', 'Test', 'Gold', 'Silver'],
   };
-
+  console.log('tgtPcts:', tgtPcts);
   return (
     <div className={classes.innerDonut}>
       <Chart options={chart.options} series={chart.series} type="donut" />

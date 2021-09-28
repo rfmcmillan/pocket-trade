@@ -4,6 +4,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import dummyPositions from '../../assets/dummyPositions';
+import TargetDonut from './TargetDonut';
 
 const ActualDonut = (props) => {
   const positions = useSelector((state) => state.positions);
@@ -14,32 +15,27 @@ const ActualDonut = (props) => {
     },
   });
   const classes = useStyles();
-  const tgtPcts = positions.map((position) => {
-    return {
-      name: position.alpacaData.symbol,
-      value: position.tgtPct,
-    };
-  });
 
   const currPcts = positions.map((position) => {
     return position.currPct;
   });
 
-  const marketValues = dummyPositions.map((position) => {
-    return position.market_value;
-  });
-
   const chart = {
     options: {
       chart: {
-        offsetY: 50,
+        offsetY: -268,
         toolbar: {
           show: false,
         },
-        stacked: true,
       },
       colors: ['#9FE2BF'],
-      dataLabels: { enabled: false },
+      dataLabels: {
+        enabled: false,
+        formatter: function (val) {
+          return `${val.toFixed(2)}%`;
+        },
+      },
+      labels: ['GLD', 'VNQ', 'BNDW', 'VT'],
       plotOptions: {
         pie: {
           customScale: 1,
@@ -50,12 +46,12 @@ const ActualDonut = (props) => {
         show: true,
         width: 5,
       },
+      tooltip: { enabled: false },
       legend: { show: false, position: 'bottom' },
     },
     series: currPcts,
-    labels: ['Vanguard', 'Test', 'Gold', 'Silver'],
   };
-
+  console.log('currPcts:', currPcts);
   return (
     <div className={classes.donut}>
       <Chart options={chart.options} series={chart.series} type="donut" />
