@@ -1,7 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography, useTheme, colors, Box, Grid } from '@material-ui/core';
+import {
+  Button,
+  Typography,
+  useTheme,
+  colors,
+  Box,
+  Grid,
+} from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
 import '@fontsource/roboto';
@@ -15,9 +22,7 @@ import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
 import SimplePieChart from '../SimplePieChart/SimplePieChart';
 
 const useStyles = makeStyles({
-  bottomRow: {
-
-  },
+  bottomRow: {},
 });
 
 const Account = () => {
@@ -40,7 +45,6 @@ const Account = () => {
 
   const theme = useTheme();
 
-
   return (
     <div id="account">
       <Typography variant="overline">PORTFOLIO VALUE</Typography>
@@ -54,21 +58,20 @@ const Account = () => {
         <Typography p={1} variant="subtitle1">
           Here's where your portfolio stands today.
         </Typography>
-        {/* <Typography variant="h5" gutterBottom>
-          {portfolio_value_usd}
-        </Typography> */}
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="row"
+          marginTop={1.5}
+        >
+          <Grid item xs={10}>
+            <PositionTable />
+          </Grid>
 
-        <Box display="flex" flexDirection="row" marginTop={1.5}>
-          <PositionTable p={1} />
-
-          <PieAllocate p={1} />
+          <PieAllocate />
         </Box>
 
-        <Grid
-          container
-          className={classes.bottomRow}
-
-        >
+        <Grid container className={classes.bottomRow}>
           {' '}
           <Grid item xs={6}>
             <SimpleLineChart />

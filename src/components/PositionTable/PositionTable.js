@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   table: {
     minWidth: 400,
     marginBottom: 20,
+    minHeight: 350,
   },
   tableContain: {
     borderRadius: '16px',
