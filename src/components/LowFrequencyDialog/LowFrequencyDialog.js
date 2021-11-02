@@ -97,15 +97,6 @@ const LowFrequencyDialog = (props) => {
   const classes = useStyles();
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        // className={classes.button}
-        onClick={handleSubmit}
-      >
-        AutoPilot Mode
-      </Button>
-
       <Dialog
         open={open}
         onClose={handleCancel}
