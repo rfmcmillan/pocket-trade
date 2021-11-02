@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import Chart from 'react-apexcharts';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
