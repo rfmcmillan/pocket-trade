@@ -9,7 +9,6 @@ import {
   Box,
   Grid,
 } from '@material-ui/core';
-
 import { useDispatch, useSelector } from 'react-redux';
 import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';

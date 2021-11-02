@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-} from '@material-ui/core';
+import { Typography, AppBar, Toolbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import LowFrequencyDialog from '../LowFrequencyDialog/LowFrequencyDialog';
 
