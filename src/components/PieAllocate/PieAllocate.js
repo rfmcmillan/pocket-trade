@@ -88,7 +88,7 @@ const PieAllocate = () => {
             outerRadius={130}
             fill="#9FE2BF"
             paddingAngle={10}
-            label
+            // label
           />
           <Pie
             data={tgtPcts}
