@@ -1,8 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography, useTheme, colors, Box, Grid } from '@material-ui/core';
-
+import {
+  Button,
+  Typography,
+  useTheme,
+  colors,
+  Box,
+  Grid,
+} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import '@fontsource/roboto';
 import dummyPositions from '../../assets/dummyPositions';
@@ -15,9 +21,7 @@ import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
 import SimplePieChart from '../SimplePieChart/SimplePieChart';
 
 const useStyles = makeStyles({
-  bottomRow: {
-
-  },
+  bottomRow: {},
 });
 
 const Account = () => {
@@ -39,7 +43,6 @@ const Account = () => {
   });
 
   const theme = useTheme();
-
 
   return (
     <div id="account">
@@ -64,11 +67,7 @@ const Account = () => {
           <PieAllocate p={1} />
         </Box>
 
-        <Grid
-          container
-          className={classes.bottomRow}
-
-        >
+        <Grid container className={classes.bottomRow}>
           {' '}
           <Grid item xs={6}>
             <SimpleLineChart />
