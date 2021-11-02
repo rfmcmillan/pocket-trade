@@ -21,6 +21,7 @@ import '@fontsource/roboto';
 import updatePositionTableTgtPct from './updatePositionTgtPct';
 
 const useStyles = makeStyles({
+  button: { margin: '15px 0px 0px 10px' },
   table: {
     minWidth: 400,
     marginBottom: 20,
@@ -220,7 +221,12 @@ const PositionTable = () => {
         </TableBody>
       </Table>
       {!edit ? (
-        <Button color="primary" onClick={handleEditButtonClick}>
+        <Button
+          className={classes.button}
+          color="primary"
+          onClick={handleEditButtonClick}
+          variant="contained"
+        >
           Edit Target Allocations
         </Button>
       ) : (
