@@ -54,7 +54,7 @@ const ActualDonut = (props) => {
   console.log('currPcts:', currPcts);
   return (
     <div className={classes.donut}>
-      <Chart options={chart.options} series={chart.series} type="donut" />
+      {/* <Chart options={chart.options} series={chart.series} type="donut" /> */}
     </div>
   );
 };

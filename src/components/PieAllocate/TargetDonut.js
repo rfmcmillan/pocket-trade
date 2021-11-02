@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 import { useTheme } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -50,7 +50,7 @@ const ActualDonut = (props) => {
   console.log('tgtPcts:', tgtPcts);
   return (
     <div className={classes.innerDonut}>
-      <Chart options={chart.options} series={chart.series} type="donut" />
+      {/* <Chart options={chart.options} series={chart.series} type="donut" /> */}
     </div>
   );
 };

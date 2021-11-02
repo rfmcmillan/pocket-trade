@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Grid } from '@material-ui/core';
 import {
