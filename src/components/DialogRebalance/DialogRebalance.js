@@ -101,7 +101,7 @@ const DialogRebalance = () => {
         className={classes.button}
         onClick={handleClickOpen}
       >
-        Quick Rebalance
+        Rebalance
       </Button>
 
       <Dialog

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     fontFamily: 'Recursive',
-    fontSize: 30,
+    fontSize: 26,
   },
   navBar: {
     backgroundColor: '#222B36',
@@ -33,9 +33,8 @@ const Nav = () => {
     <AppBar position="static" className={classes.navBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title} color="primary">
-          PocketTrade
+          RapidRebalance
         </Typography>
-        <LowFrequencyDialog />
       </Toolbar>
     </AppBar>
   );
