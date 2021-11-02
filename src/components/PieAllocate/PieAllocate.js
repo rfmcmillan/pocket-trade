@@ -45,9 +45,7 @@ const PieAllocate = () => {
               <Typography color="secondary">|</Typography>
             </Grid>
             <Grid item>
-              <Typography marginLeft={5} color="primary">
-                Actual
-              </Typography>
+              <Typography color="primary">Actual</Typography>
             </Grid>
           </Grid>
         </Grid>

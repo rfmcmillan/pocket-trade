@@ -142,9 +142,9 @@ const SimpleLineChart = () => {
   return (
     <Paper className={classes.contain}>
       <Typography variant="h6">Historical Performance</Typography>
-      <ResponsiveContainer height="95%" width="100%">
-        {/* <Chart options={options} series={series} type="line" /> */}
-      </ResponsiveContainer>
+      {/* <ResponsiveContainer height="95%" width="100%"> */}
+      {/* <Chart options={options} series={series} type="line" /> */}
+      {/* </ResponsiveContainer> */}
     </Paper>
   );
 };
