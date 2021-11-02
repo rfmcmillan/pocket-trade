@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 import { useTheme } from '@material-ui/core/styles';
 import {
   LineChart,
@@ -143,7 +143,7 @@ const SimpleLineChart = () => {
     <Paper className={classes.contain}>
       <Typography variant="h6">Historical Performance</Typography>
       <ResponsiveContainer height="95%" width="100%">
-        <Chart options={options} series={series} type="line" />
+        {/* <Chart options={options} series={series} type="line" /> */}
       </ResponsiveContainer>
     </Paper>
   );

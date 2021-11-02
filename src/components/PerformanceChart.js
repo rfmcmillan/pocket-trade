@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Chart from 'react-apexcharts';
+// import Chart from 'react-apexcharts';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
@@ -161,7 +161,7 @@ const ChartRight = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Chart options={options} series={series} type="line" />
+      {/* <Chart options={options} series={series} type="line" /> */}
     </Paper>
   );
 };
