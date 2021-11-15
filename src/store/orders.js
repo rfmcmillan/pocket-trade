@@ -1,7 +1,6 @@
 import axios from 'axios';
 const LOAD_ORDERS = 'LOAD_ORDERS';
 const CREATE_ORDER = 'CREATE_ORDER';
-const LOAD_FUTURE_ORDERS = 'LOAD_FUTURE_ORDERS';
 
 const loadOrdersActionCreator = (orders) => {
   return {

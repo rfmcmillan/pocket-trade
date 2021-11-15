@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core';
 import { updatePosition } from '../../store/positions';
 import '@fontsource/roboto';
-import updatePositionTableTgtPct from './updatePositionTgtPct';
 
 const useStyles = makeStyles({
   button: { margin: '15px 0px 0px 10px' },

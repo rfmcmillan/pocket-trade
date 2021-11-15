@@ -1,5 +1,4 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import axios from 'axios';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { accountReducer } from './account';

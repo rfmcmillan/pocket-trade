@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   LineChart,
@@ -11,7 +11,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { Paper, Typography } from '@material-ui/core';
-import classNames from 'classnames';
 
 const data2 = [
   { name: '2020-07-01', gld: 167.05, vnq: 78.8, bndw: 81.32, vt: 75.03 },

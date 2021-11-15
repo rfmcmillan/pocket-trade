@@ -3,8 +3,6 @@ import axios from 'axios';
 const LOAD_POSITIONS = 'LOAD_POSITIONS';
 const UPDATE_POSITION = 'UPDATE_POSITION';
 
-//Create Action Creators & Thunks
-
 const loadPositionsActionCreator = (positions) => {
   return {
     type: LOAD_POSITIONS,
@@ -37,7 +35,6 @@ const updatePosition = (id, tgtPct) => {
   };
 };
 
-//Reducer
 const positionsReducer = (state = [], action) => {
   if (action.type === LOAD_POSITIONS) {
     state = action.positions;
