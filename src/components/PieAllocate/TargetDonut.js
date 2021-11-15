@@ -46,12 +46,7 @@ const ActualDonut = (props) => {
     series: tgtPcts,
     labels: ['Vanguard', 'Test', 'Gold', 'Silver'],
   };
-  console.log('tgtPcts:', tgtPcts);
-  return (
-    <div className={classes.innerDonut}>
-      {/* <Chart options={chart.options} series={chart.series} type="donut" /> */}
-    </div>
-  );
+  return <div className={classes.innerDonut}></div>;
 };
 
 export default ActualDonut;

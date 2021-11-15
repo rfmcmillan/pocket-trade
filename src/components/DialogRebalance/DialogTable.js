@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 const DialogTable = (props) => {
   const classes = useStyles();
   const { proposedOrders } = props;
-  console.log(proposedOrders);
   function createData(order) {
     const { side, tradeAmt, symbol } = order;
     const row = {

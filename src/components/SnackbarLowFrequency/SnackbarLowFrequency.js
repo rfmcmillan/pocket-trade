@@ -33,17 +33,10 @@ const useStyles = makeStyles((theme) => ({
 const SnackbarLowFrequency = (props) => {
   const [open, setOpen] = React.useState(false);
   const { monthFrequency } = props;
-  console.log(monthFrequency);
-
-  const dispatch = useDispatch();
-
   const handleCancel = () => {
     setOpen(false);
   };
-
   const handleSubmit = async (event) => {
-    // dispatch(createFutureOrder(monthFrequency));
-    console.log(monthFrequency);
     setOpen(true);
   };
 

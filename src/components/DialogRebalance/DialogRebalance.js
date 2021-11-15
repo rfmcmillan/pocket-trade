@@ -84,7 +84,6 @@ const DialogRebalance = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('upon clicking submit: proposedOrders:', proposedOrders);
     await proposedOrders.forEach((order) => {
       const { symbol, tradeAmt, side, type, time_in_force } = order;
       dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));

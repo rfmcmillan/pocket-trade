@@ -50,18 +50,7 @@ const LowFrequencyDialog = (props) => {
 
   const onChange = (ev) => {
     setMonthFrequency(ev.target.ariaValueNow * 1);
-    console.log(ev.target.ariaValueNow);
   };
-
-  // const handleSubmit = async () => {
-  //   console.log('upon clicking submit: proposedOrders:', trades);
-  //   await trades.forEach((order) => {
-  //     const { symbol, tradeAmt, side, type, time_in_force } = order;
-  //     dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
-  //   });
-
-  //   setOpen(true);
-  // };
 
   const useStyles = makeStyles({
     root: {

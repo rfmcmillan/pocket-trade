@@ -33,7 +33,6 @@ const updatePosition = (id, tgtPct) => {
       tgtPct,
     });
     const position = response.data;
-    console.log(position);
     dispatch(updatePositionActionCreator(position));
   };
 };

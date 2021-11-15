@@ -31,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const SnackbarRebalance = (props) => {
   const [open, setOpen] = React.useState(false);
   const { trades } = props;
-  console.log(trades);
-  // const [proposedOrders, setProposedOrders] = React.useState(proposed);
 
   const dispatch = useDispatch();
 
@@ -78,7 +76,6 @@ const SnackbarRebalance = (props) => {
   };
 
   const handleSubmit = async () => {
-    console.log('upon clicking submit: proposedOrders:', trades);
     await trades.forEach((order) => {
       const { symbol, tradeAmt, side, type, time_in_force } = order;
       dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));

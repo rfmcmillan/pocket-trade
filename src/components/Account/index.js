@@ -9,9 +9,7 @@ import PieAllocate from '../PieAllocate/PieAllocate';
 import DialogRebalance from '../DialogRebalance/DialogRebalance';
 import SimpleLineChart from '../SimpleLineChart/SimpleLineChart';
 
-const useStyles = makeStyles({
-  bottomRow: {},
-});
+const useStyles = makeStyles({ amount: { fontSize: '2rem' } });
 
 const Account = () => {
   const account = useSelector((state) => state.account);
@@ -27,9 +25,9 @@ const Account = () => {
   return (
     <div id="account">
       <Typography variant="overline">PORTFOLIO VALUE</Typography>
-      <div>
+      <Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Typography p={1} variant="h4" component="h4" color="primary">
+          <Typography className={classes.amount} p={1} color="primary">
             {portfolio_value_usd}
           </Typography>
           <DialogRebalance p={1} />
@@ -50,7 +48,7 @@ const Account = () => {
           <PieAllocate />
         </Box>
 
-        <Grid container className={classes.bottomRow}>
+        <Grid container>
           {' '}
           <Grid item xs={6}>
             <SimpleLineChart />
@@ -59,7 +57,7 @@ const Account = () => {
             <OrderHistory p={1} />
           </Grid>
         </Grid>
-      </div>
+      </Box>
     </div>
   );
 };
