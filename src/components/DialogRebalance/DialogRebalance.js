@@ -1,22 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { createOrder, loadOrders } from '../../store/orders';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
-  Typography,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
 } from '@material-ui/core';
-import DialogList from './DialogList';
 import SnackbarRebalance from '../SnackbarRebalance/SnackbarRebalance';
 import DialogTable from './DialogTable';
 
@@ -35,7 +26,6 @@ const DialogRebalance = () => {
   const [open, setOpen] = React.useState(false);
 
   const [proposedOrders, setProposedOrders] = React.useState([]);
-  const dispatch = useDispatch();
 
   const rebalance = async () => {
     const acctResponse = await axios.get('api/account');
@@ -60,15 +50,11 @@ const DialogRebalance = () => {
         const side = 'buy';
         const order = { symbol, tradeAmt, side, type, time_in_force };
         proposed.push(order);
-        // dispatch(createOrder(symbol, amtToTrade, 'buy', 'market', 'day'));
       } else if (amount < 0) {
         const tradeAmt = -amount;
         const side = 'sell';
         const order = { symbol, tradeAmt, side, type, time_in_force };
         proposed.push(order);
-        // dispatch(
-        //   createOrder(symbol, positiveAmtToTrade, 'sell', 'market', 'day')
-        // );
       }
     });
     setProposedOrders(proposed);
@@ -80,14 +66,6 @@ const DialogRebalance = () => {
   };
 
   const handleCancel = () => {
-    setOpen(false);
-  };
-
-  const handleSubmit = async () => {
-    await proposedOrders.forEach((order) => {
-      const { symbol, tradeAmt, side, type, time_in_force } = order;
-      dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
-    });
     setOpen(false);
   };
 
@@ -113,19 +91,6 @@ const DialogRebalance = () => {
           {`Click 'Submit' to place the following trades:`}
         </DialogTitle>
         <DialogContent>
-          {/* <List
-            aria-label="main mailbox folders"
-            className={classes.dialogList}
-          >
-            {proposedOrders.map((order, idx) => {
-              const { side, tradeAmt, symbol } = order;
-              return (
-                <ListItem key={idx}>
-                  {side} {tradeAmt} shares of {symbol}
-                </ListItem>
-              );
-            })}
-          </List> */}
           <DialogTable proposedOrders={proposedOrders} />
         </DialogContent>
         <DialogActions>
