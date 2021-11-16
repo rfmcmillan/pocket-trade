@@ -13,12 +13,9 @@ import {
   Button,
   Box,
   Typography,
-  Link,
-  Checkbox,
 } from '@material-ui/core';
 import { updatePosition } from '../../store/positions';
 import '@fontsource/roboto';
-import updatePositionTableTgtPct from './updatePositionTgtPct';
 
 const useStyles = makeStyles({
   button: { margin: '15px 0px 0px 10px' },
@@ -69,12 +66,9 @@ const PositionTable = () => {
   const rows = positions.map((position) => {
     return createData(position, long_market_value);
   });
-  console.log('rows:', rows);
 
   const handleEditButtonClick = () => {
-    console.log('edit before:', edit);
     setEdit(true);
-    console.log('edit:', edit);
   };
 
   const determineSymbol = (row) => {
@@ -147,9 +141,6 @@ const PositionTable = () => {
   };
 
   const onChange = (ev) => {
-    console.log(ev.target);
-    // change[ev.target.name] = ev.target.value;
-    // change.categories = categories;
     if (ev.target.name === 'gld') {
       setGld(ev.target.value);
     } else if (ev.target.name === 'vnq') {
@@ -164,7 +155,6 @@ const PositionTable = () => {
   const onSave = () => {
     positions.forEach((position) => {
       const { id } = position;
-      console.log(position);
       let tgtPct;
       if (position.alpacaData.symbol === 'GLD') {
         tgtPct = gld;
@@ -176,12 +166,10 @@ const PositionTable = () => {
         tgtPct = vt;
       }
       tgtPct = tgtPct / 100;
-      // console.log('update', position);
       dispatch(updatePosition(id, tgtPct));
     });
     setEdit(false);
   };
-  console.log(vt, gld, vnq, bndw);
   return (
     <TableContainer component={Paper} className={classes.table}>
       <Table aria-label="simple table">

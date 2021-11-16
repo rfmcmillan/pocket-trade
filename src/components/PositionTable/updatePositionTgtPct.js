@@ -1,16 +1,7 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePosition } from '../../store/positions';
-import {
-  Button,
-  TextField,
-  Select,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-} from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -24,8 +15,6 @@ const useStyles = makeStyles({
 
 const updatePositionTableTgtPct = () => {
   const classes = useStyles();
-  const account = useSelector((state) => state.account);
-  const positions = useSelector((state) => state.positions);
   const dispatch = useDispatch();
   const [tgtPct, setTgtPct] = React.useState(0);
 

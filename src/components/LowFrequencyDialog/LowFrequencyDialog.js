@@ -1,35 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder, loadOrders } from '../../store/orders';
 import { makeStyles } from '@material-ui/core/styles';
-import SnackbarLowFrequency from '../SnackbarLowFrequency/SnackbarLowFrequency';
+import SnackbarLowFrequency from '../SnackbarLowFrequency';
 import {
   Button,
   Typography,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-  Snackbar,
   Slider,
 } from '@material-ui/core';
-import { MarkunreadSharp } from '@material-ui/icons';
-const useStyles = makeStyles((theme) => ({
-  dialogList: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  button: {
-    borderRadius: 20,
-  },
-}));
 
 const LowFrequencyDialog = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -50,18 +31,7 @@ const LowFrequencyDialog = (props) => {
 
   const onChange = (ev) => {
     setMonthFrequency(ev.target.ariaValueNow * 1);
-    console.log(ev.target.ariaValueNow);
   };
-
-  // const handleSubmit = async () => {
-  //   console.log('upon clicking submit: proposedOrders:', trades);
-  //   await trades.forEach((order) => {
-  //     const { symbol, tradeAmt, side, type, time_in_force } = order;
-  //     dispatch(createOrder(symbol, tradeAmt, side, type, time_in_force));
-  //   });
-
-  //   setOpen(true);
-  // };
 
   const useStyles = makeStyles({
     root: {
@@ -94,7 +64,6 @@ const LowFrequencyDialog = (props) => {
       label: 'Every 12 months',
     },
   ];
-  const classes = useStyles();
   return (
     <div>
       <Dialog
@@ -118,7 +87,6 @@ const LowFrequencyDialog = (props) => {
             min={1}
             max={12}
             onChange={onChange}
-            // marks={marks}
           />
         </DialogContent>
         <DialogActions>

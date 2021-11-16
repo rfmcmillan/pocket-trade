@@ -26,7 +26,6 @@ const createOrderActionCreator = (order) => {
 
 const createFutureOrder = (monthFrequency) => {
   return async (dispatch) => {
-    console.log('inside thunk:', monthFrequency);
     const futureOrder = (
       await axios.post('/api/futureOrders', {
         monthFrequency,

@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Nav from './components/Nav/Nav';
-import Account from './components/Account/Account';
-import EditAccount from './components/EditAccount/EditAccount';
+import Account from './components/Account';
 import { HashRouter, Route } from 'react-router-dom';
 import { loadAccount } from './store/account';
 import { loadPositions } from './store/positions';
@@ -20,7 +19,6 @@ class App extends React.Component {
         <div>
           <Route component={Nav} />
           <Route component={Account} path="/" exact />
-          <Route component={EditAccount} path="/edit-account" exact />
           <Route
             component={updatePositionTableTgtPct}
             path="/edit-position/:id"

@@ -6,7 +6,6 @@ import store from './store';
 import { CssBaseline } from '@material-ui/core';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { green, purple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   components: {
@@ -62,4 +61,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#root')
 );
-//make sure "root" is right or change it

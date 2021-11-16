@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
@@ -21,7 +20,6 @@ const useStyles = makeStyles({
 const FutureOrders = (props) => {
   const classes = useStyles();
   const { proposedOrders } = props;
-  console.log(proposedOrders);
   function createData(order) {
     const { side, tradeAmt, symbol } = order;
     const row = {
