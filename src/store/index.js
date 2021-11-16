@@ -5,8 +5,6 @@ import { accountReducer } from './account';
 import { positionsReducer } from './positions';
 import { ordersReducer } from './orders';
 
-//Reducers
-
 const reducer = combineReducers({
   account: accountReducer,
   positions: positionsReducer,

@@ -1,16 +1,12 @@
 const router = require('express').Router();
 
 const { default: axios } = require('axios');
-//routes go here - these will be for your api routes
-// const schedule = require('node-schedule');
 const { alpaca } = require('../alpaca');
 const {
   models: { Position, FutureOrder },
 } = require('../db');
-// const { API_KEY, API_SECRET } = require('../../env');
 const { ToadScheduler, SimpleIntervalJob, Task } = require('toad-scheduler');
 
-//I don't manipulate the Account data at all so I just access it directly through a get route and present it
 router.get('/account', async (req, res, next) => {
   try {
     const account = await alpaca.getAccount();
@@ -60,9 +56,7 @@ router.get('/orders', async (req, res, next) => {
 });
 router.get('/orders/all', async (req, res, next) => {
   try {
-    //
     const response = await alpaca.getOrders({ status: 'all' });
-
     res.send(response);
   } catch (error) {
     if (error) console.log('error with get all orders get route');
