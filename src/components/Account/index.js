@@ -1,24 +1,24 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box, Grid } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import '@fontsource/roboto';
-import PositionTable from '../PositionTable/PositionTable';
-import OrderHistory from '../OrderHistory/OrderHistory';
-import PieAllocate from '../PieAllocate';
-import DialogRebalance from '../DialogRebalance/DialogRebalance';
-import SimpleLineChart from '../SimpleLineChart';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Box, Grid } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import "@fontsource/roboto";
+import PositionTable from "../PositionTable";
+import OrderHistory from "../OrderHistory/OrderHistory";
+import PieAllocate from "../PieAllocate";
+import DialogRebalance from "../DialogRebalance/DialogRebalance";
+import SimpleLineChart from "../SimpleLineChart";
 
-const useStyles = makeStyles({ amount: { fontSize: '2rem' } });
+const useStyles = makeStyles({ amount: { fontSize: "2rem" } });
 
 const Account = () => {
   const account = useSelector((state) => state.account);
   const classes = useStyles();
 
   const { portfolio_value } = account;
-  var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   });
   const portfolio_value_usd = formatter.format(portfolio_value);
 
@@ -33,7 +33,7 @@ const Account = () => {
           <DialogRebalance p={1} />
         </Box>
         <Typography p={1} variant="subtitle1">
-          Here's where your portfolio stands today.
+          Here&apos;s where your portfolio stands today.
         </Typography>
         <Box
           display="flex"
@@ -44,12 +44,9 @@ const Account = () => {
           <Grid item xs={10}>
             <PositionTable />
           </Grid>
-
           <PieAllocate />
         </Box>
-
         <Grid container>
-          {' '}
           <Grid item xs={6}>
             <SimpleLineChart />
           </Grid>

@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
-const LOAD_POSITIONS = 'LOAD_POSITIONS';
-const UPDATE_POSITION = 'UPDATE_POSITION';
+const LOAD_POSITIONS = "LOAD_POSITIONS";
+const UPDATE_POSITION = "UPDATE_POSITION";
 
 const loadPositionsActionCreator = (positions) => {
   return {
@@ -12,7 +12,7 @@ const loadPositionsActionCreator = (positions) => {
 
 const loadPositions = () => {
   return async (dispatch) => {
-    const response = await axios.get('/api/positions');
+    const response = await axios.get("/api/positions");
     const positions = response.data;
     dispatch(loadPositionsActionCreator(positions));
   };

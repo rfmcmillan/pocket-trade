@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Grid } from '@material-ui/core';
-import { PieChart, Pie, Tooltip } from 'recharts';
+import React from "react";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { Paper, Typography, Grid } from "@material-ui/core";
+import { PieChart, Pie, Tooltip } from "recharts";
 
 const useStyles = makeStyles({
   actual: { marginLeft: 3 },
@@ -45,7 +45,7 @@ const PieAllocate = () => {
           <Grid item container>
             <Grid item>
               <Typography className={classes.target} color="secondary">
-                Target{' '}
+                Target{" "}
               </Typography>
             </Grid>
             <Grid item>
@@ -53,14 +53,14 @@ const PieAllocate = () => {
             </Grid>
             <Grid item>
               <Typography className={classes.actual} color="primary">
-                {' '}
+                {" "}
                 Actual
               </Typography>
             </Grid>
           </Grid>
         </Grid>
         <PieChart width={600} height={300}>
-          <Tooltip wrapperStyle={{ backgroundColor: 'primary' }} />
+          <Tooltip wrapperStyle={{ backgroundColor: "primary" }} />
           <Pie
             data={currPcts}
             dataKey="value"
