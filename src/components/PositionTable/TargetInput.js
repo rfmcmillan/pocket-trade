@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Box, Typography } from "@material-ui/core";
 import { updatePosition } from "../../store/positions";
@@ -13,8 +13,8 @@ const useStyles = makeStyles({
 });
 
 const TargetInput = (props) => {
+  const dispatch = useDispatch();
   const { row } = props;
-  console.log("row:", row);
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
   const [edit, setEdit] = React.useState(false);
   const classes = useStyles();
@@ -36,26 +36,12 @@ const TargetInput = (props) => {
 
   const onChange = (ev) => {
     const { target } = ev;
-    console.log("target:", target);
     setLocalTargetPct(target.value);
   };
 
   const onSave = () => {
-    // positions.forEach((position) => {
-    //   const { id } = position;
-    //   let tgtPct;
-    //   if (position.alpacaData.symbol === "GLD") {
-    //     tgtPct = gld;
-    //   } else if (position.alpacaData.symbol === "VNQ") {
-    //     tgtPct = vnq;
-    //   } else if (position.alpacaData.symbol === "BNDW") {
-    //     tgtPct = bndw;
-    //   } else if (position.alpacaData.symbol === "VT") {
-    //     tgtPct = vt;
-    //   }
-    //   tgtPct = tgtPct / 100;
-    //   dispatch(updatePosition(id, tgtPct));
-    // });
+    const localTargetPctFloat = parseFloat(localTargetPct);
+    dispatch(updatePosition(row.id, localTargetPctFloat));
     setEdit(false);
   };
   return (
@@ -80,7 +66,7 @@ const TargetInput = (props) => {
             color="primary"
             onChange={onChange}
             name={row.symbol}
-            value={localTargetPct}
+            value={localTargetPct ? localTargetPct : 0}
             variant="outlined"
             size="small"
           ></TextField>
