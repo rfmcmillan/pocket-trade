@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -45,11 +45,13 @@ const PositionTable = () => {
   const positions = useSelector((state) => state.positions);
   const dispatch = useDispatch();
   const { long_market_value } = account;
+  const [edit, setEdit] = useState(false);
 
-  const [gld, setGld] = React.useState(0);
-  const [vnq, setVnq] = React.useState(0);
-  const [vt, setVt] = React.useState(0);
-  const [bndw, setBndw] = React.useState(0);
+  const [gld, setGld] = useState(0);
+  const [vnq, setVnq] = useState(0);
+  const [vt, setVt] = useState(0);
+  const [bndw, setBndw] = useState(0);
+  const [currPosition, setCurrPosition] = useState("");
 
   function createData(position) {
     const { name, id, alpacaData, tgtPct, currPct } = position;
@@ -178,7 +180,6 @@ const PositionTable = () => {
             <TableCell>Position </TableCell>
             <TableCell align="right">Symbol</TableCell>
             <TableCell align="right">Target</TableCell>
-            <TableCell align="right">Target</TableCell>
             <TableCell align="right">Actual</TableCell>
           </TableRow>
         </TableHead>
@@ -188,10 +189,49 @@ const PositionTable = () => {
               <TableRow key={idx}>
                 <TableCell component="th" scope="row">
                   {row.name}
+                  {currPosition !== row.symbol ? (
+                    <Button
+                      className={classes.button}
+                      color="primary"
+                      onClick={() => {
+                        console.log("row:", row);
+                        setCurrPosition(row.symbol);
+                        console.log(currPosition);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  ) : (
+                    <div>
+                      <Button
+                        style={cancelButtonStyle}
+                        variant="contained"
+                        color="secondary"
+                        onClick={onCancel}
+                      >
+                        Cancel
+                      </Button>
+
+                      <Button
+                        style={submitButtonStyle}
+                        variant="contained"
+                        color="primary"
+                        onClick={onSave}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  )}
                 </TableCell>
                 <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell>
-                  <TargetInput row={row} />
+                <TableCell align="right">
+                  {currPosition === row.symbol ? (
+                    <TargetInput row={row} edit={edit} setEdit={setEdit} />
+                  ) : (
+                    <Typography>{`${(row.tgtPct * 100).toFixed(
+                      2
+                    )}%`}</Typography>
+                  )}
                 </TableCell>
                 <TableCell align="right">
                   {`${(row.currPct * 100).toFixed(2)}%`}
@@ -201,49 +241,6 @@ const PositionTable = () => {
           })}
         </TableBody>
       </Table>
-      {/* {!edit ? (
-        <Button
-          className={classes.button}
-          color="primary"
-          onClick={handleEditButtonClick}
-          variant="contained"
-        >
-          Edit Target Allocations
-        </Button>
-      ) : (
-        ""
-      )}
-      <Box
-        display="flex"
-        flexDirection="row"
-        justifyContent="flex-end"
-        bgcolor="background.paper"
-      >
-        {edit ? (
-          <Button
-            style={cancelButtonStyle}
-            variant="contained"
-            color="secondary"
-            onClick={onCancel}
-          >
-            Cancel
-          </Button>
-        ) : (
-          ""
-        )}
-        {edit ? (
-          <Button
-            style={submitButtonStyle}
-            variant="contained"
-            color="primary"
-            onClick={onSave}
-          >
-            Submit
-          </Button>
-        ) : (
-          ""
-        )} */}
-      {/* </Box> */}
     </TableContainer>
   );
 };
