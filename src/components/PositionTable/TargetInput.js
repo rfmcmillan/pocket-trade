@@ -15,8 +15,7 @@ const useStyles = makeStyles({
 
 const TargetInput = (props) => {
   const dispatch = useDispatch();
-  const { row, edit } = props;
-  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
+  const { row, edit, onChange, localTargetPct } = props;
 
   const classes = useStyles();
 
@@ -35,13 +34,13 @@ const TargetInput = (props) => {
     setEdit(false);
   };
 
-  const onChange = (ev) => {
-    const { target } = ev;
-    setLocalTargetPct(target.value);
-  };
-
   const onSave = () => {
     const localTargetPctFloat = parseFloat(localTargetPct);
+    console.log(
+      "🚀 ~ file: TargetInput.js ~ line 48 ~ onSave ~ localTargetPctFloat",
+      localTargetPctFloat
+    );
+
     dispatch(updatePosition(row.id, localTargetPctFloat));
     setEdit(false);
   };

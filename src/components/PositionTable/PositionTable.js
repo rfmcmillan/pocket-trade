@@ -11,12 +11,12 @@ import {
   Paper,
   TextField,
   Button,
-  Box,
   Typography,
 } from "@material-ui/core";
 import { updatePosition } from "../../store/positions";
 import "@fontsource/roboto";
-import TargetInput from "./TargetInput";
+
+import PositionRow from "./PositionRow";
 
 const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 10px" },
@@ -154,22 +154,33 @@ const PositionTable = () => {
     }
   };
 
+  // const onSave = () => {
+  //   positions.forEach((position) => {
+  //     const { id } = position;
+  //     let tgtPct;
+  //     if (position.alpacaData.symbol === "GLD") {
+  //       tgtPct = gld;
+  //     } else if (position.alpacaData.symbol === "VNQ") {
+  //       tgtPct = vnq;
+  //     } else if (position.alpacaData.symbol === "BNDW") {
+  //       tgtPct = bndw;
+  //     } else if (position.alpacaData.symbol === "VT") {
+  //       tgtPct = vt;
+  //     }
+  //     tgtPct = tgtPct / 100;
+  //     dispatch(updatePosition(id, tgtPct));
+  //   });
+  //   setEdit(false);
+  // };
+
   const onSave = () => {
-    positions.forEach((position) => {
-      const { id } = position;
-      let tgtPct;
-      if (position.alpacaData.symbol === "GLD") {
-        tgtPct = gld;
-      } else if (position.alpacaData.symbol === "VNQ") {
-        tgtPct = vnq;
-      } else if (position.alpacaData.symbol === "BNDW") {
-        tgtPct = bndw;
-      } else if (position.alpacaData.symbol === "VT") {
-        tgtPct = vt;
-      }
-      tgtPct = tgtPct / 100;
-      dispatch(updatePosition(id, tgtPct));
-    });
+    const localTargetPctFloat = parseFloat(localTargetPct);
+    console.log(
+      "🚀 ~ file: TargetInput.js ~ line 48 ~ onSave ~ localTargetPctFloat",
+      localTargetPctFloat
+    );
+
+    dispatch(updatePosition(row.id, localTargetPctFloat));
     setEdit(false);
   };
   return (
@@ -186,57 +197,12 @@ const PositionTable = () => {
         <TableBody>
           {rows.map((row, idx) => {
             return (
-              <TableRow key={idx}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                  {currPosition !== row.symbol ? (
-                    <Button
-                      className={classes.button}
-                      color="primary"
-                      onClick={() => {
-                        console.log("row:", row);
-                        setCurrPosition(row.symbol);
-                        console.log(currPosition);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                  ) : (
-                    <div>
-                      <Button
-                        style={cancelButtonStyle}
-                        variant="contained"
-                        color="secondary"
-                        onClick={onCancel}
-                      >
-                        Cancel
-                      </Button>
-
-                      <Button
-                        style={submitButtonStyle}
-                        variant="contained"
-                        color="primary"
-                        onClick={onSave}
-                      >
-                        Submit
-                      </Button>
-                    </div>
-                  )}
-                </TableCell>
-                <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell align="right">
-                  {currPosition === row.symbol ? (
-                    <TargetInput row={row} edit={edit} setEdit={setEdit} />
-                  ) : (
-                    <Typography>{`${(row.tgtPct * 100).toFixed(
-                      2
-                    )}%`}</Typography>
-                  )}
-                </TableCell>
-                <TableCell align="right">
-                  {`${(row.currPct * 100).toFixed(2)}%`}
-                </TableCell>
-              </TableRow>
+              <PositionRow
+                key={row.id}
+                row={row}
+                currPosition={currPosition}
+                setCurrPosition={setCurrPosition}
+              />
             );
           })}
         </TableBody>
