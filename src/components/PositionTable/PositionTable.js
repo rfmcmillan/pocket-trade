@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import { updatePosition } from "../../store/positions";
 import "@fontsource/roboto";
+import TargetInput from "./TargetInput";
 
 const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 10px" },
@@ -44,7 +45,7 @@ const PositionTable = () => {
   const positions = useSelector((state) => state.positions);
   const dispatch = useDispatch();
   const { long_market_value } = account;
-  const [edit, setEdit] = React.useState(false);
+
   const [gld, setGld] = React.useState(0);
   const [vnq, setVnq] = React.useState(0);
   const [vt, setVt] = React.useState(0);
@@ -177,6 +178,7 @@ const PositionTable = () => {
             <TableCell>Position </TableCell>
             <TableCell align="right">Symbol</TableCell>
             <TableCell align="right">Target</TableCell>
+
             <TableCell align="right">Actual</TableCell>
           </TableRow>
         </TableHead>
@@ -188,16 +190,8 @@ const PositionTable = () => {
                   {row.name}
                 </TableCell>
                 <TableCell align="right">{row.symbol}</TableCell>
-                <TableCell align="right">
-                  {!edit ? (
-                    <Box>
-                      <Typography>{`${(row.tgtPct * 100).toFixed(
-                        2
-                      )}%`}</Typography>
-                    </Box>
-                  ) : (
-                    determineSymbol(row)
-                  )}
+                <TableCell>
+                  <TargetInput row={row} />
                 </TableCell>
                 <TableCell align="right">
                   {`${(row.currPct * 100).toFixed(2)}%`}
@@ -207,7 +201,7 @@ const PositionTable = () => {
           })}
         </TableBody>
       </Table>
-      {!edit ? (
+      {/* {!edit ? (
         <Button
           className={classes.button}
           color="primary"
@@ -248,8 +242,8 @@ const PositionTable = () => {
           </Button>
         ) : (
           ""
-        )}
-      </Box>
+        )} */}
+      {/* </Box> */}
     </TableContainer>
   );
 };
