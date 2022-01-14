@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
 const PositionRow = (props) => {
   const dispatch = useDispatch();
   const { row, edit, setEdit, currPosition, setCurrPosition } = props;
-  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
+  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
 
   const classes = useStyles();
 
@@ -28,39 +29,19 @@ const PositionRow = (props) => {
     margin: "10px",
   };
 
-  const handleEditButtonClick = () => {
-    setEdit(true);
-  };
-
   const onCancel = () => {
     setCurrPosition(undefined);
   };
 
   const onChange = (ev) => {
     const { target } = ev;
-
-    console.log(
-      "🚀 ~ file: PositionRow.js ~ line 43 ~ onChange ~ target.value",
-      target.value
-    );
-
     setLocalTargetPct(target.value);
   };
 
   const onSave = () => {
-    console.log(
-      "🚀 ~ file: PositionRow.js ~ line 48 ~ onSave ~ localTargetPct",
-      localTargetPct
-    );
     const localTargetPctFloat = parseFloat(localTargetPct);
-
-    console.log(
-      "🚀 ~ file: TargetInput.js ~ line 48 ~ onSave ~ localTargetPctFloat",
-      localTargetPctFloat
-    );
-
     dispatch(updatePosition(row.id, localTargetPctFloat));
-    setCurrPosition({});
+    setCurrPosition("");
   };
   return (
     <TableRow>
@@ -120,6 +101,14 @@ const PositionRow = (props) => {
       </TableCell>
     </TableRow>
   );
+};
+
+PositionRow.propTypes = {
+  row: PropTypes.object,
+  edit: PropTypes.bool,
+  setEdit: PropTypes.func,
+  currPosition: PropTypes.string,
+  setCurrPosition: PropTypes.func,
 };
 
 export default PositionRow;

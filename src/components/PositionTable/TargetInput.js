@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Button, Box, Grid, Typography } from "@material-ui/core";
-import { updatePosition } from "../../store/positions";
+import { TextField } from "@material-ui/core";
 import "@fontsource/roboto";
 
 const useStyles = makeStyles({
@@ -14,36 +13,10 @@ const useStyles = makeStyles({
 });
 
 const TargetInput = (props) => {
-  const dispatch = useDispatch();
-  const { row, edit, onChange, localTargetPct } = props;
+  const { row, onChange, localTargetPct } = props;
 
   const classes = useStyles();
 
-  const cancelButtonStyle = {
-    margin: "10px",
-  };
-  const submitButtonStyle = {
-    margin: "10px",
-  };
-
-  const handleEditButtonClick = () => {
-    setEdit(true);
-  };
-
-  const onCancel = () => {
-    setEdit(false);
-  };
-
-  const onSave = () => {
-    const localTargetPctFloat = parseFloat(localTargetPct);
-    console.log(
-      "🚀 ~ file: TargetInput.js ~ line 48 ~ onSave ~ localTargetPctFloat",
-      localTargetPctFloat
-    );
-
-    dispatch(updatePosition(row.id, localTargetPctFloat));
-    setEdit(false);
-  };
   return (
     <div>
       <TextField
@@ -58,6 +31,12 @@ const TargetInput = (props) => {
       ></TextField>
     </div>
   );
+};
+
+TargetInput.propTypes = {
+  row: PropTypes.object,
+  onChange: PropTypes.func,
+  localTargetPct: PropTypes.string,
 };
 
 export default TargetInput;
