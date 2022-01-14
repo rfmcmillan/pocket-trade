@@ -33,7 +33,7 @@ const PositionRow = (props) => {
   };
 
   const onCancel = () => {
-    setEdit(false);
+    setCurrPosition(undefined);
   };
 
   const onChange = (ev) => {
