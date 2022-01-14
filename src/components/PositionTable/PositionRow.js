@@ -9,6 +9,8 @@ import TargetInput from "./TargetInput";
 
 const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 10px" },
+  cancel: { margin: "10px" },
+  submit: { margin: "10px" },
   targetPct: { width: "25%" },
   textField: {
     maxWidth: 75,
@@ -19,15 +21,7 @@ const PositionRow = (props) => {
   const dispatch = useDispatch();
   const { row, edit, setEdit, currPosition, setCurrPosition } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
-
   const classes = useStyles();
-
-  const cancelButtonStyle = {
-    margin: "10px",
-  };
-  const submitButtonStyle = {
-    margin: "10px",
-  };
 
   const onCancel = () => {
     setCurrPosition(undefined);
@@ -43,6 +37,7 @@ const PositionRow = (props) => {
     dispatch(updatePosition(row.id, localTargetPctFloat));
     setCurrPosition("");
   };
+
   return (
     <TableRow>
       <TableCell component="th" scope="row">
@@ -62,7 +57,7 @@ const PositionRow = (props) => {
         ) : (
           <div>
             <Button
-              style={cancelButtonStyle}
+              className={classes.cancel}
               variant="contained"
               color="secondary"
               onClick={onCancel}
@@ -71,7 +66,7 @@ const PositionRow = (props) => {
             </Button>
 
             <Button
-              style={submitButtonStyle}
+              className={classes.submit}
               variant="contained"
               color="primary"
               onClick={onSave}
