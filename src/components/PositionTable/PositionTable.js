@@ -1,6 +1,6 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
   TableBody,
@@ -13,19 +13,19 @@ import {
   Button,
   Box,
   Typography,
-} from '@material-ui/core';
-import { updatePosition } from '../../store/positions';
-import '@fontsource/roboto';
+} from "@material-ui/core";
+import { updatePosition } from "../../store/positions";
+import "@fontsource/roboto";
 
 const useStyles = makeStyles({
-  button: { margin: '15px 0px 0px 10px' },
+  button: { margin: "15px 0px 0px 10px" },
   table: {
     minWidth: 400,
     marginBottom: 20,
     minHeight: 350,
   },
   tableContain: {
-    borderRadius: '16px',
+    borderRadius: "16px",
   },
   textField: {
     maxWidth: 75,
@@ -33,10 +33,10 @@ const useStyles = makeStyles({
 });
 
 const cancelButtonStyle = {
-  margin: '10px',
+  margin: "10px",
 };
 const submitButtonStyle = {
-  margin: '10px',
+  margin: "10px",
 };
 const PositionTable = () => {
   const classes = useStyles();
@@ -50,7 +50,7 @@ const PositionTable = () => {
   const [vt, setVt] = React.useState(0);
   const [bndw, setBndw] = React.useState(0);
 
-  function createData(position, long_market_value) {
+  function createData(position) {
     const { name, id, alpacaData, tgtPct, currPct } = position;
     const { symbol } = alpacaData;
     const row = {
@@ -70,9 +70,8 @@ const PositionTable = () => {
   const handleEditButtonClick = () => {
     setEdit(true);
   };
-
   const determineSymbol = (row) => {
-    if (row.symbol === 'GLD') {
+    if (row.symbol === "GLD") {
       return (
         <TextField
           className={classes.textField}
@@ -88,7 +87,7 @@ const PositionTable = () => {
           Edit
         </TextField>
       );
-    } else if (row.symbol === 'VNQ') {
+    } else if (row.symbol === "VNQ") {
       return (
         <TextField
           className={classes.textField}
@@ -103,7 +102,7 @@ const PositionTable = () => {
           Edit
         </TextField>
       );
-    } else if (row.symbol === 'BNDW') {
+    } else if (row.symbol === "BNDW") {
       return (
         <TextField
           className={classes.textField}
@@ -118,7 +117,7 @@ const PositionTable = () => {
           Edit
         </TextField>
       );
-    } else if (row.symbol === 'VT') {
+    } else if (row.symbol === "VT") {
       return (
         <TextField
           className={classes.textField}
@@ -141,13 +140,13 @@ const PositionTable = () => {
   };
 
   const onChange = (ev) => {
-    if (ev.target.name === 'gld') {
+    if (ev.target.name === "gld") {
       setGld(ev.target.value);
-    } else if (ev.target.name === 'vnq') {
+    } else if (ev.target.name === "vnq") {
       setVnq(ev.target.value);
-    } else if (ev.target.name === 'bndw') {
+    } else if (ev.target.name === "bndw") {
       setBndw(ev.target.value);
-    } else if (ev.target.name === 'vt') {
+    } else if (ev.target.name === "vt") {
       setVt(ev.target.value);
     }
   };
@@ -156,13 +155,13 @@ const PositionTable = () => {
     positions.forEach((position) => {
       const { id } = position;
       let tgtPct;
-      if (position.alpacaData.symbol === 'GLD') {
+      if (position.alpacaData.symbol === "GLD") {
         tgtPct = gld;
-      } else if (position.alpacaData.symbol === 'VNQ') {
+      } else if (position.alpacaData.symbol === "VNQ") {
         tgtPct = vnq;
-      } else if (position.alpacaData.symbol === 'BNDW') {
+      } else if (position.alpacaData.symbol === "BNDW") {
         tgtPct = bndw;
-      } else if (position.alpacaData.symbol === 'VT') {
+      } else if (position.alpacaData.symbol === "VT") {
         tgtPct = vt;
       }
       tgtPct = tgtPct / 100;
@@ -218,7 +217,7 @@ const PositionTable = () => {
           Edit Target Allocations
         </Button>
       ) : (
-        ''
+        ""
       )}
       <Box
         display="flex"
@@ -236,7 +235,7 @@ const PositionTable = () => {
             Cancel
           </Button>
         ) : (
-          ''
+          ""
         )}
         {edit ? (
           <Button
@@ -248,7 +247,7 @@ const PositionTable = () => {
             Submit
           </Button>
         ) : (
-          ''
+          ""
         )}
       </Box>
     </TableContainer>
