@@ -53,7 +53,6 @@ const TargetInput = (props) => {
             className={classes.button}
             color="primary"
             onClick={handleEditButtonClick}
-            variant="contained"
           >
             Edit
           </Button>

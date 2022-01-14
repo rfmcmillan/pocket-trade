@@ -178,7 +178,7 @@ const PositionTable = () => {
             <TableCell>Position </TableCell>
             <TableCell align="right">Symbol</TableCell>
             <TableCell align="right">Target</TableCell>
-
+            <TableCell align="right">Target</TableCell>
             <TableCell align="right">Actual</TableCell>
           </TableRow>
         </TableHead>
