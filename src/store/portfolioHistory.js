@@ -1,16 +1,16 @@
 import axios from "axios";
 const LOAD_PORTFOLIO_HISTORY = "LOAD_PORTFOLIO_HISTORY";
 
-const loadPortfolioHistoryActionCreator = (orders) => {
+const loadPortfolioHistoryActionCreator = (portfolioHistory) => {
   return {
     type: LOAD_PORTFOLIO_HISTORY,
-    orders,
+    portfolioHistory,
   };
 };
 
 const loadPortfolioHistory = () => {
   return async (dispatch) => {
-    const response = await axios.get("/api/portfolioHistory");
+    const response = await axios.get("/api/portfolio/history");
     const portfolioHistory = response.data;
     dispatch(loadPortfolioHistoryActionCreator(portfolioHistory));
   };

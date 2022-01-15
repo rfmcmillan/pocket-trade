@@ -79,15 +79,6 @@ router.post("/orders", async (req, res, next) => {
   }
 });
 
-router.get("/futureOrders", async (req, res, next) => {
-  try {
-    const response = await futureOrders.findAll();
-    res.send(response.data);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.post("/futureOrders", async (req, res, next) => {
   try {
     const { monthFrequency } = req.body;
@@ -98,7 +89,6 @@ router.post("/futureOrders", async (req, res, next) => {
       const newDate = new Date(date);
       const time = newDate.getTime();
       const returnDate = new Date(time);
-      const stringDate = returnDate.toString();
       const futureOrder = await FutureOrder.create({ date: returnDate });
       futureOrders.push(futureOrder);
     }
