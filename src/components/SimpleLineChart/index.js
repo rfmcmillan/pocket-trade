@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 import { makeStyles } from "@material-ui/core/styles";
 import {
   LineChart,
@@ -38,53 +41,39 @@ const useStyles = makeStyles({
 const SimpleLineChart = () => {
   const classes = useStyles();
   const portfolioHistory = useSelector((state) => state.portfolioHistory);
-  console.log(
-    "🚀 ~ file: index.js ~ line 41 ~ SimpleLineChart ~ portfolioHistory",
-    portfolioHistory
-  );
   const { timestamp, equity } = portfolioHistory;
-
-  console.log("timestamp:", timestamp);
-
-  if (timestamp) {
-    const timestampData = timestamp.map((item) => {
-      return { name: item };
-    });
-    console.log("timestampData:", timestampData);
-  }
-
-  if (equity) {
-    const equityData = equity.map((item) => {
-      return { item };
-    });
-    console.log(
-      "🚀 ~ file: index.js ~ line 60 ~ equityData ~ equityData",
-      equityData
-    );
-  }
 
   let data = [];
   if (timestamp) {
     timestamp.forEach((item) => {
-      data.push({ timestamp: item });
+      console.log(
+        "🚀 ~ file: index.js ~ line 49 ~ timestamp.forEach ~ item",
+        item
+      );
+      const date = dayjs(item * 1000).format("LL");
+      console.log(
+        "🚀 ~ file: index.js ~ line 50 ~ timestamp.forEach ~ date",
+        date
+      );
+
+      data.push({ timestamp: date });
     });
-    console.log("data:", data);
   }
 
   if (equity) {
     equity.forEach((item, idx) => {
-      data[idx]["equity"] = item;
+      data[idx].equity = item;
     });
   }
 
-  console.log("data:", data);
+  console.log(data);
 
   return (
     <Paper className={classes.contain}>
-      <Typography variant="h6">Historical Performance</Typography>
+      <Typography variant="h6">1 Month Performance</Typography>
       <ResponsiveContainer height="95%" width="100%">
         <LineChart
-          data={data2}
+          data={data}
           margin={{
             top: 30,
             right: 30,
@@ -92,20 +81,26 @@ const SimpleLineChart = () => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis domain={[165, 180]} />
-          <Tooltip />
+          <CartesianGrid
+            horizontal={false}
+            vertical={false}
+            strokeDasharray="3 3"
+          />
+          <XAxis dataKey="timestamp" />
+          <YAxis domain={[325000, 350000]} />
+          <Tooltip
+            formatter={(value) => {
+              return value.toLocaleString("en-US").slice(0, -1);
+            }}
+          />
           <Legend />
           <Line
+            name="Portfolio Value"
             type="monotone"
-            dataKey="gld"
+            dataKey="equity"
             stroke="#088F8F"
             activeDot={{ r: 8 }}
           />
-          <Line type="monotone" dataKey="vnq" stroke="#27C6DB" />
-          <Line type="monotone" dataKey="bndw" stroke="#9FE2BF" />
-          <Line type="monotone" dataKey="vt" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </Paper>
