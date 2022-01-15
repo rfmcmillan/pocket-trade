@@ -1,13 +1,12 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const { default: axios } = require('axios');
-const { alpaca } = require('../alpaca');
+const { default: axios } = require("axios");
+const { alpaca } = require("../alpaca");
 const {
   models: { Position, FutureOrder },
-} = require('../db');
-const { ToadScheduler, SimpleIntervalJob, Task } = require('toad-scheduler');
+} = require("../db");
 
-router.get('/account', async (req, res, next) => {
+router.get("/account", async (req, res, next) => {
   try {
     const account = await alpaca.getAccount();
     res.send(account);
@@ -16,16 +15,16 @@ router.get('/account', async (req, res, next) => {
   }
 });
 
-router.get('/positions', async (req, res, next) => {
+router.get("/positions", async (req, res, next) => {
   try {
-    const positions = await Position.findAll({ order: ['name'] });
+    const positions = await Position.findAll({ order: ["name"] });
     res.send(positions);
   } catch (error) {
     next(error);
   }
 });
 
-router.put('/positions/:id', async (req, res, next) => {
+router.put("/positions/:id", async (req, res, next) => {
   try {
     const position = await Position.findByPk(req.params.id);
     const updated = await position.update(req.body);
@@ -35,14 +34,14 @@ router.put('/positions/:id', async (req, res, next) => {
   }
 });
 
-router.get('/orders', async (req, res, next) => {
+router.get("/orders", async (req, res, next) => {
   try {
     const response = await axios.get(
-      'https://paper-api.alpaca.markets/v2/orders',
+      "https://paper-api.alpaca.markets/v2/orders",
       {
         headers: {
-          'APCA-API-KEY-ID': process.env.API_KEY,
-          'APCA-API-SECRET-KEY': process.env.API_SECRET,
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
         },
       }
     );
@@ -50,21 +49,22 @@ router.get('/orders', async (req, res, next) => {
 
     res.send(orders);
   } catch (error) {
-    if (error) console.log('error with orders get route');
-    next(error);
-  }
-});
-router.get('/orders/all', async (req, res, next) => {
-  try {
-    const response = await alpaca.getOrders({ status: 'all' });
-    res.send(response);
-  } catch (error) {
-    if (error) console.log('error with get all orders get route');
+    if (error) console.log("error with orders get route");
     next(error);
   }
 });
 
-router.post('/orders', async (req, res, next) => {
+router.get("/orders/all", async (req, res, next) => {
+  try {
+    const response = await alpaca.getOrders({ status: "all" });
+    res.send(response);
+  } catch (error) {
+    if (error) console.log("error with get all orders get route");
+    next(error);
+  }
+});
+
+router.post("/orders", async (req, res, next) => {
   try {
     const { symbol, notional, side, type, time_in_force } = req.body;
     alpaca.createOrder({
@@ -79,7 +79,7 @@ router.post('/orders', async (req, res, next) => {
   }
 });
 
-router.get('/futureOrders', async (req, res, next) => {
+router.get("/futureOrders", async (req, res, next) => {
   try {
     const response = await futureOrders.findAll();
     res.send(response.data);
@@ -88,7 +88,7 @@ router.get('/futureOrders', async (req, res, next) => {
   }
 });
 
-router.post('/futureOrders', async (req, res, next) => {
+router.post("/futureOrders", async (req, res, next) => {
   try {
     const { monthFrequency } = req.body;
     let date = Date.now();
@@ -104,7 +104,15 @@ router.post('/futureOrders', async (req, res, next) => {
     }
     res.send(futureOrders);
   } catch (error) {
-    console.log(error);
+    next(error);
+  }
+});
+
+router.get("/portfolio/history", async (req, res, next) => {
+  try {
+    const portfolioHistory = await alpaca.getPortfolioHistory("3M");
+    res.send(portfolioHistory);
+  } catch (error) {
     next(error);
   }
 });
