@@ -8,8 +8,9 @@ import "@fontsource/roboto";
 import TargetInput from "./TargetInput";
 
 const useStyles = makeStyles({
-  button: { margin: "15px 0px 0px 10px" },
+  button: { margin: "15px 0px 0px 5px", marginBottom: "16px" },
   cancel: { margin: "10px" },
+  cell: { padding: "0px 16px 0px 16px" },
   submit: { margin: "10px" },
   targetPct: { width: "25%" },
   textField: {
@@ -40,16 +41,14 @@ const PositionRow = (props) => {
 
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell className={classes.cell} component="th" scope="row">
         {row.name}
         {currPosition !== row.symbol ? (
           <Button
             className={classes.button}
             color="primary"
             onClick={() => {
-              console.log("row:", row);
               setCurrPosition(row.symbol);
-              console.log(currPosition);
             }}
           >
             Edit
