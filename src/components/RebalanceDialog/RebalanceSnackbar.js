@@ -1,12 +1,13 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { createOrder } from '../../store/orders';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Snackbar } from '@material-ui/core';
+import React from "react";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { createOrder } from "../../store/orders";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Snackbar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   dialogList: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SnackbarRebalance = (props) => {
+const RebalanceSnackbar = (props) => {
   const [open, setOpen] = React.useState(false);
   const { trades } = props;
 
@@ -44,7 +45,7 @@ const SnackbarRebalance = (props) => {
       <Snackbar
         open={open}
         message="Success! Trades submitted!"
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         autoHideDuration={3000}
         onClose={() => setOpen(false)}
       />
@@ -52,4 +53,8 @@ const SnackbarRebalance = (props) => {
   );
 };
 
-export default SnackbarRebalance;
+RebalanceSnackbar.propTypes = {
+  trades: PropTypes.array,
+};
+
+export default RebalanceSnackbar;

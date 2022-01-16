@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 
 const OrderHistory = () => {
   const orders = useSelector((state) => state.orders);
-
   const classes = useStyles();
   function createData(order) {
     const {
@@ -90,7 +89,7 @@ const OrderHistory = () => {
                     <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
                     <TableCell>{row.filled_avg_price}</TableCell>
                     <TableCell>
-                      {`${parseInt(row.notional).toLocaleString("en-US")}`}
+                      {`${parseInt(row.notional).toLocaleString("en-US")}.00`}
                     </TableCell>
                     <TableCell>{row.status.toUpperCase()}</TableCell>
                   </TableRow>

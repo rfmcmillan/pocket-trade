@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SimpleLineChart = () => {
+const PerformanceChart = () => {
   const classes = useStyles();
   const portfolioHistory = useSelector((state) => state.portfolioHistory);
   const { timestamp, equity } = portfolioHistory;
@@ -88,4 +88,4 @@ const SimpleLineChart = () => {
   );
 };
 
-export default SimpleLineChart;
+export default PerformanceChart;

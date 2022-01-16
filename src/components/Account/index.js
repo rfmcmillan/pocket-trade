@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import "@fontsource/roboto";
 import PositionTable from "../PositionTable";
 import OrderHistory from "../OrderHistory/OrderHistory";
-import PieAllocate from "../PieAllocate";
-import DialogRebalance from "../DialogRebalance/DialogRebalance";
-import SimpleLineChart from "../SimpleLineChart";
+import PieAllocate from "../AllocationChart";
+import DialogRebalance from "../RebalanceDialog";
+import SimpleLineChart from "../PerformanceChart";
 
 const useStyles = makeStyles({ amount: { fontSize: "2rem" } });
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Nav from "./components/Nav/Nav";
 import Account from "./components/Account";
 import { HashRouter, Route } from "react-router-dom";
@@ -43,6 +44,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loadPortfolioHistory());
     },
   };
+};
+
+App.propTypes = {
+  bootstrap: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
