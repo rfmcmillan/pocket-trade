@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   Paper,
@@ -10,7 +10,7 @@ import {
   TableCell,
   TableHead,
   TableBody,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   contain: {
@@ -51,6 +51,7 @@ const OrderHistory = () => {
   const rows = orders.map((order) => {
     return createData(order);
   });
+
   return (
     <Paper className={classes.contain} elevation={3}>
       <Typography variant="h6" className={classes.title}>
@@ -88,7 +89,9 @@ const OrderHistory = () => {
                     <TableCell>{row.side.toUpperCase()}</TableCell>
                     <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
                     <TableCell>{row.filled_avg_price}</TableCell>
-                    <TableCell>{`$${row.notional}.00`}</TableCell>
+                    <TableCell>
+                      {`${parseInt(row.notional).toLocaleString("en-US")}`}
+                    </TableCell>
                     <TableCell>{row.status.toUpperCase()}</TableCell>
                   </TableRow>
                 );
