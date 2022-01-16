@@ -1,12 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Nav from './components/Nav/Nav';
-import Account from './components/Account';
-import { HashRouter, Route } from 'react-router-dom';
-import { loadAccount } from './store/account';
-import { loadPositions } from './store/positions';
-import { loadOrders } from './store/orders';
-import updatePositionTableTgtPct from './components/PositionTable/updatePositionTgtPct';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Nav from "./components/Nav/Nav";
+import Account from "./components/Account";
+import { HashRouter, Route } from "react-router-dom";
+import { loadAccount } from "./store/account";
+import { loadPositions } from "./store/positions";
+import { loadOrders } from "./store/orders";
+import { loadPortfolioHistory } from "./store/portfolioHistory";
+import updatePositionTableTgtPct from "./components/PositionTable/updatePositionTgtPct";
 
 class App extends React.Component {
   componentDidMount() {
@@ -39,8 +41,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loadAccount());
       dispatch(loadPositions());
       dispatch(loadOrders());
+      dispatch(loadPortfolioHistory());
     },
   };
+};
+
+App.propTypes = {
+  bootstrap: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

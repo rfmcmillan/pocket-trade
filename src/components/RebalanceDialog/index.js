@@ -1,19 +1,19 @@
-import React from 'react';
-import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-} from '@material-ui/core';
-import SnackbarRebalance from '../SnackbarRebalance/SnackbarRebalance';
-import DialogTable from './DialogTable';
+} from "@material-ui/core";
+import SnackbarRebalance from "./RebalanceSnackbar";
+import DialogTable from "./DialogTable";
 
 const useStyles = makeStyles((theme) => ({
   dialogList: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -22,16 +22,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DialogRebalance = () => {
+const RebalanceDialog = () => {
   const [open, setOpen] = React.useState(false);
 
   const [proposedOrders, setProposedOrders] = React.useState([]);
 
   const rebalance = async () => {
-    const acctResponse = await axios.get('api/account');
+    const acctResponse = await axios.get("api/account");
     const account = acctResponse.data;
     const { portfolio_value } = account;
-    const posResponse = await axios.get('/api/positions');
+    const posResponse = await axios.get("/api/positions");
     const positions = posResponse.data;
     const proposed = [];
     positions.forEach((position) => {
@@ -43,16 +43,16 @@ const DialogRebalance = () => {
       const tgtAmt = tgtPct * portfolio_value;
       const currAmt = currPct * portfolio_value;
       const amount = parseInt(tgtAmt - currAmt);
-      const type = 'market';
-      const time_in_force = 'day';
+      const type = "market";
+      const time_in_force = "day";
       if (amount > 0) {
         const tradeAmt = amount;
-        const side = 'buy';
+        const side = "buy";
         const order = { symbol, tradeAmt, side, type, time_in_force };
         proposed.push(order);
       } else if (amount < 0) {
         const tradeAmt = -amount;
-        const side = 'sell';
+        const side = "sell";
         const order = { symbol, tradeAmt, side, type, time_in_force };
         proposed.push(order);
       }
@@ -104,4 +104,4 @@ const DialogRebalance = () => {
   );
 };
 
-export default DialogRebalance;
+export default RebalanceDialog;

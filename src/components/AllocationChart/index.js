@@ -17,10 +17,9 @@ const useStyles = makeStyles({
   },
 });
 
-const PieAllocate = () => {
+const AllocationChart = () => {
   const positions = useSelector((state) => state.positions);
   const classes = useStyles();
-
   const tgtPcts = positions.map((position) => {
     return {
       name: position.alpacaData.symbol,
@@ -89,4 +88,4 @@ const PieAllocate = () => {
   );
 };
 
-export default PieAllocate;
+export default AllocationChart;
