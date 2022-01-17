@@ -1,6 +1,6 @@
 # RapidRebalance
 
-![alt text](https://github.com/rfmcmillan/rapid-rebalance/src/assets/screenshot.png?raw=true)
+![alt text](https://github.com/rfmcmillan/rapid-rebalance/src/assets/screenshot.png)
 
 RapidRebalance is an app to help you quickly rebalance your investment portfolio. I originally built
 this for a hackathon at Fullstack Academy as a way for me to explore some of the features that you would find
