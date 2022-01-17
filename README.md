@@ -21,6 +21,12 @@ Use npm to install RapidRebalance along with all its' dependencies.
 npm install
 ```
 
+Start the app.
+
+```bash
+npm run start
+```
+
 ## Usage
 
 To edit the target % for your portfolio allocation:
