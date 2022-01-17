@@ -29,7 +29,7 @@ npm run start
 
 ## Usage
 
-To edit the target % for your portfolio allocation:
+To edit the target allocation % for one of your portfolio holdings:
 
 1. Click the "Edit" button next to the portfolio holding you'd like to change. An editable input should now appear in the "Target" column.
 
@@ -39,4 +39,5 @@ To edit the target % for your portfolio allocation:
 
 4. Click the green "Rebalance" button. This should produce a dialog proposing all of the trades needed to bring your portfolio into balance.
 
-5. Click "Submit" to place the trades.
+5. Click "Submit" to place the trades. If you have placed the trades during trading hours, they should be completed almost instantly. If not, they
+   will be completed as soon as markets open.
