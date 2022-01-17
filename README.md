@@ -5,7 +5,7 @@ this for a hackathon at Fullstack Academy as a way for me to explore some of the
 in a robo-advisor like WealthFront or Betterment. It uses the Alpaca Markets API, which provides a paper-trading account and
 trade execution, and Recharts, a data visualization library for React.
 
-![alt text](https://github.com/rfmcmillan/rapid-rebalance/blob/readme/src/assets/screenshot.png?raw=true)
+![alt text](https://github.com/rfmcmillan/rapid-rebalance/blob/main/src/assets/screenshot.png?raw=true)
 
 ## Installation
 
