@@ -1,11 +1,11 @@
 # RapidRebalance
 
-![alt text](https://github.com/rfmcmillan/rapid-rebalance/blob/readme/src/assets/screenshot.png?raw=true)
-
 RapidRebalance is an app to help you quickly rebalance your investment portfolio. I originally built
 this for a hackathon at Fullstack Academy as a way for me to explore some of the features that you would find
-in a robo-advisor like WealthFront or Betterment. It uses the Alpaca Markets API which provides a paper-trading account and
-trade execution.
+in a robo-advisor like WealthFront or Betterment. It uses the Alpaca Markets API, which provides a paper-trading account and
+trade execution, and Recharts, a data visualization library for React.
+
+![alt text](https://github.com/rfmcmillan/rapid-rebalance/blob/readme/src/assets/screenshot.png?raw=true)
 
 ## Installation
 
