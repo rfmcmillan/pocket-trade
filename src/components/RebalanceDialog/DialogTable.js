@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -60,5 +61,7 @@ const DialogTable = (props) => {
     </TableContainer>
   );
 };
+
+DialogTable.propTypes = { proposedOrders: PropTypes.array };
 
 export default DialogTable;
