@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
   TableBody,
@@ -8,8 +8,8 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from '@material-ui/core';
-import '@fontsource/roboto';
+} from "@material-ui/core";
+import "@fontsource/roboto";
 
 const useStyles = makeStyles({
   table: {
@@ -49,7 +49,9 @@ const DialogTable = (props) => {
               <TableRow key={idx}>
                 <TableCell>{row.symbol}</TableCell>
                 <TableCell>{row.side.toUpperCase()}</TableCell>
-                <TableCell>{`$${row.tradeAmt}.00`}</TableCell>
+                <TableCell>{`$${row.tradeAmt.toLocaleString(
+                  "en-US"
+                )}.00`}</TableCell>
               </TableRow>
             );
           })}
