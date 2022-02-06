@@ -67,7 +67,7 @@ const PerformanceChart = () => {
             tickFormatter={(tick) => {
               return `$${tick.toLocaleString("en-US")}`;
             }}
-            domain={[325000, 350000]}
+            domain={[305000, 350000]}
           />
           <Tooltip
             formatter={(value) => {
