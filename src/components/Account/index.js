@@ -7,7 +7,7 @@ import PositionTable from "../PositionTable";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import PieAllocate from "../AllocationChart";
 import DialogRebalance from "../RebalanceDialog";
-import SimpleLineChart from "../PerformanceChart";
+import PerformanceChart from "../PerformanceChart";
 
 const useStyles = makeStyles({ amount: { fontSize: "2rem" } });
 
@@ -48,7 +48,7 @@ const Account = () => {
         </Box>
         <Grid container>
           <Grid item xs={6}>
-            <SimpleLineChart />
+            <PerformanceChart />
           </Grid>
           <Grid item xs={6}>
             <OrderHistory p={1} />
