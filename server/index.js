@@ -14,14 +14,14 @@ const router = require("./routes");
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res, next) =>
+app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "../index.html"), null)
 );
 
 app.use("/api", router);
 
 app.use((err, req, res, next) => {
-  console.log("500 handler just ran.", "err:", err);
+  console.log("err:", err);
   res.status(500).send({ error: err });
   next(err);
 });
