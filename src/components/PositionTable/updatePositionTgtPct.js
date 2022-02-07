@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updatePosition } from "../../store/positions";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +12,8 @@ const useStyles = makeStyles({
     maxWidth: 100,
   },
 });
+
+//This component is a work in progress. It will eventually be used in a dialog for user to edit target allocation for a holding.
 
 const updatePositionTableTgtPct = () => {
   const classes = useStyles();
