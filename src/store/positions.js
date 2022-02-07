@@ -12,9 +12,13 @@ const loadPositionsActionCreator = (positions) => {
 
 const loadPositions = () => {
   return async (dispatch) => {
-    const response = await axios.get("/api/positions");
-    const positions = response.data;
-    dispatch(loadPositionsActionCreator(positions));
+    try {
+      const response = await axios.get("/api/positions");
+      const positions = response.data;
+      dispatch(loadPositionsActionCreator(positions));
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
@@ -27,11 +31,15 @@ const updatePositionActionCreator = (position) => {
 
 const updatePosition = (id, tgtPct) => {
   return async (dispatch) => {
-    const response = await axios.put(`api/positions/${id}`, {
-      tgtPct,
-    });
-    const position = response.data;
-    dispatch(updatePositionActionCreator(position));
+    try {
+      const response = await axios.put(`api/positions/${id}`, {
+        tgtPct,
+      });
+      const position = response.data;
+      dispatch(updatePositionActionCreator(position));
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 

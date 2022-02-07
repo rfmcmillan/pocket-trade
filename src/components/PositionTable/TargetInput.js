@@ -8,7 +8,9 @@ const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 10px" },
   targetPct: { width: "25%" },
   textField: {
+    marginLeft: 50,
     maxWidth: 75,
+    color: "#d3bcbd",
   },
 });
 
@@ -26,7 +28,7 @@ const TargetInput = (props) => {
         onChange={onChange}
         name={row.symbol}
         value={localTargetPct ? localTargetPct : 0}
-        variant="outlined"
+        variant="filled"
         size="small"
       ></TextField>
     </div>
