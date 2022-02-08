@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
-import { updatePosition } from "../../store/positions";
+import { updatePosition } from "../../../store/positions";
 import "@fontsource/roboto";
 import TargetInput from "./TargetInput";
 
@@ -20,7 +20,15 @@ const useStyles = makeStyles({
 
 const PositionRow = (props) => {
   const dispatch = useDispatch();
-  const { row, edit, setEdit, currPosition, setCurrPosition } = props;
+  const {
+    row,
+    edit,
+    setEdit,
+    currPosition,
+    setCurrPosition,
+    tgtPctsTotal,
+    setTgtPctsTotal,
+  } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
   const classes = useStyles();
 
@@ -31,6 +39,7 @@ const PositionRow = (props) => {
   const onChange = (ev) => {
     const { target } = ev;
     setLocalTargetPct(target.value);
+    setTgtPctsTotal(tgtPctsTotal);
   };
 
   const onSave = () => {
@@ -63,15 +72,18 @@ const PositionRow = (props) => {
             >
               Cancel
             </Button>
-
-            <Button
-              className={classes.submit}
-              variant="contained"
-              color="primary"
-              onClick={onSave}
-            >
-              Submit
-            </Button>
+            {tgtPctsTotal <= 1 ? (
+              <Button
+                className={classes.submit}
+                variant="contained"
+                color="primary"
+                onClick={onSave}
+              >
+                Submit
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
         )}
       </TableCell>

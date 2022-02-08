@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -22,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RebalanceDialog = () => {
+const RebalanceButton = (props) => {
   const [open, setOpen] = React.useState(false);
-
   const [proposedOrders, setProposedOrders] = React.useState([]);
+  const { tgtPctsTotal } = props;
 
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
@@ -77,6 +78,7 @@ const RebalanceDialog = () => {
         color="primary"
         className={classes.button}
         onClick={handleClickOpen}
+        disabled={tgtPctsTotal <= 1 ? false : true}
       >
         Rebalance
       </Button>
@@ -104,4 +106,8 @@ const RebalanceDialog = () => {
   );
 };
 
-export default RebalanceDialog;
+RebalanceButton.propTypes = {
+  tgtPctsTotal: PropTypes.number,
+};
+
+export default RebalanceButton;

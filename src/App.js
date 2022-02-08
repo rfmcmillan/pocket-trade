@@ -8,7 +8,7 @@ import { loadAccount } from "./store/account";
 import { loadPositions } from "./store/positions";
 import { loadOrders } from "./store/orders";
 import { loadPortfolioHistory } from "./store/portfolioHistory";
-import updatePositionTableTgtPct from "./components/PositionTable/updatePositionTgtPct";
+import updatePositionTableTgtPct from "./components/Account/PositionTable/updatePositionTgtPct";
 
 class App extends React.Component {
   componentDidMount() {
