@@ -88,7 +88,6 @@ const PositionTable = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography>{tgtPctsTotal}</Typography>
     </div>
   );
 };
