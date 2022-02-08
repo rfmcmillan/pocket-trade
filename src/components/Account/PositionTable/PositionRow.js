@@ -115,6 +115,7 @@ PositionRow.propTypes = {
   setEdit: PropTypes.func,
   currPosition: PropTypes.string,
   setCurrPosition: PropTypes.func,
+  tgtPctsTotal: PropTypes.number,
 };
 
 export default PositionRow;
