@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
 import { updatePosition } from "../../../store/positions";
-import "@fontsource/roboto";
 import TargetInput from "./TargetInput";
 
 const useStyles = makeStyles({
