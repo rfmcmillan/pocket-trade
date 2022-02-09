@@ -25,14 +25,13 @@ const useStyles = makeStyles({
   },
 });
 
-const PositionTable = (props) => {
+const PositionTable = () => {
   const classes = useStyles();
-  const [tgtPctsTotal, setTgtPctsTotal] = useState(0);
+
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
   const { long_market_value } = account;
   const [currPosition, setCurrPosition] = useState("");
-  const { func } = props;
 
   function createData(position) {
     const { name, id, alpacaData, tgtPct, currPct } = position;
@@ -57,8 +56,6 @@ const PositionTable = (props) => {
     return (total += curr);
   }, 0);
 
-  func(tgtPctsTotalTemp);
-
   return (
     <div>
       <TableContainer component={Paper} className={classes.table}>
@@ -75,8 +72,6 @@ const PositionTable = (props) => {
             {rows.map((row) => {
               return (
                 <PositionRow
-                  setTgtPctsTotal={setTgtPctsTotal}
-                  tgtPctsTotal={tgtPctsTotal}
                   key={row.id}
                   row={row}
                   currPosition={currPosition}

@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, Grid } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "@fontsource/roboto";
 import PositionTable from "./PositionTable";
 import OrderHistory from "./OrderHistory/OrderHistory";
 import PieAllocate from "./AllocationChart";
 import RebalanceButton from "./RebalanceButton";
 import PerformanceChart from "./PerformanceChart";
+import { updateTotalTargetPercentageActionCreator } from "../../store/totalTargetPercentage";
 
 const useStyles = makeStyles({ amount: { fontSize: "2rem" } });
 
 const Account = () => {
+  const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
+  const positions = useSelector((state) => state.positions);
   const classes = useStyles();
-  const [tgtPctsTotal, setTgtPctsTotal] = useState(0);
-
   const { portfolio_value } = account;
   var formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -23,10 +24,14 @@ const Account = () => {
   });
   const portfolio_value_usd = formatter.format(portfolio_value);
 
-  const fetchTgtPctTotal = (tgtPctsTotalValue) => {
-    setTgtPctsTotal(tgtPctsTotalValue);
-    console.log("tgtPctsTotal in state in Account:", tgtPctsTotal);
-  };
+  useEffect(() => {
+    const mapped = positions.map((position) => position.tgtPct);
+    const totalTargetPercentages = mapped.reduce(
+      (sum, curr) => (sum += curr),
+      0
+    );
+    dispatch(updateTotalTargetPercentageActionCreator(totalTargetPercentages));
+  }, [positions]);
 
   return (
     <div id="account">
@@ -36,7 +41,7 @@ const Account = () => {
           <Typography className={classes.amount} p={1} color="primary">
             {portfolio_value_usd}
           </Typography>
-          <RebalanceButton tgtPctsTotal={tgtPctsTotal} p={1} />
+          <RebalanceButton p={1} />
         </Box>
         <Typography p={1} variant="subtitle1">
           Here&apos;s where your portfolio stands today.
@@ -48,7 +53,7 @@ const Account = () => {
           marginTop={1.5}
         >
           <Grid item xs={10}>
-            <PositionTable func={fetchTgtPctTotal} />
+            <PositionTable />
           </Grid>
           <PieAllocate />
         </Box>

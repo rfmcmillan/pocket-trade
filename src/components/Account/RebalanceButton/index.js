@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,10 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RebalanceButton = (props) => {
+const RebalanceButton = () => {
+  const totalTargetPercentage = useSelector(
+    (state) => state.totalTargetPercentage
+  );
   const [open, setOpen] = React.useState(false);
   const [proposedOrders, setProposedOrders] = React.useState([]);
-  const { tgtPctsTotal } = props;
 
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
@@ -78,7 +81,7 @@ const RebalanceButton = (props) => {
         color="primary"
         className={classes.button}
         onClick={handleClickOpen}
-        disabled={tgtPctsTotal <= 1 ? false : true}
+        disabled={totalTargetPercentage <= 1 ? false : true}
       >
         Rebalance
       </Button>
