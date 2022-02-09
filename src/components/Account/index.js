@@ -39,7 +39,7 @@ const Account = () => {
       <Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Typography className={classes.amount} p={1} color="primary">
-            {portfolio_value_usd}
+            {portfolio_value_usd ? portfolio_value_usd : "$100,000.00"}
           </Typography>
           <RebalanceButton p={1} />
         </Box>
