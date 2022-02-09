@@ -1,14 +1,4 @@
-import axios from "axios";
-
-const LOAD_TOTAL_TARGET_PERCENTAGE = "LOAD_TOTAL_TARGET_PERCENTAGE";
 const UPDATE_TOTAL_TARGET_PERCENTAGE = "UPDATE_TOTAL_TARGET_PERCENTAGE";
-
-const loadTotalTargetPercentageActionCreator = (totalTargetPercentage) => {
-  return {
-    type: LOAD_TOTAL_TARGET_PERCENTAGE,
-    totalTargetPercentage,
-  };
-};
 
 const updateTotalTargetPercentageActionCreator = (totalTargetPercentage) => {
   return {
@@ -25,7 +15,6 @@ const totalTargetPercentageReducer = (state = 0, action) => {
 };
 
 export {
-  loadTotalTargetPercentageActionCreator,
   updateTotalTargetPercentageActionCreator,
   totalTargetPercentageReducer,
 };

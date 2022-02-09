@@ -50,12 +50,6 @@ const PositionTable = () => {
     return createData(position, long_market_value);
   });
 
-  const tgtPcts = positions.map((position) => position.tgtPct);
-
-  const tgtPctsTotalTemp = tgtPcts.reduce((total, curr) => {
-    return (total += curr);
-  }, 0);
-
   return (
     <div>
       <TableContainer component={Paper} className={classes.table}>
