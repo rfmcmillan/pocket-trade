@@ -100,8 +100,19 @@ router.post("/futureOrders", async (req, res, next) => {
 
 router.get("/portfolio/history", async (req, res, next) => {
   try {
-    const portfolioHistory = await alpaca.getPortfolioHistory("3M");
-    res.send(portfolioHistory);
+    // const portfolioHistory = await alpaca.getPortfolioHistory("1M");
+    const portfolioHistory = await axios.get(
+      "https://paper-api.alpaca.markets/v2/account/portfolio/history",
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
+        },
+        params: { period: "1D", timeframe: "15Min" },
+      }
+    );
+
+    res.send(portfolioHistory.data);
   } catch (error) {
     next(error);
   }

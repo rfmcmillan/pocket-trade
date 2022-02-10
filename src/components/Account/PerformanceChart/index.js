@@ -45,7 +45,7 @@ const PerformanceChart = () => {
 
   return (
     <Paper className={classes.contain}>
-      <Typography variant="h6">1 Month Performance</Typography>
+      <Typography variant="h6">1 Day Performance</Typography>
       <ResponsiveContainer height="95%" width="100%">
         <LineChart
           data={data}
