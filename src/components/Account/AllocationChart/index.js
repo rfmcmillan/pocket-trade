@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Grid } from "@material-ui/core";
@@ -34,8 +34,6 @@ const AllocationChart = () => {
       value: position.alpacaData.market_value / account.long_market_value,
     };
   });
-
-  useEffect(() => {}, [positions]);
 
   return (
     <Paper className={classes.pie}>

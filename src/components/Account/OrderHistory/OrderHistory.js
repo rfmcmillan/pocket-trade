@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -23,9 +23,6 @@ const OrderHistory = () => {
   const orders = useSelector((state) => state.orders);
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log("yay");
-  }, [orders]);
   function createData(order) {
     const {
       symbol,

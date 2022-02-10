@@ -53,7 +53,6 @@ router.put("/positions/:id", async (req, res, next) => {
       }
     );
     const alpacaData = response.data;
-    console.log("req.body:");
     const valuesToUpdate = { ...req.body, alpacaData };
     const updated = await position.update(valuesToUpdate);
     await updated.save();
