@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { createOrder, loadOrders } from "../../../store/orders";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Snackbar } from "@material-ui/core";
-import { updatePosition } from "../../../store/positions";
+import { updatePosition, loadPositions } from "../../../store/positions";
 
 const useStyles = makeStyles((theme) => ({
   dialogList: {
@@ -34,6 +34,7 @@ const SubmitButton = (props) => {
     );
 
     await dispatch(loadOrders());
+    await dispatch(loadPositions());
     setOpen(true);
   };
 
