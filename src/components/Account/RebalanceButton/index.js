@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -28,14 +28,10 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  const [open, setOpen] = React.useState(false);
-  const [proposedOrders, setProposedOrders] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [proposedOrders, setProposedOrders] = useState([]);
   const orders = useSelector((state) => state.orders);
   const mostRecentOrderStatus = orders[0]?.status;
-  console.log(
-    "🚀 ~ file: index.js ~ line 38 ~ RebalanceButton ~ mostRecentOrderStatus",
-    mostRecentOrderStatus
-  );
 
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
@@ -88,7 +84,9 @@ const RebalanceButton = () => {
         className={classes.button}
         onClick={handleClickOpen}
         disabled={
-          totalTargetPercentage <= 1 && mostRecentOrderStatus !== "accepted"
+          totalTargetPercentage <= 1 &&
+          mostRecentOrderStatus !== "accepted" &&
+          mostRecentOrderStatus !== "new"
             ? false
             : true
         }
