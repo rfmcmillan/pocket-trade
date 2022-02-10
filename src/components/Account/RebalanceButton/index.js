@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -10,7 +10,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
-import SnackbarRebalance from "./RebalanceSnackbar";
+import RebalanceSnackbar from "./RebalanceSnackbar";
 import DialogTable from "./DialogTable";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,10 +28,26 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [proposedOrders, setProposedOrders] = useState([]);
+  const [ordersStillPending, setOrdersStillPending] = useState(false);
+  // const [TotalTargetPercentageEqualsOne, setTotalTargetPercentageEqualsOne] =
+  //   useState(false);
+
   const orders = useSelector((state) => state.orders);
   const mostRecentOrderStatus = orders[0]?.status;
+
+  useEffect(() => {
+    if (mostRecentOrderStatus === ("accepted" || "new")) {
+      setOrdersStillPending(true);
+    }
+  }, [mostRecentOrderStatus]);
+
+  // useEffect(() => {
+  //   if (totalTargetPercentage === 1) {
+  //     setTotalTargetPercentageEqualsOne(false);
+  //   }
+  // }, [totalTargetPercentage]);
 
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
@@ -68,34 +84,34 @@ const RebalanceButton = () => {
 
   const handleClickOpen = async () => {
     await rebalance();
-    setOpen(true);
+    setOpenDialog(true);
   };
 
   const handleCancel = () => {
-    setOpen(false);
+    setOpenDialog(false);
   };
 
   const classes = useStyles();
   return (
     <div>
       <Button
-        variant="contained"
-        color="primary"
         className={classes.button}
-        onClick={handleClickOpen}
+        color="primary"
         disabled={
-          totalTargetPercentage <= 1 &&
+          totalTargetPercentage === 1 &&
           mostRecentOrderStatus !== "accepted" &&
           mostRecentOrderStatus !== "new"
             ? false
             : true
         }
+        onClick={handleClickOpen}
+        variant="contained"
       >
         Rebalance
       </Button>
 
       <Dialog
-        open={open}
+        open={openDialog}
         onClose={handleCancel}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -110,7 +126,7 @@ const RebalanceButton = () => {
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
-          <SnackbarRebalance trades={proposedOrders} />
+          <RebalanceSnackbar trades={proposedOrders} />
         </DialogActions>
       </Dialog>
     </div>

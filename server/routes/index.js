@@ -17,7 +17,25 @@ router.get("/account", async (req, res, next) => {
 
 router.get("/positions", async (req, res, next) => {
   try {
-    const positions = await Position.findAll({ order: ["name"] });
+    const account = await alpaca.getAccount();
+    const { long_market_value } = account;
+    const response = await axios.get(
+      `https://paper-api.alpaca.markets/v2/positions`,
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
+        },
+      }
+    );
+    const alpacaPositions = response.data;
+
+    const positions = await Position.findAll({ order: ["symbol"] });
+
+    positions.forEach((position, idx) => {
+      position.alpacaData = alpacaPositions[idx];
+    });
+
     res.send(positions);
   } catch (error) {
     next(error);
@@ -28,6 +46,7 @@ router.put("/positions/:id", async (req, res, next) => {
   try {
     const position = await Position.findByPk(req.params.id);
     const updated = await position.update(req.body);
+    await updated.save();
     res.status(200).send(updated);
   } catch (error) {
     next(error);
