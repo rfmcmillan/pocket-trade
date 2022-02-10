@@ -12,10 +12,6 @@ const loadPortfolioHistory = () => {
   return async (dispatch) => {
     const response = await axios.get("/api/portfolio/history");
     const portfolioHistory = response.data;
-    console.log(
-      "🚀 ~ file: portfolioHistory.js ~ line 15 ~ return ~ portfolioHistory",
-      portfolioHistory
-    );
     dispatch(loadPortfolioHistoryActionCreator(portfolioHistory));
   };
 };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
-import { updatePosition, loadPositions } from "../../../store/positions";
+import { updatePosition } from "../../../store/positions";
 import TargetInput from "./TargetInput";
 import { updateTotalTargetPercentageActionCreator } from "../../../store/totalTargetPercentage";
 
