@@ -30,6 +30,12 @@ const RebalanceButton = () => {
   );
   const [open, setOpen] = React.useState(false);
   const [proposedOrders, setProposedOrders] = React.useState([]);
+  const orders = useSelector((state) => state.orders);
+  const mostRecentOrderStatus = orders[0]?.status;
+  console.log(
+    "🚀 ~ file: index.js ~ line 38 ~ RebalanceButton ~ mostRecentOrderStatus",
+    mostRecentOrderStatus
+  );
 
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
@@ -81,7 +87,11 @@ const RebalanceButton = () => {
         color="primary"
         className={classes.button}
         onClick={handleClickOpen}
-        disabled={totalTargetPercentage <= 1 ? false : true}
+        disabled={
+          totalTargetPercentage <= 1 && mostRecentOrderStatus !== "accepted"
+            ? false
+            : true
+        }
       >
         Rebalance
       </Button>
