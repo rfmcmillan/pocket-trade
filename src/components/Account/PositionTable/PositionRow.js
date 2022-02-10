@@ -99,7 +99,7 @@ const PositionRow = (props) => {
         )}
       </TableCell>
       <TableCell align="right">
-        {`${(row.currPct * 100).toFixed(2)}%`}
+        {`${((row.market_value / row.long_market_value) * 100).toFixed(2)}%`}
       </TableCell>
     </TableRow>
   );

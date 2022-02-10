@@ -39,29 +39,19 @@ const PositionTable = () => {
   function createData(position) {
     const { name, id, alpacaData, tgtPct } = position;
     const { symbol, market_value } = alpacaData;
-    console.log(
-      "🚀 ~ file: index.js ~ line 42 ~ createData ~ market_value",
-      market_value
-    );
-    const currPct = market_value / long_market_value;
-    console.log(
-      "🚀 ~ file: index.js ~ line 48 ~ createData ~ currPct",
-      currPct
-    );
+
     const row = {
       id,
       name,
       symbol,
       tgtPct,
-      currPct,
       market_value,
+      long_market_value,
     };
     return row;
   }
 
-  useEffect(() => {
-    console.log("yay");
-  }, [positions]);
+  useEffect(() => {}, [positions]);
 
   const rows = positions.map((position) => {
     return createData(position, long_market_value);

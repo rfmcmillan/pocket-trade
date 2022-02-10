@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { createOrder } from "../../../store/orders";
+import { createOrder, loadOrders } from "../../../store/orders";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Snackbar } from "@material-ui/core";
 import { updatePosition } from "../../../store/positions";
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RebalanceSnackbar = (props) => {
+const SubmitButton = (props) => {
   const [open, setOpen] = React.useState(false);
   const { trades } = props;
   const positions = useSelector((state) => state.positions);
@@ -32,6 +32,8 @@ const RebalanceSnackbar = (props) => {
     await positions.forEach((position) =>
       dispatch(updatePosition(position.id, position.tgtPct))
     );
+
+    await dispatch(loadOrders());
     setOpen(true);
   };
 
@@ -57,8 +59,8 @@ const RebalanceSnackbar = (props) => {
   );
 };
 
-RebalanceSnackbar.propTypes = {
+SubmitButton.propTypes = {
   trades: PropTypes.array,
 };
 
-export default RebalanceSnackbar;
+export default SubmitButton;

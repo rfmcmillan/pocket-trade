@@ -10,7 +10,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
-import RebalanceSnackbar from "./RebalanceSnackbar";
+import SubmitButton from "./SubmitButton";
 import DialogTable from "./DialogTable";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,19 +52,19 @@ const RebalanceButton = () => {
   const rebalance = async () => {
     const acctResponse = await axios.get("api/account");
     const account = acctResponse.data;
-    const { portfolio_value } = account;
+    const { long_market_value } = account;
     const posResponse = await axios.get("/api/positions");
     const positions = posResponse.data;
     const proposed = [];
     positions.forEach((position) => {
       const {
         tgtPct,
-        currPct,
-        alpacaData: { symbol },
+
+        alpacaData: { symbol, market_value },
       } = position;
-      const tgtAmt = tgtPct * portfolio_value;
-      const currAmt = currPct * portfolio_value;
-      const amount = parseInt(tgtAmt - currAmt);
+
+      const tgtAmt = tgtPct * long_market_value;
+      const amount = parseInt(tgtAmt - market_value);
       const type = "market";
       const time_in_force = "day";
       if (amount > 0) {
@@ -126,7 +126,7 @@ const RebalanceButton = () => {
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>
-          <RebalanceSnackbar trades={proposedOrders} />
+          <SubmitButton trades={proposedOrders} />
         </DialogActions>
       </Dialog>
     </div>
