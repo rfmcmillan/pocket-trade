@@ -8,7 +8,6 @@ import { loadAccount } from "./store/account";
 import { loadPositions } from "./store/positions";
 import { loadOrders } from "./store/orders";
 import { loadPortfolioHistory } from "./store/portfolioHistory";
-import updatePositionTableTgtPct from "./components/Account/PositionTable/updatePositionTgtPct";
 
 class App extends React.Component {
   componentDidMount() {
@@ -21,10 +20,6 @@ class App extends React.Component {
         <div>
           <Route component={Nav} />
           <Route component={Account} path="/" exact />
-          <Route
-            component={updatePositionTableTgtPct}
-            path="/edit-position/:id"
-          />
         </div>
       </HashRouter>
     );

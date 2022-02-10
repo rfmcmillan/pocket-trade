@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -27,24 +27,27 @@ const useStyles = makeStyles({
 
 const PositionTable = () => {
   const classes = useStyles();
-
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
   const { long_market_value } = account;
   const [currPosition, setCurrPosition] = useState("");
 
   function createData(position) {
-    const { name, id, alpacaData, tgtPct, currPct } = position;
-    const { symbol } = alpacaData;
+    const { name, id, alpacaData, tgtPct } = position;
+    const { symbol, market_value } = alpacaData;
+
     const row = {
       id,
       name,
       symbol,
       tgtPct,
-      currPct,
+      market_value,
+      long_market_value,
     };
     return row;
   }
+
+  useEffect(() => {}, [positions]);
 
   const rows = positions.map((position) => {
     return createData(position, long_market_value);

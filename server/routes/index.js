@@ -17,7 +17,23 @@ router.get("/account", async (req, res, next) => {
 
 router.get("/positions", async (req, res, next) => {
   try {
-    const positions = await Position.findAll({ order: ["name"] });
+    const response = await axios.get(
+      `https://paper-api.alpaca.markets/v2/positions`,
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
+        },
+      }
+    );
+    const alpacaPositions = response.data;
+
+    const positions = await Position.findAll({ order: ["symbol"] });
+
+    positions.forEach((position, idx) => {
+      position.alpacaData = alpacaPositions[idx];
+    });
+
     res.send(positions);
   } catch (error) {
     next(error);
@@ -27,7 +43,19 @@ router.get("/positions", async (req, res, next) => {
 router.put("/positions/:id", async (req, res, next) => {
   try {
     const position = await Position.findByPk(req.params.id);
-    const updated = await position.update(req.body);
+    const response = await axios.get(
+      `https://paper-api.alpaca.markets/v2/positions/${position.symbol}`,
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
+        },
+      }
+    );
+    const alpacaData = response.data;
+    const valuesToUpdate = { ...req.body, alpacaData };
+    const updated = await position.update(valuesToUpdate);
+    await updated.save();
     res.status(200).send(updated);
   } catch (error) {
     next(error);
@@ -100,8 +128,19 @@ router.post("/futureOrders", async (req, res, next) => {
 
 router.get("/portfolio/history", async (req, res, next) => {
   try {
-    const portfolioHistory = await alpaca.getPortfolioHistory("3M");
-    res.send(portfolioHistory);
+    // const portfolioHistory = await alpaca.getPortfolioHistory("1M");
+    const portfolioHistory = await axios.get(
+      "https://paper-api.alpaca.markets/v2/account/portfolio/history",
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.API_KEY,
+          "APCA-API-SECRET-KEY": process.env.API_SECRET,
+        },
+        params: { period: "1D", timeframe: "15Min" },
+      }
+    );
+
+    res.send(portfolioHistory.data);
   } catch (error) {
     next(error);
   }

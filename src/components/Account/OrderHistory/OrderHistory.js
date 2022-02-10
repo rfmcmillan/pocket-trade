@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 const OrderHistory = () => {
   const orders = useSelector((state) => state.orders);
   const classes = useStyles();
+
   function createData(order) {
     const {
       symbol,

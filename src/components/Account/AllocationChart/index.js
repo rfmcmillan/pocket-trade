@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 
 const AllocationChart = () => {
   const positions = useSelector((state) => state.positions);
+  const account = useSelector((state) => state.account);
   const classes = useStyles();
   const tgtPcts = positions.map((position) => {
     return {
@@ -30,7 +31,7 @@ const AllocationChart = () => {
   const currPcts = positions.map((position) => {
     return {
       name: position.alpacaData.symbol,
-      value: position.currPct,
+      value: position.alpacaData.market_value / account.long_market_value,
     };
   });
 

@@ -10,12 +10,16 @@ import RebalanceButton from "./RebalanceButton";
 import PerformanceChart from "./PerformanceChart";
 import { updateTotalTargetPercentageActionCreator } from "../../store/totalTargetPercentage";
 
-const useStyles = makeStyles({ amount: { fontSize: "2rem" } });
+const useStyles = makeStyles({
+  amount: { fontSize: "2rem" },
+  overline: { padding: ".5rem 0rem 0rem 0rem", fontSize: "small" },
+});
 
 const Account = () => {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
+
   const classes = useStyles();
   const { portfolio_value } = account;
   var formatter = new Intl.NumberFormat("en-US", {
@@ -35,7 +39,9 @@ const Account = () => {
 
   return (
     <div id="account">
-      <Typography variant="overline">PORTFOLIO VALUE</Typography>
+      <Typography className={classes.overline} variant="body1">
+        PORTFOLIO VALUE
+      </Typography>
       <Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Typography className={classes.amount} p={1} color="primary">

@@ -45,7 +45,7 @@ const PerformanceChart = () => {
 
   return (
     <Paper className={classes.contain}>
-      <Typography variant="h6">1 Month Performance</Typography>
+      <Typography variant="h6">1 Day Performance</Typography>
       <ResponsiveContainer height="95%" width="100%">
         <LineChart
           data={data}
@@ -67,11 +67,11 @@ const PerformanceChart = () => {
             tickFormatter={(tick) => {
               return `$${tick.toLocaleString("en-US")}`;
             }}
-            domain={[305000, 350000]}
+            domain={[95000, 105000]}
           />
           <Tooltip
             formatter={(value) => {
-              return `$${value.toLocaleString("en-US").slice(0, -1)}`;
+              return `$${value.toLocaleString("en-US")}`;
             }}
           />
           <Legend />
