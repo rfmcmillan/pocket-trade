@@ -8,9 +8,7 @@ const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 10px" },
   targetPct: { width: "25%" },
   textField: {
-    marginLeft: 50,
-    maxWidth: 75,
-    color: "#d3bcbd",
+    width: 190,
   },
 });
 
@@ -20,18 +18,17 @@ const TargetInput = (props) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <TextField
-        className={classes.textField}
-        label={`${(row.tgtPct * 100).toFixed(2)}%`}
-        color="primary"
-        onChange={onChange}
-        name={row.symbol}
-        value={localTargetPct ? localTargetPct : 0}
-        variant="filled"
-        size="small"
-      ></TextField>
-    </div>
+    <TextField
+      className={classes.textField}
+      autoFocus={true}
+      color="primary"
+      label="New Target Allocation %"
+      onChange={onChange}
+      name={row.symbol}
+      value={localTargetPct ? localTargetPct * 100 : null}
+      variant="outlined"
+      size="small"
+    ></TextField>
   );
 };
 

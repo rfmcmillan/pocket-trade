@@ -8,6 +8,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
+  Typography,
 } from "@material-ui/core";
 import TargetInput from "../TargetInput";
 import { updatePosition } from "../../../../store/positions";
@@ -15,7 +17,15 @@ import { updateTotalTargetPercentageActionCreator } from "../../../../store/tota
 
 const useStyles = makeStyles((theme) => ({
   button: { margin: "15px 0px 0px 5px", marginBottom: "16px" },
+  dialog: { width: 500 },
+  prompt: { marginBottom: "2rem", textAlign: "center", width: 350 },
+  promptGrid: { minWidth: 350 },
   root: { display: "inline-block", marginLeft: ".25rem" },
+  submit: { borderRadius: 20 },
+  symbol: { fontSize: "1rem" },
+  title: { textAlign: "center" },
+  titleGrid: { minWidth: 400 },
+  titleText: { fontSize: "1.5rem" },
 }));
 
 const EditTargetModal = (props) => {
@@ -38,7 +48,7 @@ const EditTargetModal = (props) => {
 
   const onChange = (ev) => {
     const { target } = ev;
-    setLocalTargetPct(target.value);
+    setLocalTargetPct(target.value / 100);
   };
 
   const onSave = () => {
@@ -53,6 +63,7 @@ const EditTargetModal = (props) => {
     dispatch(updatePosition(row.id, localTargetPctFloat));
     dispatch(updateTotalTargetPercentageActionCreator(newTotal));
     setCurrPosition("");
+    setOpenDialog(false);
   };
 
   const classes = useStyles();
@@ -72,18 +83,42 @@ const EditTargetModal = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {`Enter your desired target allocation % below:`}
+        <DialogTitle className={classes.title} id="alert-dialog-title">
+          <Grid container direction="column" alignItems="center">
+            <Grid className={classes.titleGrid} item xs={6}>
+              <Typography variant="h1" className={classes.titleText}>
+                {row.name}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="h2"
+                className={classes.symbol}
+                color="primary"
+              >
+                {row.symbol}
+              </Typography>
+            </Grid>
+          </Grid>
         </DialogTitle>
-        <DialogContent>
-          <TargetInput
-            row={row}
-            edit={edit}
-            setEdit={setEdit}
-            localTargetPct={localTargetPct}
-            setLocalTargetPct={setLocalTargetPct}
-            onChange={onChange}
-          />
+        <DialogContent className={classes.dialog}>
+          <Grid container direction="column" alignItems="center">
+            <Grid className={classes.promptGrid} item xs={6}>
+              <Typography className={classes.prompt} variant="body1">
+                Please enter your desired target allocation % below:
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <TargetInput
+                row={row}
+                edit={edit}
+                setEdit={setEdit}
+                localTargetPct={localTargetPct}
+                setLocalTargetPct={setLocalTargetPct}
+                onChange={onChange}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <div></div>

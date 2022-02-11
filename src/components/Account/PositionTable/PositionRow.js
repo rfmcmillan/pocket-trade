@@ -66,18 +66,7 @@ const PositionRow = (props) => {
       </TableCell>
       <TableCell align="right">{row.symbol}</TableCell>
       <TableCell align="right">
-        {currPosition === row.symbol ? (
-          <TargetInput
-            row={row}
-            edit={edit}
-            setEdit={setEdit}
-            localTargetPct={localTargetPct}
-            setLocalTargetPct={setLocalTargetPct}
-            onChange={onChange}
-          />
-        ) : (
-          <Typography>{`${(row.tgtPct * 100).toFixed(2)}%`}</Typography>
-        )}
+        <Typography>{`${(row.tgtPct * 100).toFixed(2)}%`}</Typography>
       </TableCell>
       <TableCell align="right">
         {`${((row.market_value / row.long_market_value) * 100).toFixed(2)}%`}
