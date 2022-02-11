@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -32,9 +32,7 @@ const EditTargetModal = (props) => {
   const dispatch = useDispatch();
   const { row, edit, setEdit, setCurrPosition, positions } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
-  const totalTargetPercentage = useSelector(
-    (state) => state.totalTargetPercentage
-  );
+
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleClickOpen = async () => {
@@ -47,7 +45,7 @@ const EditTargetModal = (props) => {
 
   const onChange = (ev) => {
     const { target } = ev;
-    setLocalTargetPct(target.value / 100);
+    setLocalTargetPct(target.value);
   };
 
   const onSave = () => {

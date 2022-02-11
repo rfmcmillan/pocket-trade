@@ -25,7 +25,7 @@ const TargetInput = (props) => {
       label="New Target Allocation %"
       onChange={onChange}
       name={row.symbol}
-      value={localTargetPct ? localTargetPct * 100 : null}
+      value={localTargetPct}
       variant="outlined"
       size="small"
     ></TextField>

@@ -28,10 +28,6 @@ const PerformanceChart = () => {
   const classes = useStyles();
   const portfolioHistory = useSelector((state) => state.portfolioHistory);
   const { timestamp, equity } = portfolioHistory;
-  console.log(
-    "🚀 ~ file: index.js ~ line 31 ~ PerformanceChart ~ timestamp",
-    timestamp
-  );
 
   let data = [];
   if (timestamp) {

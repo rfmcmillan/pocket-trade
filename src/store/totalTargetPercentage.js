@@ -7,7 +7,7 @@ const updateTotalTargetPercentageActionCreator = (totalTargetPercentage) => {
   };
 };
 
-const totalTargetPercentageReducer = (state = 0, action) => {
+const totalTargetPercentageReducer = (state = 1, action) => {
   if (action.type === UPDATE_TOTAL_TARGET_PERCENTAGE) {
     state = action.totalTargetPercentage;
   }
