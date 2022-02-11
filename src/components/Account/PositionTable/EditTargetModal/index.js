@@ -16,7 +16,7 @@ import { updatePosition } from "../../../../store/positions";
 import { updateTotalTargetPercentageActionCreator } from "../../../../store/totalTargetPercentage";
 
 const useStyles = makeStyles(() => ({
-  button: { margin: "0px 0px 0px 5px" },
+  button: { margin: "15px 0px 15px 5px" },
   dialog: { width: 500 },
   prompt: { marginBottom: "2rem", textAlign: "center", width: 350 },
   promptGrid: { minWidth: 350 },
