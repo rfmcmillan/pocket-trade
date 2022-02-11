@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, Grid } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import "@fontsource/roboto";
 import PositionTable from "./PositionTable";
@@ -46,7 +47,7 @@ const Account = () => {
       </Typography>
       <div>
         <Grid container direction="row" justifyContent="space-around">
-          <Grid item xs={10}>
+          <Grid item xs={9}>
             <Typography className={classes.amount} p={1} color="primary">
               {portfolio_value_usd}
             </Typography>
@@ -54,17 +55,32 @@ const Account = () => {
           <Grid
             item
             container
-            xs={2}
+            xs={3}
             flexDirection="column"
             justifyContent="flex-start"
+            spacing={2}
           >
-            <Grid item xs={8}>
-              {totalTargetPercentage !== 1 ? (
-                <Typography>{`Your total target allocation % is off by ${Math.abs(
-                  totalTargetPercentage * 100 - 100
-                )
-                  .toString()
-                  .slice(0, 2)}%`}</Typography>
+            <Grid item xs={9}>
+              {totalTargetPercentage > 1 ? (
+                <Alert elevation={6} variant="filled" severity="info">
+                  {`Your total target allocation % is off by ${(
+                    totalTargetPercentage * 100 -
+                    100
+                  )
+                    .toString()
+                    .slice(0, 2)}%`}{" "}
+                </Alert>
+              ) : (
+                ""
+              )}
+              {totalTargetPercentage < 1 ? (
+                <Alert elevation={6} variant="filled" severity="info">
+                  {`Your total target allocation % is off by -${Math.abs(
+                    totalTargetPercentage * 100 - 100
+                  )
+                    .toString()
+                    .slice(0, 2)}%`}{" "}
+                </Alert>
               ) : (
                 ""
               )}

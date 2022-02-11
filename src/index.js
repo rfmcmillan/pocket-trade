@@ -4,10 +4,10 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store";
 import { CssBaseline } from "@material-ui/core";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   components: {
     MuiTableCell: {
       styleOverrides: {
