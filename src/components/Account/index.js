@@ -58,6 +58,7 @@ const Account = () => {
             xs={3}
             flexDirection="column"
             justifyContent="flex-start"
+            alignItems="center"
             spacing={2}
           >
             <Grid item xs={9}>
