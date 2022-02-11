@@ -119,7 +119,6 @@ const EditTargetModal = (props) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <div></div>
           <Button onClick={handleCancel} color="secondary">
             Cancel
           </Button>

@@ -12,7 +12,11 @@ import PerformanceChart from "./PerformanceChart";
 import { updateTotalTargetPercentageActionCreator } from "../../store/totalTargetPercentage";
 
 const useStyles = makeStyles({
+  alert: { marginRight: "1rem" },
+  alertItemGrid: { padding: 0 },
+  alertGrid: { margin: 0 },
   amount: { fontSize: "2rem" },
+  header: { minHeight: 70 },
   overline: { padding: ".5rem 0rem 0rem 0rem", fontSize: "small" },
 });
 
@@ -97,24 +101,34 @@ const Account = () => {
         PORTFOLIO VALUE
       </Typography>
       <div>
-        <Grid container direction="row" justifyContent="space-around">
+        <Grid
+          className={classes.header}
+          container
+          direction="row"
+          justifyContent="space-around"
+        >
           <Grid item xs={7}>
             <Typography className={classes.amount} p={1} color="primary">
               {portfolio_value_usd}
             </Typography>
           </Grid>
           <Grid
+            className={classes.alertGrid}
             item
             container
             xs={5}
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
-            spacing={2}
           >
-            <Grid item xs={6}>
+            <Grid className={classes.alertItemGrid} item xs={6}>
               {displayAlert ? (
-                <Alert elevation={6} variant="filled" severity="info">
+                <Alert
+                  className={classes.alert}
+                  elevation={6}
+                  variant="filled"
+                  severity="info"
+                >
                   {alertText}
                 </Alert>
               ) : (
