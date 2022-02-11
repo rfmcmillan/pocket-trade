@@ -6,6 +6,7 @@ import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
 import { updatePosition } from "../../../store/positions";
 import TargetInput from "./TargetInput";
 import { updateTotalTargetPercentageActionCreator } from "../../../store/totalTargetPercentage";
+import EditTargetModal from "./EditTargetModal";
 
 const useStyles = makeStyles({
   button: { margin: "15px 0px 0px 5px", marginBottom: "16px" },
@@ -52,36 +53,16 @@ const PositionRow = (props) => {
     <TableRow>
       <TableCell className={classes.cell} component="th" scope="row">
         {row.name}
-        {currPosition !== row.symbol ? (
-          <Button
-            className={classes.button}
-            color="primary"
-            onClick={() => {
-              setCurrPosition(row.symbol);
-            }}
-          >
-            Edit
-          </Button>
-        ) : (
-          <div>
-            <Button
-              className={classes.cancel}
-              variant="contained"
-              color="secondary"
-              onClick={onCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              className={classes.submit}
-              variant="contained"
-              color="primary"
-              onClick={onSave}
-            >
-              Submit
-            </Button>
-          </div>
-        )}
+        <EditTargetModal
+          row={row}
+          positions={positions}
+          edit={edit}
+          setEdit={setEdit}
+          localTargetPct={localTargetPct}
+          setLocalTargetPct={setLocalTargetPct}
+          setCurrPosition={setCurrPosition}
+          onChange={onChange}
+        />
       </TableCell>
       <TableCell align="right">{row.symbol}</TableCell>
       <TableCell align="right">
