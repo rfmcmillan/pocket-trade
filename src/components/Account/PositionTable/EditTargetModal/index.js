@@ -107,6 +107,7 @@ const EditTargetModal = (props) => {
                 Please enter your desired target allocation % below:
               </Typography>
             </Grid>
+
             <Grid item xs={6}>
               <TargetInput
                 row={row}

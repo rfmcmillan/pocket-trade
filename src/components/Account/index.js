@@ -19,7 +19,9 @@ const Account = () => {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
-
+  const totalTargetPercentage = useSelector(
+    (state) => state.totalTargetPercentage
+  );
   const classes = useStyles();
   const { portfolio_value } = account;
   var formatter = new Intl.NumberFormat("en-US", {
@@ -42,13 +44,36 @@ const Account = () => {
       <Typography className={classes.overline} variant="body1">
         PORTFOLIO VALUE
       </Typography>
-      <Box>
-        <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Typography className={classes.amount} p={1} color="primary">
-            {portfolio_value_usd}
-          </Typography>
-          <RebalanceButton p={1} />
-        </Box>
+      <div>
+        <Grid container direction="row" justifyContent="space-around">
+          <Grid item xs={10}>
+            <Typography className={classes.amount} p={1} color="primary">
+              {portfolio_value_usd}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            container
+            xs={2}
+            flexDirection="column"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={8}>
+              {totalTargetPercentage !== 1 ? (
+                <Typography>{`Your total target allocation % is off by ${Math.abs(
+                  totalTargetPercentage * 100 - 100
+                )
+                  .toString()
+                  .slice(0, 2)}%`}</Typography>
+              ) : (
+                ""
+              )}
+            </Grid>
+            <Grid item xs={2}>
+              <RebalanceButton p={1} />
+            </Grid>
+          </Grid>
+        </Grid>
         <Typography p={1} variant="subtitle1">
           Here&apos;s where your portfolio stands today.
         </Typography>
@@ -71,7 +96,7 @@ const Account = () => {
             <OrderHistory p={1} />
           </Grid>
         </Grid>
-      </Box>
+      </div>
     </div>
   );
 };
