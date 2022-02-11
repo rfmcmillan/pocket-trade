@@ -20,11 +20,13 @@ const Account = () => {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
+  const orders = useSelector((state) => state.orders);
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
   const [alertText, setAlertText] = useState("");
   const [displayAlert, setDisplayAlert] = useState(false);
+  const [pendingTrades, setPendingTrades] = useState(false);
   const classes = useStyles();
 
   const { portfolio_value } = account;
@@ -49,13 +51,31 @@ const Account = () => {
   }, [positions]);
 
   useEffect(() => {
-    if (totalTargetPercentage === 1) {
-      setDisplayAlert(false);
-    } else {
+    if (totalTargetPercentage !== 1) {
       setAlertText(determineAlert(totalTargetPercentage));
       setDisplayAlert(true);
+    } else if (pendingTrades === true) {
+      setAlertText(
+        "Please wait until all pending trades have been filled before you rebalance again."
+      );
+      setDisplayAlert(true);
+    } else {
+      setDisplayAlert(false);
     }
-  }, [totalTargetPercentage]);
+  }, [totalTargetPercentage, pendingTrades]);
+
+  useEffect(() => {
+    const mostRecentOrder = orders[0];
+    console.log(
+      "🚀 ~ file: index.js ~ line 70 ~ useEffect ~ mostRecentOrder",
+      mostRecentOrder
+    );
+    if (mostRecentOrder) {
+      if (mostRecentOrder.status !== "filled") {
+        setPendingTrades(true);
+      }
+    }
+  }, [orders]);
 
   const determineAlert = (totalTargetPercentage) => {
     if (totalTargetPercentage > 1) {
@@ -63,7 +83,7 @@ const Account = () => {
         Math.round(totalTargetPercentage * 100 - 100)
       )}%`;
     } else if (totalTargetPercentage < 1) {
-      return `Your total target allocation % is off by -${Math.abs(
+      return `Your total target allocation is off by -${Math.abs(
         totalTargetPercentage * 100 - 100
       )
         .toString()
