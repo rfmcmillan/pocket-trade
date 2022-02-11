@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Typography, TableRow, TableCell } from "@material-ui/core";
-import { updatePosition } from "../../../store/positions";
-import TargetInput from "./TargetInput";
-import { updateTotalTargetPercentageActionCreator } from "../../../store/totalTargetPercentage";
+import { Typography, TableRow, TableCell } from "@material-ui/core";
+
 import EditTargetModal from "./EditTargetModal";
 
 const useStyles = makeStyles({
@@ -20,34 +18,10 @@ const useStyles = makeStyles({
 });
 
 const PositionRow = (props) => {
-  const dispatch = useDispatch();
   const positions = useSelector((state) => state.positions);
-  const { row, edit, setEdit, currPosition, setCurrPosition } = props;
+  const { row, edit, setEdit, setCurrPosition } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
   const classes = useStyles();
-
-  const onCancel = () => {
-    setCurrPosition(undefined);
-  };
-
-  const onChange = (ev) => {
-    const { target } = ev;
-    setLocalTargetPct(target.value);
-  };
-
-  const onSave = () => {
-    const localTargetPctFloat = parseFloat(localTargetPct);
-    const filtered = positions.filter((position) => {
-      return position.id !== row.id;
-    });
-    const mapped = filtered.map((position) => position.tgtPct);
-    const newTgtPcts = [...mapped, localTargetPctFloat];
-    const newTotal = newTgtPcts.reduce((sum, curr) => (sum += curr), 0);
-
-    dispatch(updatePosition(row.id, localTargetPctFloat));
-    dispatch(updateTotalTargetPercentageActionCreator(newTotal));
-    setCurrPosition("");
-  };
 
   return (
     <TableRow>
@@ -61,7 +35,6 @@ const PositionRow = (props) => {
           localTargetPct={localTargetPct}
           setLocalTargetPct={setLocalTargetPct}
           setCurrPosition={setCurrPosition}
-          onChange={onChange}
         />
       </TableCell>
       <TableCell align="right">{row.symbol}</TableCell>

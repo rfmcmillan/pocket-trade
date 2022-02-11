@@ -15,8 +15,8 @@ import TargetInput from "../TargetInput";
 import { updatePosition } from "../../../../store/positions";
 import { updateTotalTargetPercentageActionCreator } from "../../../../store/totalTargetPercentage";
 
-const useStyles = makeStyles((theme) => ({
-  button: { margin: "15px 0px 0px 5px", marginBottom: "16px" },
+const useStyles = makeStyles(() => ({
+  button: { margin: "0px 0px 0px 5px" },
   dialog: { width: 500 },
   prompt: { marginBottom: "2rem", textAlign: "center", width: 350 },
   promptGrid: { minWidth: 350 },
@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditTargetModal = (props) => {
   const dispatch = useDispatch();
-  const { row, edit, setEdit, currPosition, setCurrPosition, positions } =
-    props;
+  const { row, edit, setEdit, setCurrPosition, positions } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
