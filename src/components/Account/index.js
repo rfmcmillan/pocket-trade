@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   alertItemGrid: { padding: 0 },
   alertGrid: { margin: 0 },
   amount: { fontSize: "2rem" },
-  header: { minHeight: 70 },
+  header: {},
   overline: { padding: ".5rem 0rem 0rem 0rem", fontSize: "small" },
 });
 
@@ -105,9 +105,9 @@ const Account = () => {
           className={classes.header}
           container
           direction="row"
-          justifyContent="space-around"
+          justifyContent="space-between"
         >
-          <Grid item xs={7}>
+          <Grid item xs={6}>
             <Typography className={classes.amount} p={1} color="primary">
               {portfolio_value_usd}
             </Typography>
@@ -116,12 +116,12 @@ const Account = () => {
             className={classes.alertGrid}
             item
             container
-            xs={5}
+            xs={6}
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Grid className={classes.alertItemGrid} item xs={6}>
+            <Grid className={classes.alertItemGrid} item xs={10.5}>
               {displayAlert ? (
                 <Alert
                   className={classes.alert}
@@ -135,7 +135,7 @@ const Account = () => {
                 ""
               )}
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1.5}>
               <RebalanceButton p={1} />
             </Grid>
           </Grid>
