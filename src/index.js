@@ -8,6 +8,15 @@ import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 330,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
     MuiTableCell: {
       styleOverrides: {
@@ -17,6 +26,7 @@ const theme = createTheme({
       },
     },
   },
+
   palette: {
     action: {
       disabledBackground: "#919eab",
