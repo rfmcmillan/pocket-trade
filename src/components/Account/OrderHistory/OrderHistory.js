@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -52,6 +53,12 @@ const OrderHistory = () => {
     return createData(order);
   });
 
+  const formatDate = (createdDate) => {
+    const timestamp = new Date(createdDate);
+    const date = dayjs(timestamp).format("MM/DD/YY h:mmA");
+    return date;
+  };
+
   return (
     <Paper className={classes.contain} elevation={3}>
       <Typography variant="h6" className={classes.title}>
@@ -72,26 +79,19 @@ const OrderHistory = () => {
           </TableHead>
           <TableBody>
             {rows.map((row, idx) => {
-              const timeStamp = new Date(row.created_at);
-              const date = timeStamp.getDate();
-              const month = timeStamp.getMonth() + 1;
-              const year = timeStamp.getFullYear();
-              const hour = timeStamp.getHours();
-              const minute = timeStamp.getMinutes();
-
               if (idx < 7) {
                 return (
                   <TableRow key={idx}>
                     <TableCell component="th" scope="row">
                       {row.symbol}
                     </TableCell>
-                    <TableCell>{`${month}/${date}/${year} ${hour}:${minute}`}</TableCell>
+                    <TableCell>{formatDate(row.created_at)}</TableCell>
                     <TableCell>{row.side.toUpperCase()}</TableCell>
                     <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
                     <TableCell>{row.filled_avg_price}</TableCell>
-                    <TableCell>
-                      {`${parseInt(row.notional).toLocaleString("en-US")}.00`}
-                    </TableCell>
+                    <TableCell>{`${parseInt(row.notional).toFixed(
+                      2
+                    )}`}</TableCell>
                     <TableCell>{row.status.toUpperCase()}</TableCell>
                   </TableRow>
                 );

@@ -122,7 +122,7 @@ const Account = () => {
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Grid className={classes.alertItemGrid} item xs={10.5}>
+            <Grid className={classes.alertItemGrid} item xs={10}>
               {displayAlert ? (
                 <Alert
                   className={classes.alert}
@@ -136,7 +136,7 @@ const Account = () => {
                 ""
               )}
             </Grid>
-            <Grid item xs={1.5}>
+            <Grid item xs={2}>
               <RebalanceButton p={1} />
             </Grid>
           </Grid>
