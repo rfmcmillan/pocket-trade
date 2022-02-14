@@ -4,10 +4,19 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store";
 import { CssBaseline } from "@material-ui/core";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 330,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
     MuiTableCell: {
       styleOverrides: {
@@ -17,6 +26,7 @@ const theme = createMuiTheme({
       },
     },
   },
+
   palette: {
     action: {
       disabledBackground: "#919eab",

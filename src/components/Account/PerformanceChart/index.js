@@ -32,7 +32,9 @@ const PerformanceChart = () => {
   let data = [];
   if (timestamp) {
     timestamp.forEach((item) => {
-      const date = dayjs(item * 1000).format("l");
+      const date = `${dayjs(item * 1000).format("h")}:${dayjs(
+        item * 1000
+      ).format("mm")}${dayjs(item * 1000).format("A")}`;
       data.push({ timestamp: date });
     });
   }
@@ -61,7 +63,7 @@ const PerformanceChart = () => {
             vertical={false}
             strokeDasharray="3 3"
           />
-          <XAxis dataKey="timestamp" />
+          <XAxis tickCount={2} dataKey="timestamp" />
           <YAxis
             tickCount={6}
             tickFormatter={(tick) => {
