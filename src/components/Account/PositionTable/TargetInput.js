@@ -41,7 +41,7 @@ const TargetInput = (props) => {
 TargetInput.propTypes = {
   row: PropTypes.object,
   onChange: PropTypes.func,
-  localTargetPct: PropTypes.string,
+  localTargetPct: PropTypes.number,
 };
 
 export default TargetInput;

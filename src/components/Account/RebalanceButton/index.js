@@ -28,10 +28,16 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  const [openDialog, setOpenDialog] = useState(false);
-  const [proposedOrders, setProposedOrders] = useState([]);
+  // const positions = useSelector((state) => state.positions);
+  // const account = useSelector((state) => state.account);
+  // console.log(
+  //   "🚀 ~ file: index.js ~ line 33 ~ RebalanceButton ~ account",
+  //   account
+  // );
 
   const orders = useSelector((state) => state.orders);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [proposedOrders, setProposedOrders] = useState([]);
   const mostRecentOrderStatus = orders[0]?.status;
 
   const rebalance = async () => {
