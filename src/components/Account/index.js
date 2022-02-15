@@ -55,7 +55,7 @@ const Account = () => {
   }, [positions]);
 
   useEffect(() => {
-    if (totalTargetPercentage !== 1) {
+    if (totalTargetPercentage !== 100) {
       setAlertText(determineAlert(totalTargetPercentage));
       setDisplayAlert(true);
     } else if (pendingTrades === true) {
@@ -70,10 +70,6 @@ const Account = () => {
 
   useEffect(() => {
     const mostRecentOrder = orders[0];
-    console.log(
-      "🚀 ~ file: index.js ~ line 70 ~ useEffect ~ mostRecentOrder",
-      mostRecentOrder
-    );
     if (mostRecentOrder) {
       if (mostRecentOrder.status !== "filled") {
         setPendingTrades(true);
@@ -82,13 +78,13 @@ const Account = () => {
   }, [orders]);
 
   const determineAlert = (totalTargetPercentage) => {
-    if (totalTargetPercentage > 1) {
+    if (totalTargetPercentage > 100) {
       return `Your total target allocation is off by ${parseInt(
-        Math.round(totalTargetPercentage * 100 - 100)
+        Math.round(totalTargetPercentage - 100)
       )}%`;
-    } else if (totalTargetPercentage < 1) {
+    } else if (totalTargetPercentage < 100) {
       return `Your total target allocation is off by -${Math.abs(
-        totalTargetPercentage * 100 - 100
+        totalTargetPercentage - 100
       )
         .toString()
         .slice(0, 2)}%`;

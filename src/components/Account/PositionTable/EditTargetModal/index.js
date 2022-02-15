@@ -11,6 +11,7 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import TargetInput from "../TargetInput";
 import { updatePosition } from "../../../../store/positions";
 import { updateTotalTargetPercentageActionCreator } from "../../../../store/totalTargetPercentage";
@@ -31,9 +32,9 @@ const useStyles = makeStyles(() => ({
 const EditTargetModal = (props) => {
   const dispatch = useDispatch();
   const { row, edit, setEdit, setCurrPosition, positions } = props;
-  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
-
+  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
   const [openDialog, setOpenDialog] = useState(false);
+  const [error, setError] = useState("");
 
   const handleClickOpen = async () => {
     setOpenDialog(true);
@@ -45,7 +46,20 @@ const EditTargetModal = (props) => {
 
   const onChange = (ev) => {
     const { target } = ev;
+    console.log(
+      "🚀 ~ file: index.js ~ line 49 ~ onChange ~ target",
+      target.valueAsNumber
+    );
     setLocalTargetPct(target.value);
+
+    console.log(
+      "🚀 ~ file: index.js ~ line 56 ~ onChange ~ isNaN(target.value)",
+      isNaN(target.value)
+    );
+    if (isNaN(target.value)) {
+      console.log("true  - not a number");
+      setError("Please make sure you have entered a number");
+    }
   };
 
   const onSave = () => {
@@ -127,6 +141,7 @@ const EditTargetModal = (props) => {
             variant="contained"
             color="primary"
             onClick={onSave}
+            disabled={localTargetPct ? false : true}
           >
             Submit
           </Button>

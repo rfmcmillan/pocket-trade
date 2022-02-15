@@ -80,25 +80,25 @@ const syncAndSeed = async () => {
     name: "Vanguard Total World Stock ETF",
     symbol: "VT",
     alpacaData: vtAlpaca,
-    tgtPct: 0.7,
+    tgtPct: 70,
   });
   const bndw = await Position.create({
     name: "Vanguard Total World Bond ETF",
     symbol: "BNDW",
     alpacaData: bndwAlpaca,
-    tgtPct: 0.2,
+    tgtPct: 20,
   });
   const vnq = await Position.create({
     name: "Vanguard Real Estate ETF",
     alpacaData: vnqAlpaca,
     symbol: "VNQ",
-    tgtPct: 0.05,
+    tgtPct: 5,
   });
   const gld = await Position.create({
     name: "SPDR Gold Trust ETF",
     alpacaData: gldAlpaca,
     symbol: "GLD",
-    tgtPct: 0.05,
+    tgtPct: 5,
   });
 
   return { positions: { vt, bndw, vnq, gld } };
