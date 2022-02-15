@@ -39,7 +39,7 @@ const PositionRow = (props) => {
       </TableCell>
       <TableCell align="right">{row.symbol}</TableCell>
       <TableCell align="right">
-        <Typography>{`${(row.tgtPct * 100).toFixed(2)}%`}</Typography>
+        <Typography>{`${row.tgtPct.toFixed(2)}%`}</Typography>
       </TableCell>
       <TableCell align="right">
         {`${((row.market_value / row.long_market_value) * 100).toFixed(2)}%`}

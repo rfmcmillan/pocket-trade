@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
+import { InputLabel, OutlinedInput, FormControl } from "@material-ui/core";
 import "@fontsource/roboto";
 
 const useStyles = makeStyles({
@@ -18,24 +18,30 @@ const TargetInput = (props) => {
   const classes = useStyles();
 
   return (
-    <TextField
-      className={classes.textField}
-      autoFocus={true}
-      color="primary"
-      label="New Target Allocation %"
-      onChange={onChange}
-      name={row.symbol}
-      value={localTargetPct}
-      variant="outlined"
-      size="small"
-    ></TextField>
+    <FormControl error={localTargetPct ? false : true}>
+      <InputLabel htmlFor="target-percentage" shrink={true} variant="outlined">
+        New Target Allocation %
+      </InputLabel>
+      <OutlinedInput
+        className={classes.textField}
+        autoFocus={true}
+        color="primary"
+        id="target-percentage"
+        label="  New Target Allocation %"
+        onChange={onChange}
+        name={row.symbol}
+        size="small"
+        type="number"
+        value={localTargetPct}
+      ></OutlinedInput>
+    </FormControl>
   );
 };
 
 TargetInput.propTypes = {
   row: PropTypes.object,
   onChange: PropTypes.func,
-  localTargetPct: PropTypes.string,
+  localTargetPct: PropTypes.number,
 };
 
 export default TargetInput;

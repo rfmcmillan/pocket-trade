@@ -53,6 +53,7 @@ router.put("/positions/:id", async (req, res, next) => {
       }
     );
     const alpacaData = response.data;
+
     const valuesToUpdate = { ...req.body, alpacaData };
     const updated = await position.update(valuesToUpdate);
     await updated.save();
@@ -128,7 +129,6 @@ router.post("/futureOrders", async (req, res, next) => {
 
 router.get("/portfolio/history", async (req, res, next) => {
   try {
-    // const portfolioHistory = await alpaca.getPortfolioHistory("1M");
     const portfolioHistory = await axios.get(
       "https://paper-api.alpaca.markets/v2/account/portfolio/history",
       {

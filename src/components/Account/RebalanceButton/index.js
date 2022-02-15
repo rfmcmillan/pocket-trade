@@ -28,10 +28,16 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  const [openDialog, setOpenDialog] = useState(false);
-  const [proposedOrders, setProposedOrders] = useState([]);
+  // const positions = useSelector((state) => state.positions);
+  // const account = useSelector((state) => state.account);
+  // console.log(
+  //   "🚀 ~ file: index.js ~ line 33 ~ RebalanceButton ~ account",
+  //   account
+  // );
 
   const orders = useSelector((state) => state.orders);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [proposedOrders, setProposedOrders] = useState([]);
   const mostRecentOrderStatus = orders[0]?.status;
 
   const rebalance = async () => {
@@ -48,7 +54,7 @@ const RebalanceButton = () => {
         alpacaData: { symbol, market_value },
       } = position;
 
-      const tgtAmt = tgtPct * long_market_value;
+      const tgtAmt = (tgtPct / 100) * long_market_value;
       const amount = parseInt(tgtAmt - market_value);
       const type = "market";
       const time_in_force = "day";
@@ -83,7 +89,7 @@ const RebalanceButton = () => {
         className={classes.button}
         color="primary"
         disabled={
-          totalTargetPercentage === 1 &&
+          totalTargetPercentage === 100 &&
           mostRecentOrderStatus !== "accepted" &&
           mostRecentOrderStatus !== "new"
             ? false
