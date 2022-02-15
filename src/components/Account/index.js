@@ -109,7 +109,7 @@ const Account = () => {
           direction="row"
           justifyContent="space-between"
         >
-          <Grid item xs={4} xl={6}>
+          <Grid item xs={5} xl={7}>
             <Typography className={classes.amount} p={1} color="primary">
               {portfolioValue}
             </Typography>
@@ -118,8 +118,8 @@ const Account = () => {
             className={classes.alertGrid}
             item
             container
-            xs={8}
-            xl={6}
+            xs={7}
+            xl={5}
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
