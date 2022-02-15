@@ -83,7 +83,7 @@ const RebalanceButton = () => {
         className={classes.button}
         color="primary"
         disabled={
-          totalTargetPercentage === 1 &&
+          totalTargetPercentage === 100 &&
           mostRecentOrderStatus !== "accepted" &&
           mostRecentOrderStatus !== "new"
             ? false
