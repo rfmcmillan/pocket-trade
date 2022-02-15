@@ -31,15 +31,21 @@ const Account = () => {
   const [alertText, setAlertText] = useState("");
   const [displayAlert, setDisplayAlert] = useState(false);
   const [pendingTrades, setPendingTrades] = useState(false);
+  const [portfolioValue, setPortfolioValue] = useState(account.portfolio_value);
   const classes = useStyles();
 
-  const { portfolio_value } = account;
+  useEffect(() => {
+    const { portfolio_value } = account;
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
 
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-  const portfolio_value_usd = formatter.format(portfolio_value);
+    if (portfolio_value) {
+      const portfolioValueUsd = formatter.format(portfolio_value);
+      setPortfolioValue(portfolioValueUsd);
+    }
+  }, [account]);
 
   useEffect(() => {
     const mapped = positions.map((position) => position.tgtPct);
@@ -105,7 +111,7 @@ const Account = () => {
         >
           <Grid item xs={4} xl={6}>
             <Typography className={classes.amount} p={1} color="primary">
-              {portfolio_value_usd}
+              {portfolioValue}
             </Typography>
           </Grid>
           <Grid
