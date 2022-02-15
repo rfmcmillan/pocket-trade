@@ -88,10 +88,12 @@ const OrderHistory = () => {
                     <TableCell>{formatDate(row.created_at)}</TableCell>
                     <TableCell>{row.side.toUpperCase()}</TableCell>
                     <TableCell>{(row.filled_qty * 1).toFixed(2)}</TableCell>
-                    <TableCell>{row.filled_avg_price}</TableCell>
-                    <TableCell>{`${parseInt(row.notional).toFixed(
-                      2
-                    )}`}</TableCell>
+                    <TableCell>
+                      {`$${(row.filled_avg_price * 1).toFixed(2)}`}
+                    </TableCell>
+                    <TableCell>{`$${(row.notional * 1).toLocaleString(
+                      "en-US"
+                    )}.00`}</TableCell>
                     <TableCell>{row.status.toUpperCase()}</TableCell>
                   </TableRow>
                 );
