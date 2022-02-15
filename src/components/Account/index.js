@@ -124,7 +124,7 @@ const Account = () => {
                   className={classes.alert}
                   elevation={6}
                   variant="filled"
-                  severity="info"
+                  severity="error"
                 >
                   {alertText}
                 </Alert>

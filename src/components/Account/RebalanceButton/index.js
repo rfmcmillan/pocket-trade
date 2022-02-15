@@ -48,7 +48,7 @@ const RebalanceButton = () => {
         alpacaData: { symbol, market_value },
       } = position;
 
-      const tgtAmt = tgtPct * long_market_value;
+      const tgtAmt = (tgtPct / 100) * long_market_value;
       const amount = parseInt(tgtAmt - market_value);
       const type = "market";
       const time_in_force = "day";
