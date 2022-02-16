@@ -11,7 +11,6 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 import TargetInput from "../TargetInput";
 import { updatePosition } from "../../../../store/positions";
 import { updateTotalTargetPercentageActionCreator } from "../../../../store/totalTargetPercentage";
@@ -31,10 +30,9 @@ const useStyles = makeStyles(() => ({
 
 const EditTargetModal = (props) => {
   const dispatch = useDispatch();
-  const { row, edit, setEdit, setCurrPosition, positions } = props;
+  const { row, positions } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
   const [openDialog, setOpenDialog] = useState(false);
-  const [error, setError] = useState("");
 
   const handleClickOpen = async () => {
     setOpenDialog(true);
@@ -46,20 +44,7 @@ const EditTargetModal = (props) => {
 
   const onChange = (ev) => {
     const { target } = ev;
-    console.log(
-      "🚀 ~ file: index.js ~ line 49 ~ onChange ~ target",
-      target.valueAsNumber
-    );
     setLocalTargetPct(target.value);
-
-    console.log(
-      "🚀 ~ file: index.js ~ line 56 ~ onChange ~ isNaN(target.value)",
-      isNaN(target.value)
-    );
-    if (isNaN(target.value)) {
-      console.log("true  - not a number");
-      setError("Please make sure you have entered a number");
-    }
   };
 
   const onSave = () => {
@@ -73,7 +58,6 @@ const EditTargetModal = (props) => {
 
     dispatch(updatePosition(row.id, localTargetPctFloat));
     dispatch(updateTotalTargetPercentageActionCreator(newTotal));
-    setCurrPosition("");
     setOpenDialog(false);
   };
 
@@ -123,10 +107,7 @@ const EditTargetModal = (props) => {
             <Grid item xs={6}>
               <TargetInput
                 row={row}
-                edit={edit}
-                setEdit={setEdit}
                 localTargetPct={localTargetPct}
-                setLocalTargetPct={setLocalTargetPct}
                 onChange={onChange}
               />
             </Grid>
@@ -152,13 +133,8 @@ const EditTargetModal = (props) => {
 };
 
 EditTargetModal.propTypes = {
-  tgtPctsTotal: PropTypes.number,
   row: PropTypes.object,
   positions: PropTypes.array,
-  edit: PropTypes.bool,
-  setEdit: PropTypes.func,
-  currPosition: PropTypes.string,
-  setCurrPosition: PropTypes.func,
 };
 
 export default EditTargetModal;

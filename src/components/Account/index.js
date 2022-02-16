@@ -31,15 +31,21 @@ const Account = () => {
   const [alertText, setAlertText] = useState("");
   const [displayAlert, setDisplayAlert] = useState(false);
   const [pendingTrades, setPendingTrades] = useState(false);
+  const [portfolioValue, setPortfolioValue] = useState(account.portfolio_value);
   const classes = useStyles();
 
-  const { portfolio_value } = account;
+  useEffect(() => {
+    const { portfolio_value } = account;
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
 
-  var formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-  const portfolio_value_usd = formatter.format(portfolio_value);
+    if (portfolio_value) {
+      const portfolioValueUsd = formatter.format(portfolio_value);
+      setPortfolioValue(portfolioValueUsd);
+    }
+  }, [account]);
 
   useEffect(() => {
     const mapped = positions.map((position) => position.tgtPct);
@@ -52,7 +58,7 @@ const Account = () => {
         updateTotalTargetPercentageActionCreator(totalTargetPercentages)
       );
     }
-  }, [positions]);
+  }, [positions, dispatch]);
 
   useEffect(() => {
     if (totalTargetPercentage !== 100) {
@@ -103,17 +109,17 @@ const Account = () => {
           direction="row"
           justifyContent="space-between"
         >
-          <Grid item xs={4} xl={6}>
+          <Grid item xs={5} xl={7}>
             <Typography className={classes.amount} p={1} color="primary">
-              {portfolio_value_usd}
+              {portfolioValue}
             </Typography>
           </Grid>
           <Grid
             className={classes.alertGrid}
             item
             container
-            xs={8}
-            xl={6}
+            xs={7}
+            xl={5}
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
