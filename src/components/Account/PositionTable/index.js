@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -30,7 +30,6 @@ const PositionTable = () => {
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
   const { long_market_value } = account;
-  const [currPosition, setCurrPosition] = useState("");
 
   function createData(position) {
     const { name, id, alpacaData, tgtPct } = position;
@@ -46,8 +45,6 @@ const PositionTable = () => {
     };
     return row;
   }
-
-  useEffect(() => {}, [positions]);
 
   const rows = positions.map((position) => {
     return createData(position, long_market_value);
@@ -67,14 +64,7 @@ const PositionTable = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => {
-              return (
-                <PositionRow
-                  key={row.id}
-                  row={row}
-                  currPosition={currPosition}
-                  setCurrPosition={setCurrPosition}
-                />
-              );
+              return <PositionRow key={row.id} row={row} />;
             })}
           </TableBody>
         </Table>

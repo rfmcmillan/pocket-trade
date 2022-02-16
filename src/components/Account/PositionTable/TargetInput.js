@@ -14,7 +14,6 @@ const useStyles = makeStyles({
 
 const TargetInput = (props) => {
   const { row, onChange, localTargetPct } = props;
-
   const classes = useStyles();
 
   return (

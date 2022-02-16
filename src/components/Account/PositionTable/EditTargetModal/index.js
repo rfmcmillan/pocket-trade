@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 
 const EditTargetModal = (props) => {
   const dispatch = useDispatch();
-  const { row, edit, setEdit, setCurrPosition, positions } = props;
+  const { row, positions } = props;
   const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct);
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -58,7 +58,6 @@ const EditTargetModal = (props) => {
 
     dispatch(updatePosition(row.id, localTargetPctFloat));
     dispatch(updateTotalTargetPercentageActionCreator(newTotal));
-    setCurrPosition("");
     setOpenDialog(false);
   };
 
@@ -108,10 +107,7 @@ const EditTargetModal = (props) => {
             <Grid item xs={6}>
               <TargetInput
                 row={row}
-                edit={edit}
-                setEdit={setEdit}
                 localTargetPct={localTargetPct}
-                setLocalTargetPct={setLocalTargetPct}
                 onChange={onChange}
               />
             </Grid>
@@ -142,8 +138,6 @@ EditTargetModal.propTypes = {
   positions: PropTypes.array,
   edit: PropTypes.bool,
   setEdit: PropTypes.func,
-  currPosition: PropTypes.string,
-  setCurrPosition: PropTypes.func,
 };
 
 export default EditTargetModal;

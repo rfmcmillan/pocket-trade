@@ -58,7 +58,7 @@ const Account = () => {
         updateTotalTargetPercentageActionCreator(totalTargetPercentages)
       );
     }
-  }, [positions]);
+  }, [positions, dispatch]);
 
   useEffect(() => {
     if (totalTargetPercentage !== 100) {

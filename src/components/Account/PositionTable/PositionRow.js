@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,23 +19,14 @@ const useStyles = makeStyles({
 
 const PositionRow = (props) => {
   const positions = useSelector((state) => state.positions);
-  const { row, edit, setEdit, setCurrPosition } = props;
-  const [localTargetPct, setLocalTargetPct] = useState(row.tgtPct.toString());
+  const { row } = props;
   const classes = useStyles();
 
   return (
     <TableRow>
       <TableCell className={classes.cell} component="th" scope="row">
         {row.name}
-        <EditTargetModal
-          row={row}
-          positions={positions}
-          edit={edit}
-          setEdit={setEdit}
-          localTargetPct={localTargetPct}
-          setLocalTargetPct={setLocalTargetPct}
-          setCurrPosition={setCurrPosition}
-        />
+        <EditTargetModal row={row} positions={positions} />
       </TableCell>
       <TableCell align="right">{row.symbol}</TableCell>
       <TableCell align="right">
@@ -50,12 +41,6 @@ const PositionRow = (props) => {
 
 PositionRow.propTypes = {
   row: PropTypes.object,
-  edit: PropTypes.bool,
-  setEdit: PropTypes.func,
-  currPosition: PropTypes.string,
-  setCurrPosition: PropTypes.func,
-  tgtPctsTotal: PropTypes.number,
-  setTgtPctsTotal: PropTypes.func,
 };
 
 export default PositionRow;
