@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -27,57 +28,51 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  const positions = useSelector((state) => state.positions);
-  const account = useSelector((state) => state.account);
-  const orders = useSelector((state) => state.orders);
+  console.log(
+    "🚀 ~ file: index.js ~ line 31 ~ RebalanceButton ~ totalTargetPercentage",
+    totalTargetPercentage
+  );
   const [openDialog, setOpenDialog] = useState(false);
   const [proposedOrders, setProposedOrders] = useState([]);
+
+  const orders = useSelector((state) => state.orders);
   const mostRecentOrderStatus = orders[0]?.status;
 
-  const rebalancePortfolio = async () => {
+  const rebalance = async () => {
+    const acctResponse = await axios.get("api/account");
+    const account = acctResponse.data;
     const { long_market_value } = account;
+    const posResponse = await axios.get("/api/positions");
+    const positions = posResponse.data;
     const proposed = [];
     positions.forEach((position) => {
-      const tradeAmount = calculateTradeAmount(position, long_market_value);
-      const order = buildOrder(position, tradeAmount);
-      proposed.push(order);
+      const {
+        tgtPct,
+
+        alpacaData: { symbol, market_value },
+      } = position;
+
+      const tgtAmt = (tgtPct / 100) * long_market_value;
+      const amount = parseInt(tgtAmt - market_value);
+      const type = "market";
+      const time_in_force = "day";
+      if (amount > 0) {
+        const tradeAmt = amount;
+        const side = "buy";
+        const order = { symbol, tradeAmt, side, type, time_in_force };
+        proposed.push(order);
+      } else if (amount < 0) {
+        const tradeAmt = -amount;
+        const side = "sell";
+        const order = { symbol, tradeAmt, side, type, time_in_force };
+        proposed.push(order);
+      }
     });
     setProposedOrders(proposed);
   };
 
-  const calculateTradeAmount = (position, totalPortfolioValue) => {
-    const {
-      tgtPct,
-      alpacaData: { market_value },
-    } = position;
-
-    const tgtAmt = (tgtPct / 100) * totalPortfolioValue;
-    return parseInt(tgtAmt - market_value);
-  };
-
-  const buildOrder = (position, calculatedTradeAmount) => {
-    const {
-      alpacaData: { symbol },
-    } = position;
-
-    const type = "market";
-    const time_in_force = "day";
-    let tradeAmt;
-    let side;
-
-    if (calculatedTradeAmount > 0) {
-      tradeAmt = calculatedTradeAmount;
-      side = "buy";
-      return { symbol, tradeAmt, side, type, time_in_force };
-    } else if (calculatedTradeAmount < 0) {
-      tradeAmt = -calculatedTradeAmount;
-      side = "sell";
-      return { symbol, tradeAmt, side, type, time_in_force };
-    }
-  };
-
   const handleClickOpen = async () => {
-    await rebalancePortfolio();
+    await rebalance();
     setOpenDialog(true);
   };
 
