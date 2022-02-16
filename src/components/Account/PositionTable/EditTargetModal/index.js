@@ -133,11 +133,8 @@ const EditTargetModal = (props) => {
 };
 
 EditTargetModal.propTypes = {
-  tgtPctsTotal: PropTypes.number,
   row: PropTypes.object,
   positions: PropTypes.array,
-  edit: PropTypes.bool,
-  setEdit: PropTypes.func,
 };
 
 export default EditTargetModal;

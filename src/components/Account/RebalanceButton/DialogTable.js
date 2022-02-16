@@ -46,6 +46,10 @@ const DialogTable = (props) => {
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => {
+            console.log(
+              "🚀 ~ file: DialogTable.js ~ line 59 ~ {rows.map ~ row",
+              row
+            );
             return (
               <TableRow key={idx}>
                 <TableCell>{row.symbol}</TableCell>

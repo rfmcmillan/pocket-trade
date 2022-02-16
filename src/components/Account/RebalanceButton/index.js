@@ -68,11 +68,12 @@ const RebalanceButton = () => {
     if (calculatedTradeAmount > 0) {
       tradeAmt = calculatedTradeAmount;
       side = "buy";
+      return { symbol, tradeAmt, side, type, time_in_force };
     } else if (calculatedTradeAmount < 0) {
       tradeAmt = -calculatedTradeAmount;
       side = "sell";
+      return { symbol, tradeAmt, side, type, time_in_force };
     }
-    return { symbol, tradeAmt, side, type, time_in_force };
   };
 
   const handleClickOpen = async () => {
