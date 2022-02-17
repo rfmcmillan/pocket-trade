@@ -28,34 +28,27 @@ const RebalanceButton = () => {
   const totalTargetPercentage = useSelector(
     (state) => state.totalTargetPercentage
   );
-  console.log(
-    "🚀 ~ file: index.js ~ line 31 ~ RebalanceButton ~ totalTargetPercentage",
-    totalTargetPercentage
-  );
+  const account = useSelector((state) => state.account);
+  const orders = useSelector((state) => state.orders);
+  const positions = useSelector((state) => state.positions);
   const [openDialog, setOpenDialog] = useState(false);
   const [proposedOrders, setProposedOrders] = useState([]);
-
-  const orders = useSelector((state) => state.orders);
   const mostRecentOrderStatus = orders[0]?.status;
 
   const rebalance = async () => {
-    const acctResponse = await axios.get("api/account");
-    const account = acctResponse.data;
     const { long_market_value } = account;
-    const posResponse = await axios.get("/api/positions");
-    const positions = posResponse.data;
     const proposed = [];
+
     positions.forEach((position) => {
       const {
         tgtPct,
-
         alpacaData: { symbol, market_value },
       } = position;
-
       const tgtAmt = (tgtPct / 100) * long_market_value;
       const amount = parseInt(tgtAmt - market_value);
       const type = "market";
       const time_in_force = "day";
+
       if (amount > 0) {
         const tradeAmt = amount;
         const side = "buy";
