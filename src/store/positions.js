@@ -15,6 +15,7 @@ const loadPositions = () => {
     try {
       const response = await axios.get("/api/positions");
       const positions = response.data;
+
       dispatch(loadPositionsActionCreator(positions));
     } catch (error) {
       console.error(error);

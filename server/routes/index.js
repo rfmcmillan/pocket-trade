@@ -27,6 +27,10 @@ router.get("/positions", async (req, res, next) => {
       }
     );
     const alpacaPositions = response.data;
+    console.log(
+      "🚀 ~ file: index.js ~ line 30 ~ router.get ~ alpacaPositions",
+      alpacaPositions
+    );
 
     const positions = await Position.findAll({ order: ["symbol"] });
 
