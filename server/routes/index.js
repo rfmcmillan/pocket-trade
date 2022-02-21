@@ -28,11 +28,25 @@ router.get("/positions", async (req, res, next) => {
     );
     const alpacaPositions = response.data;
 
+    const sortedAlpacaPositions = alpacaPositions.sort((a, b) => {
+      if (a.symbol > b.symbol) {
+        return 1;
+      }
+      if (a.symbol < b.symbol) {
+        return -1;
+      }
+      return 0;
+    });
+
     const positions = await Position.findAll({ order: ["symbol"] });
 
     positions.forEach((position, idx) => {
-      position.alpacaData = alpacaPositions[idx];
+      position.alpacaData = sortedAlpacaPositions[idx];
     });
+    console.log(
+      "🚀 ~ file: index.js ~ line 46 ~ positions.forEach ~ positions",
+      positions
+    );
 
     res.send(positions);
   } catch (error) {

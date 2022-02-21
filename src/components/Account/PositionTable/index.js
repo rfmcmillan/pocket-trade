@@ -29,6 +29,10 @@ const PositionTable = () => {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
   const positions = useSelector((state) => state.positions);
+  console.log(
+    "🚀 ~ file: index.js ~ line 32 ~ PositionTable ~ positions",
+    positions
+  );
   const { long_market_value } = account;
 
   function createData(position) {
