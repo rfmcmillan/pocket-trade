@@ -88,7 +88,6 @@ const syncAndSeed = async () => {
     alpacaData: bndwAlpaca,
     tgtPct: 20,
   });
-  console.log("🚀 ~ file: db.js ~ line 91 ~ syncAndSeed ~ bndw", bndw);
   const vnq = await Position.create({
     name: "Vanguard Real Estate ETF",
     alpacaData: vnqAlpaca,
