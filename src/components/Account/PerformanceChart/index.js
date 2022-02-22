@@ -83,7 +83,8 @@ const PerformanceChart = () => {
           <Line
             activeDot={{ r: 8 }}
             dataKey="equity"
-            dot={true}
+            dot={false}
+            isAnimationActive={false}
             name="Portfolio Value"
             stroke="#088F8F"
             type="monotone"
