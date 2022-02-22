@@ -81,11 +81,12 @@ const PerformanceChart = () => {
           />
           <Legend />
           <Line
-            name="Portfolio Value"
-            type="monotone"
-            dataKey="equity"
-            stroke="#088F8F"
             activeDot={{ r: 8 }}
+            dataKey="equity"
+            dot={true}
+            name="Portfolio Value"
+            stroke="#088F8F"
+            type="monotone"
           />
         </LineChart>
       </ResponsiveContainer>
