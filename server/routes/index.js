@@ -146,7 +146,7 @@ router.get("/portfolio/history", async (req, res, next) => {
           "APCA-API-KEY-ID": process.env.API_KEY,
           "APCA-API-SECRET-KEY": process.env.API_SECRET,
         },
-        params: { period: "1D", timeframe: "15Min" },
+        params: { period: "1D", timeframe: "1Min" },
       }
     );
 
